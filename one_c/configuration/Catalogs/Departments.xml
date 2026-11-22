@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='utf-8'?>
+<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" version="2.20" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<Catalog uuid="223526b4-2394-58c7-87f9-f276b270ce8c">
+		<InternalInfo>
+			<xr:GeneratedType name="CatalogObject.Departments" category="Object">
+				<xr:TypeId>5a48a559-0727-5045-b6ff-b749acf22c49</xr:TypeId>
+				<xr:ValueId>ea66ce1a-9132-556b-837c-2f63687cd28a</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="CatalogRef.Departments" category="Ref">
+				<xr:TypeId>6ad04d06-e5e4-5a20-8166-70ef0b020cdc</xr:TypeId>
+				<xr:ValueId>08ea2795-85cc-54a5-b150-8bcc602845be</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="CatalogSelection.Departments" category="Selection">
+				<xr:TypeId>0f561599-4b28-58e7-a800-0abd7dfefa88</xr:TypeId>
+				<xr:ValueId>fa84159e-3b61-5719-887a-544e408b8b4f</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="CatalogList.Departments" category="List">
+				<xr:TypeId>9613897b-69a4-582d-b5a5-e1d4d4ed3f02</xr:TypeId>
+				<xr:ValueId>1891b628-c777-56dd-913e-cc30e5973357</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="CatalogManager.Departments" category="Manager">
+				<xr:TypeId>946c09f4-5e67-551d-9e59-5fee856276af</xr:TypeId>
+				<xr:ValueId>2e98a6f7-3f5d-531f-8ec4-2bbadf6daffe</xr:ValueId>
+			</xr:GeneratedType>
+		</InternalInfo>
+		<Properties>
+			<Name>Departments</Name>
+			<Synonym>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Подразделения</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Подразделения</v8:content>
+				</v8:item>
+			</Synonym>
+			<CodeLength>20</CodeLength>
+			<DescriptionLength>150</DescriptionLength>
+			<CodeType>String</CodeType>
+			<CodeAllowedLength>Variable</CodeAllowedLength>
+			<CheckUnique>true</CheckUnique>
+			<Autonumbering>true</Autonumbering>
+			<UseStandardCommands>true</UseStandardCommands>
+		</Properties>
+		<ChildObjects />
+	</Catalog>
+</MetaDataObject>

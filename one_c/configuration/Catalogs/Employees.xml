@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='utf-8'?>
+<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" version="2.20" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<Catalog uuid="702c886f-3a0e-5470-9757-8670b1405228">
+		<InternalInfo>
+			<xr:GeneratedType name="CatalogObject.Employees" category="Object">
+				<xr:TypeId>4736a75d-dfb3-58df-8013-f760a0ac518c</xr:TypeId>
+				<xr:ValueId>3c406919-e783-5494-9f03-041376babb1e</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="CatalogRef.Employees" category="Ref">
+				<xr:TypeId>ab46b777-3216-508e-a83e-1fe453dd985f</xr:TypeId>
+				<xr:ValueId>1d4f9953-9791-5be7-bfd5-0ae823670568</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="CatalogSelection.Employees" category="Selection">
+				<xr:TypeId>c93ea1ca-51b4-5e4b-b391-a5a07647c4b1</xr:TypeId>
+				<xr:ValueId>9944d6fa-859e-5e5c-a262-920386f6ab02</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="CatalogList.Employees" category="List">
+				<xr:TypeId>cf450d3d-4f16-58de-8784-edc081654804</xr:TypeId>
+				<xr:ValueId>ee89d897-f2dc-5507-9d41-00923d70b24f</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="CatalogManager.Employees" category="Manager">
+				<xr:TypeId>cc6094d1-50c6-5f09-ab06-b97dc9e650bd</xr:TypeId>
+				<xr:ValueId>8abdfd88-bda8-5588-8a6d-602b0d88802a</xr:ValueId>
+			</xr:GeneratedType>
+		</InternalInfo>
+		<Properties>
+			<Name>Employees</Name>
+			<Synonym>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сотрудники</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Сотрудники</v8:content>
+				</v8:item>
+			</Synonym>
+			<CodeLength>20</CodeLength>
+			<DescriptionLength>150</DescriptionLength>
+			<CodeType>String</CodeType>
+			<CodeAllowedLength>Variable</CodeAllowedLength>
+			<CheckUnique>true</CheckUnique>
+			<Autonumbering>true</Autonumbering>
+			<UseStandardCommands>true</UseStandardCommands>
+		</Properties>
+		<ChildObjects>
+			<Attribute uuid="a443d880-bb5f-5a53-b9f5-ee1c151a21b7">
+				<Properties>
+					<Name>Department</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Подразделение</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Подразделение</v8:content>
+						</v8:item>
+					</Synonym>
+					<Type>
+						<v8:Type>cfg:CatalogRef.Departments</v8:Type>
+					</Type>
+				</Properties>
+			</Attribute>
+			<Attribute uuid="3934f78b-60c5-5b94-b7bb-9a1e28f09d1f">
+				<Properties>
+					<Name>Active</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Действует</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Действует</v8:content>
+						</v8:item>
+					</Synonym>
+					<Type>
+						<v8:Type>xs:boolean</v8:Type>
+					</Type>
+				</Properties>
+			</Attribute>
+		</ChildObjects>
+	</Catalog>
+</MetaDataObject>

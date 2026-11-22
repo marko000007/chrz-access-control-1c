@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='utf-8'?>
+<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" version="2.20" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<Catalog uuid="450ecd97-5374-526a-b7be-53368b119741">
+		<InternalInfo>
+			<xr:GeneratedType name="CatalogObject.PortalUsers" category="Object">
+				<xr:TypeId>5aac6aa5-7eee-5e40-b951-efca577c1fb0</xr:TypeId>
+				<xr:ValueId>820b97c2-6017-5d08-9a1e-45497413653a</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="CatalogRef.PortalUsers" category="Ref">
+				<xr:TypeId>5335c7e2-c11d-5a74-9ac7-ac8f19bea4d4</xr:TypeId>
+				<xr:ValueId>5281037f-baf5-5657-af9d-d45d6ecff061</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="CatalogSelection.PortalUsers" category="Selection">
+				<xr:TypeId>d293ef5a-8d48-542e-8062-20cacc071ab2</xr:TypeId>
+				<xr:ValueId>9192025b-a3dd-596f-97b3-414790e11243</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="CatalogList.PortalUsers" category="List">
+				<xr:TypeId>a43453be-b8d4-5fa9-abca-8f40acef7865</xr:TypeId>
+				<xr:ValueId>dd456576-dcb5-53ab-b189-34457cbfdc38</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="CatalogManager.PortalUsers" category="Manager">
+				<xr:TypeId>0d044d92-4656-5c25-8ec4-d33c46069492</xr:TypeId>
+				<xr:ValueId>049f1a40-2c32-5be3-814e-5cc1a3786adc</xr:ValueId>
+			</xr:GeneratedType>
+		</InternalInfo>
+		<Properties>
+			<Name>PortalUsers</Name>
+			<Synonym>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Пользователи портала</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Пользователи портала</v8:content>
+				</v8:item>
+			</Synonym>
+			<CodeLength>20</CodeLength>
+			<DescriptionLength>150</DescriptionLength>
+			<CodeType>String</CodeType>
+			<CodeAllowedLength>Variable</CodeAllowedLength>
+			<CheckUnique>true</CheckUnique>
+			<Autonumbering>true</Autonumbering>
+			<UseStandardCommands>true</UseStandardCommands>
+		</Properties>
+		<ChildObjects>
+			<Attribute uuid="82c25e27-bb24-5ea9-bf3f-57e20910e13d">
+				<Properties>
+					<Name>RoleCode</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Роль портала</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Роль портала</v8:content>
+						</v8:item>
+					</Synonym>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>150</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Properties>
+			</Attribute>
+			<Attribute uuid="e3b0596c-d092-5368-a10b-cbf5ba6737eb">
+				<Properties>
+					<Name>Active</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Действует</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Действует</v8:content>
+						</v8:item>
+					</Synonym>
+					<Type>
+						<v8:Type>xs:boolean</v8:Type>
+					</Type>
+				</Properties>
+			</Attribute>
+		</ChildObjects>
+	</Catalog>
+</MetaDataObject>

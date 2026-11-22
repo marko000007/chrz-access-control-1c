@@ -1,0 +1,68 @@
+{
+  "catalogs": [
+    {
+      "name": "Departments",
+      "title": "Подразделения",
+      "fields": []
+    },
+    {
+      "name": "Employees",
+      "title": "Сотрудники",
+      "fields": [
+        [
+          "Department",
+          "Подразделение",
+          "CatalogRef.Departments"
+        ],
+        [
+          "Active",
+          "Действует",
+          "boolean"
+        ]
+      ]
+    },
+    {
+      "name": "Visitors",
+      "title": "Посетители",
+      "fields": [
+        [
+          "Company",
+          "Организация посетителя",
+          "string"
+        ]
+      ]
+    },
+    {
+      "name": "Checkpoints",
+      "title": "Точки прохода",
+      "fields": [
+        [
+          "Active",
+          "Действует",
+          "boolean"
+        ]
+      ]
+    },
+    {
+      "name": "VisitPurposes",
+      "title": "Цели посещения",
+      "fields": []
+    },
+    {
+      "name": "PortalUsers",
+      "title": "Пользователи портала",
+      "fields": [
+        [
+          "RoleCode",
+          "Роль портала",
+          "string"
+        ],
+        [
+          "Active",
+          "Действует",
+          "boolean"
+        ]
+      ]
+    }
+  ]
+}

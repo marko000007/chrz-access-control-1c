@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='utf-8'?>
+<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" version="2.20" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<Catalog uuid="33de0e97-0721-5cba-9661-2a86c6087d2b">
+		<InternalInfo>
+			<xr:GeneratedType name="CatalogObject.Checkpoints" category="Object">
+				<xr:TypeId>8b6e8c0a-97b8-50e2-af09-4ec809e6f017</xr:TypeId>
+				<xr:ValueId>d0916272-e585-5f56-8d02-d49f26fbf5d6</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="CatalogRef.Checkpoints" category="Ref">
+				<xr:TypeId>e32f1229-b499-5db0-83f0-ab07e163af6b</xr:TypeId>
+				<xr:ValueId>16aa48fd-f538-556b-b3a4-15650dc6b969</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="CatalogSelection.Checkpoints" category="Selection">
+				<xr:TypeId>48cc72d9-133c-5248-914e-fa21714b5997</xr:TypeId>
+				<xr:ValueId>bf29c283-58fb-57c6-8915-f043b332c469</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="CatalogList.Checkpoints" category="List">
+				<xr:TypeId>4e706502-7809-5ea5-8a52-b7ef1e6a55e5</xr:TypeId>
+				<xr:ValueId>f0714a97-5709-544e-92fd-15c00f61694c</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="CatalogManager.Checkpoints" category="Manager">
+				<xr:TypeId>3bdbb225-0884-52b0-913c-17ef2609db16</xr:TypeId>
+				<xr:ValueId>0c0701fb-a5d1-519a-989b-0f8b1390872a</xr:ValueId>
+			</xr:GeneratedType>
+		</InternalInfo>
+		<Properties>
+			<Name>Checkpoints</Name>
+			<Synonym>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Точки прохода</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Точки прохода</v8:content>
+				</v8:item>
+			</Synonym>
+			<CodeLength>20</CodeLength>
+			<DescriptionLength>150</DescriptionLength>
+			<CodeType>String</CodeType>
+			<CodeAllowedLength>Variable</CodeAllowedLength>
+			<CheckUnique>true</CheckUnique>
+			<Autonumbering>true</Autonumbering>
+			<UseStandardCommands>true</UseStandardCommands>
+		</Properties>
+		<ChildObjects>
+			<Attribute uuid="33d5f556-6d2c-5353-8968-1b3877424532">
+				<Properties>
+					<Name>Active</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Действует</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Действует</v8:content>
+						</v8:item>
+					</Synonym>
+					<Type>
+						<v8:Type>xs:boolean</v8:Type>
+					</Type>
+				</Properties>
+			</Attribute>
+		</ChildObjects>
+	</Catalog>
+</MetaDataObject>

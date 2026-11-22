@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='utf-8'?>
+<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" version="2.20" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<Catalog uuid="57bd5a30-e3f8-5aa4-88a3-2696c567e25f">
+		<InternalInfo>
+			<xr:GeneratedType name="CatalogObject.VisitPurposes" category="Object">
+				<xr:TypeId>bf83182e-ac0e-5f2c-be7f-116a9133c895</xr:TypeId>
+				<xr:ValueId>c4164c53-e139-5ff9-b8ee-7b6d03ec5add</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="CatalogRef.VisitPurposes" category="Ref">
+				<xr:TypeId>d33bb960-6d18-5227-b44a-af16345aec1f</xr:TypeId>
+				<xr:ValueId>d34014f2-d139-5911-83ac-f408030d50cf</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="CatalogSelection.VisitPurposes" category="Selection">
+				<xr:TypeId>0f77cca1-f6fc-5291-9574-4409fe153b3d</xr:TypeId>
+				<xr:ValueId>46ebfa9e-2781-5005-a7b3-1ee43d2a1c9d</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="CatalogList.VisitPurposes" category="List">
+				<xr:TypeId>9490f7b9-4b45-5d52-a3fc-1e6c2f2d1bf5</xr:TypeId>
+				<xr:ValueId>0d1c24c4-590e-5b48-b741-96c68c42446c</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="CatalogManager.VisitPurposes" category="Manager">
+				<xr:TypeId>166e01a7-63c4-554e-8d2b-e225d096a946</xr:TypeId>
+				<xr:ValueId>0ed06fdc-1375-57b9-aaf0-8dc5550a9564</xr:ValueId>
+			</xr:GeneratedType>
+		</InternalInfo>
+		<Properties>
+			<Name>VisitPurposes</Name>
+			<Synonym>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Цели посещения</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Цели посещения</v8:content>
+				</v8:item>
+			</Synonym>
+			<CodeLength>20</CodeLength>
+			<DescriptionLength>150</DescriptionLength>
+			<CodeType>String</CodeType>
+			<CodeAllowedLength>Variable</CodeAllowedLength>
+			<CheckUnique>true</CheckUnique>
+			<Autonumbering>true</Autonumbering>
+			<UseStandardCommands>true</UseStandardCommands>
+		</Properties>
+		<ChildObjects />
+	</Catalog>
+</MetaDataObject>

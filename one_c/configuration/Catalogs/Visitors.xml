@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='utf-8'?>
+<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" version="2.20" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<Catalog uuid="4e3df00a-6bea-5b54-be84-6b2a026d641a">
+		<InternalInfo>
+			<xr:GeneratedType name="CatalogObject.Visitors" category="Object">
+				<xr:TypeId>de6865d0-55ff-5d5c-8d25-0114c61864c1</xr:TypeId>
+				<xr:ValueId>9a6036a4-50d7-571d-bc68-ea1ab9fe9058</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="CatalogRef.Visitors" category="Ref">
+				<xr:TypeId>e68ca9f7-71d4-593f-8b86-1a35673a7879</xr:TypeId>
+				<xr:ValueId>ad53578b-3c13-548d-8d5b-7e5261933e36</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="CatalogSelection.Visitors" category="Selection">
+				<xr:TypeId>41e8a2c9-2fd6-5ebd-b811-1566da843e1d</xr:TypeId>
+				<xr:ValueId>203224a8-7b03-5843-965c-4e98d43008a0</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="CatalogList.Visitors" category="List">
+				<xr:TypeId>c596c023-8cd0-52d6-a12a-4a2409938294</xr:TypeId>
+				<xr:ValueId>62740733-4b38-5ffc-b33d-feb5a0e70178</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="CatalogManager.Visitors" category="Manager">
+				<xr:TypeId>71484412-6029-5017-885c-71558c520075</xr:TypeId>
+				<xr:ValueId>e8874ced-f695-5447-bed1-b23ee2a4be9a</xr:ValueId>
+			</xr:GeneratedType>
+		</InternalInfo>
+		<Properties>
+			<Name>Visitors</Name>
+			<Synonym>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Посетители</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Посетители</v8:content>
+				</v8:item>
+			</Synonym>
+			<CodeLength>20</CodeLength>
+			<DescriptionLength>150</DescriptionLength>
+			<CodeType>String</CodeType>
+			<CodeAllowedLength>Variable</CodeAllowedLength>
+			<CheckUnique>true</CheckUnique>
+			<Autonumbering>true</Autonumbering>
+			<UseStandardCommands>true</UseStandardCommands>
+		</Properties>
+		<ChildObjects>
+			<Attribute uuid="e33275ff-c717-5f94-8037-9f6f4630f4aa">
+				<Properties>
+					<Name>Company</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Организация посетителя</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Организация посетителя</v8:content>
+						</v8:item>
+					</Synonym>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>150</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Properties>
+			</Attribute>
+		</ChildObjects>
+	</Catalog>
+</MetaDataObject>
