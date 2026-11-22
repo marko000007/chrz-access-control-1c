@@ -69,5 +69,53 @@
         ]
       ]
     }
+  ],
+  "documents": [
+    {
+      "name": "Requests",
+      "title": "Заявки на посещение",
+      "fields": [
+        [
+          "Visitor",
+          "Посетитель",
+          "CatalogRef.Visitors"
+        ],
+        [
+          "Host",
+          "Принимающий сотрудник",
+          "CatalogRef.Employees"
+        ],
+        [
+          "Checkpoint",
+          "Точка прохода",
+          "CatalogRef.Checkpoints"
+        ],
+        [
+          "Purpose",
+          "Цель посещения",
+          "CatalogRef.VisitPurposes"
+        ],
+        [
+          "StartsAt",
+          "Начало действия",
+          "dateTime"
+        ],
+        [
+          "EndsAt",
+          "Окончание действия",
+          "dateTime"
+        ],
+        [
+          "RequesterLogin",
+          "Автор заявки",
+          "string"
+        ],
+        [
+          "Status",
+          "Статус",
+          "string"
+        ]
+      ]
+    }
   ]
 }

@@ -253,6 +253,9 @@
 			<Catalog>PortalUsers</Catalog>
 			<CommonModule>AccessCatalogs</CommonModule>
 			<CommonModule>AccessPolicy</CommonModule>
+			<CommonModule>AccessRequests</CommonModule>
+			<Document>Requests</Document>
+			<CommonModule>AccessSelfTest</CommonModule>
 		</ChildObjects>
 	</Configuration>
 </MetaDataObject>

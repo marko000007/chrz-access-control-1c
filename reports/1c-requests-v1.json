@@ -1,0 +1,6 @@
+{
+  "ok": true,
+  "stage": "requests",
+  "checks": 3,
+  "data_origin": "synthetic"
+}

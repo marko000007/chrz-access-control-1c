@@ -1,0 +1,202 @@
+<?xml version='1.0' encoding='utf-8'?>
+<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" version="2.20" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<Document uuid="6189fd48-2cb5-5583-94e7-bf418dd21ee7">
+		<InternalInfo>
+			<xr:GeneratedType name="DocumentObject.Requests" category="Object">
+				<xr:TypeId>6cc90171-9ab3-50e3-97bf-0ac29c4407e5</xr:TypeId>
+				<xr:ValueId>bff40acd-1047-5833-9bdf-b5099670d1e0</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="DocumentRef.Requests" category="Ref">
+				<xr:TypeId>fbba42dc-de46-5df2-977c-c01b7f8210bb</xr:TypeId>
+				<xr:ValueId>369abaeb-2564-51c7-9742-efe2d8751a65</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="DocumentSelection.Requests" category="Selection">
+				<xr:TypeId>33175a61-acdd-51b0-bf2f-6b1c4d0d0aa8</xr:TypeId>
+				<xr:ValueId>a1ea805a-b691-5a4f-95db-d8bab2b03316</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="DocumentList.Requests" category="List">
+				<xr:TypeId>59def4ba-f5e1-5cce-bb1b-b1e9dae81bfe</xr:TypeId>
+				<xr:ValueId>c6368c8d-d688-5c71-aaa2-9ea05f2d4553</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="DocumentManager.Requests" category="Manager">
+				<xr:TypeId>002261ab-ebc4-58a3-8976-21d05e2a5321</xr:TypeId>
+				<xr:ValueId>fd58c9dd-172c-53b7-bffe-fdac99d62c57</xr:ValueId>
+			</xr:GeneratedType>
+		</InternalInfo>
+		<Properties>
+			<Name>Requests</Name>
+			<Synonym>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Заявки на посещение</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Заявки на посещение</v8:content>
+				</v8:item>
+			</Synonym>
+			<NumberLength>11</NumberLength>
+			<NumberType>String</NumberType>
+			<NumberAllowedLength>Variable</NumberAllowedLength>
+			<NumberPeriodicity>Year</NumberPeriodicity>
+			<Posting>Deny</Posting>
+			<CheckUnique>true</CheckUnique>
+			<Autonumbering>true</Autonumbering>
+			<UseStandardCommands>true</UseStandardCommands>
+		</Properties>
+		<ChildObjects>
+			<Attribute uuid="ead13ed8-6032-5f33-ab39-d5423952f775">
+				<Properties>
+					<Name>Visitor</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Посетитель</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Посетитель</v8:content>
+						</v8:item>
+					</Synonym>
+					<Type>
+						<v8:Type>cfg:CatalogRef.Visitors</v8:Type>
+					</Type>
+				</Properties>
+			</Attribute>
+			<Attribute uuid="36268a97-5079-5d13-8ac3-76cce124a84f">
+				<Properties>
+					<Name>Host</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Принимающий сотрудник</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Принимающий сотрудник</v8:content>
+						</v8:item>
+					</Synonym>
+					<Type>
+						<v8:Type>cfg:CatalogRef.Employees</v8:Type>
+					</Type>
+				</Properties>
+			</Attribute>
+			<Attribute uuid="cf08c234-001c-53ae-b13f-7c019cf3474a">
+				<Properties>
+					<Name>Checkpoint</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Точка прохода</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Точка прохода</v8:content>
+						</v8:item>
+					</Synonym>
+					<Type>
+						<v8:Type>cfg:CatalogRef.Checkpoints</v8:Type>
+					</Type>
+				</Properties>
+			</Attribute>
+			<Attribute uuid="bf1add9e-b20c-5535-b162-fab57e4d0b06">
+				<Properties>
+					<Name>Purpose</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Цель посещения</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Цель посещения</v8:content>
+						</v8:item>
+					</Synonym>
+					<Type>
+						<v8:Type>cfg:CatalogRef.VisitPurposes</v8:Type>
+					</Type>
+				</Properties>
+			</Attribute>
+			<Attribute uuid="bfd7b368-d582-5df9-9d77-325fc6d2bd46">
+				<Properties>
+					<Name>StartsAt</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Начало действия</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Начало действия</v8:content>
+						</v8:item>
+					</Synonym>
+					<Type>
+						<v8:Type>xs:dateTime</v8:Type>
+					</Type>
+				</Properties>
+			</Attribute>
+			<Attribute uuid="9bc9cae9-99d0-5127-afa6-7703f90e1ae2">
+				<Properties>
+					<Name>EndsAt</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Окончание действия</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Окончание действия</v8:content>
+						</v8:item>
+					</Synonym>
+					<Type>
+						<v8:Type>xs:dateTime</v8:Type>
+					</Type>
+				</Properties>
+			</Attribute>
+			<Attribute uuid="7cb10759-725e-52b5-bed2-33b2a0f63444">
+				<Properties>
+					<Name>RequesterLogin</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Автор заявки</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Автор заявки</v8:content>
+						</v8:item>
+					</Synonym>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>150</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Properties>
+			</Attribute>
+			<Attribute uuid="af3a0661-d9ca-55bb-8484-4b1bbaf13e4b">
+				<Properties>
+					<Name>Status</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Статус</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Статус</v8:content>
+						</v8:item>
+					</Synonym>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>150</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Properties>
+			</Attribute>
+		</ChildObjects>
+	</Document>
+</MetaDataObject>
