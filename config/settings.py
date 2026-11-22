@@ -37,3 +37,7 @@ CSRF_COOKIE_NAME = "chrz_portal_csrf"
 SESSION_COOKIE_SECURE = not DEBUG
 CSRF_COOKIE_SECURE = not DEBUG
 AUTH_PASSWORD_VALIDATORS = [{"NAME":"django.contrib.auth.password_validation.MinimumLengthValidator"},{"NAME":"django.contrib.auth.password_validation.CommonPasswordValidator"}]
+
+ERP_BASE_URL = os.getenv("ERP_BASE_URL", "")
+ERP_USERNAME = os.getenv("ERP_USERNAME", "")
+ERP_PASSWORD = os.getenv("ERP_PASSWORD", "")
