@@ -1,6 +1,9 @@
 """Bounded HTTP client; domain records remain in 1C."""
 import base64
 import json
+from datetime import datetime
+from uuid import UUID
+from http.client import HTTPException
 from urllib.error import HTTPError, URLError
 from urllib.parse import urlsplit
 from urllib.request import HTTPRedirectHandler, Request, build_opener
@@ -76,7 +79,7 @@ class ERPClient:
             if exc.code == 409:
                 raise ERPConflict("Состояние записи изменилось или запрос конфликтует с предыдущим.") from None
             raise ERPUnavailable("Не удалось выполнить запрос к 1С.") from None
-        except (URLError,TimeoutError,OSError):
+        except (URLError,TimeoutError,OSError,HTTPException):
             raise ERPUnavailable("Сервис 1С временно недоступен.") from None
         if len(raw)>self.MAX_RESPONSE:
             raise ERPUnavailable("Ответ 1С превышает допустимый размер.")
@@ -87,6 +90,61 @@ class ERPClient:
         if not isinstance(result,dict) or type(result.get("api_version")) is not int or result["api_version"] != 1 or "data" not in result:
             raise ERPUnavailable("Версия или структура API 1С не поддерживается.")
         return result["data"]
+
+    def references(self, actor):
+        data=self.request("GET","/references",actor)
+        if not isinstance(data,dict):
+            raise ERPUnavailable("1С вернула некорректные справочники.")
+        result={}
+        for kind in ["visitors","employees","checkpoints","purposes"]:
+            values=data.get(kind)
+            if not isinstance(values,list) or len(values)>500:
+                raise ERPUnavailable("Неизвестный формат или слишком большой справочник 1С.")
+            checked=[]
+            seen=set()
+            for item in values:
+                try:
+                    if not isinstance(item,dict):raise ValueError
+                    key=str(UUID(item["id"]))
+                    if not isinstance(item["name"],str) or not 1 <= len(item["name"]) <= 150 or key in seen:raise ValueError
+                except (KeyError,TypeError,ValueError,AttributeError):
+                    raise ERPUnavailable("Недопустимая запись справочника 1С.") from None
+                checked.append({"id":key,"name":item["name"]});seen.add(key)
+            result[kind]=checked
+        return result
+
+    def requests(self, actor):
+        data=self.request("GET","/requests",actor)
+        if not isinstance(data,dict) or not isinstance(data.get("items"),list) or len(data["items"])>100:
+            raise ERPUnavailable("Некорректный список заявок 1С.")
+        result=[]
+        for item in data["items"]:
+            try:
+                if not isinstance(item,dict):raise ValueError
+                key=str(UUID(item["id"]))
+                author=item["requester_login"]
+                visitor=item["visitor"]
+                if not isinstance(author,str) or not 1 <= len(author) <= 150 or not isinstance(visitor,str) or not 1 <= len(visitor) <= 150:raise ValueError
+                if item["status"] not in {"submitted","approved","rejected","cancelled"}:raise ValueError
+                dates={}
+                for field in ["starts_at","ends_at"]:
+                    value=datetime.fromisoformat(item[field])
+                    if value.tzinfo is None:raise ValueError
+                    dates[field]=value
+                if dates["ends_at"]<=dates["starts_at"]:raise ValueError
+            except (KeyError,TypeError,ValueError,AttributeError):
+                raise ERPUnavailable("Некорректная запись заявки 1С.") from None
+            result.append({"id":key,"visitor":visitor,"requester_login":author,"status":item["status"],**dates})
+        return result
+
+    def create_request(self, actor, payload, key):
+        result=self.request("POST","/requests",actor,payload,key)
+        try:
+            if not isinstance(result,dict) or result.get("status")!="submitted":raise ValueError
+            identifier=str(UUID(result["id"]))
+        except (KeyError,TypeError,ValueError,AttributeError):
+            raise ERPUnavailable("1С не подтвердила создание заявки.") from None
+        return {"id":identifier,"status":"submitted"}
 
     def actor(self, actor):
         data=self.request("GET","/actors/me",actor)
