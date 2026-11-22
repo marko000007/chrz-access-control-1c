@@ -1,0 +1,1 @@
+{% extends "base.html" %}{% block crumb %}Сервис учёта{% endblock %}{% block content %}<h1>Учёт временно недоступен</h1><p class="notice">{{ reason }}</p><p>Права и предметные записи проверяются в 1С. Портал не создаёт локальных пропусков при отсутствии связи.</p><a href="{% url 'dashboard' %}">Вернуться в кабинет</a>{% endblock %}

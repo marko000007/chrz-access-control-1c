@@ -252,6 +252,7 @@
 			<Catalog>VisitPurposes</Catalog>
 			<Catalog>PortalUsers</Catalog>
 			<CommonModule>AccessCatalogs</CommonModule>
+			<CommonModule>AccessPolicy</CommonModule>
 		</ChildObjects>
 	</Configuration>
 </MetaDataObject>

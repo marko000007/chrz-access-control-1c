@@ -88,6 +88,12 @@ class ERPClient:
             raise ERPUnavailable("Версия или структура API 1С не поддерживается.")
         return result["data"]
 
+    def actor(self, actor):
+        data=self.request("GET","/actors/me",actor)
+        if not isinstance(data,dict) or data.get("actor") != actor or data.get("role") not in {"admin","requester","approver","guard"}:
+            raise ERPUnavailable("1С вернула некорректное сопоставление пользователя.")
+        return data
+
     def health(self, actor):
         data=self.request("GET","/health",actor)
         if not isinstance(data,dict) or data.get("system") != "1c-enterprise":

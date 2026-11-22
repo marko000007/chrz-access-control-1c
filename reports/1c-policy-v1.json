@@ -1,0 +1,6 @@
+{
+  "ok": true,
+  "stage": "policy",
+  "checks": 4,
+  "data_origin": "synthetic"
+}

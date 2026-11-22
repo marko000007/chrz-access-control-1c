@@ -15,3 +15,11 @@ def dashboard(request):
     except ERPUnavailable as exc:
         status=str(exc)
     return render(request,"portal/dashboard.html",{"integration_status":status})
+
+
+from .permissions import erp_roles,ROLE_LABELS
+
+
+@erp_roles("admin","requester","approver","guard")
+def workspace(request):
+    return render(request,"portal/workspace.html",{"profile":request.erp_profile,"role_label":ROLE_LABELS[request.erp_profile["role"]]})

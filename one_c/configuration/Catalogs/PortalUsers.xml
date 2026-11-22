@@ -44,6 +44,28 @@
 			<UseStandardCommands>true</UseStandardCommands>
 		</Properties>
 		<ChildObjects>
+			<Attribute uuid="4c55db2d-d5ad-5ef6-80f7-e7ac195f5a28">
+				<Properties>
+					<Name>Login</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Имя входа портала</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Имя входа портала</v8:content>
+						</v8:item>
+					</Synonym>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>150</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Properties>
+			</Attribute>
 			<Attribute uuid="82c25e27-bb24-5ea9-bf3f-57e20910e13d">
 				<Properties>
 					<Name>RoleCode</Name>
