@@ -1,0 +1,54 @@
+{
+  "platform": "1C:Enterprise training 8.3.27.1606",
+  "source_format": "XML 2.20",
+  "fresh_file_database": true,
+  "source": "one_c/configuration",
+  "checks": {
+    "ok": true,
+    "catalogs": {
+      "ok": true,
+      "stage": "catalogs",
+      "checks": 3,
+      "data_origin": "synthetic"
+    },
+    "policy": {
+      "ok": true,
+      "stage": "policy",
+      "checks": 4,
+      "data_origin": "synthetic"
+    },
+    "requests": {
+      "ok": true,
+      "stage": "requests",
+      "checks": 3,
+      "data_origin": "synthetic"
+    },
+    "data_origin": "synthetic"
+  },
+  "http_publication_verified": false,
+  "source_commit": "6a440e7516c51b95f130e92a75abdaeb81f3fffc",
+  "sha256_files": {
+    "Catalogs/Checkpoints.xml": "eb88e4993865f1fda16a50280bb2fa86166334b250f337e8a518bc171827f1e7",
+    "Catalogs/Departments.xml": "a7d4898f9d6e4aa5a5878387fbaca89432c8ad6f51452af34ca92756053af98c",
+    "Catalogs/Employees/Ext/ObjectModule.bsl": "1add89071d5bb861ba86374804339cc17b00128411b1f7b2fde264514517d350",
+    "Catalogs/Employees.xml": "1ef37c0b0f81333cefbbe4a42c1b1be55c8d62bc59c0e447ea6d059df7a6fadf",
+    "Catalogs/PortalUsers/Ext/ObjectModule.bsl": "7812350d39c04303432669bd23669e1bba8e8b1bf2be2c60e506bec41a689073",
+    "Catalogs/PortalUsers.xml": "e8ca69cd2df6744dd3d15859db1c5a913e055e3094c083f6b6a9d049acfdbdb0",
+    "Catalogs/VisitPurposes.xml": "374e4808d72ac6f415a68b1f6889798c75ef8783e02df566df81ec2ddba4c647",
+    "Catalogs/Visitors.xml": "a7a89c4b8ce8838927bb6300b7c09726367f20eb0540b043eec7643d262e5d78",
+    "CommonModules/AccessCatalogs/Ext/Module.bsl": "1de47226278b8f4bd1784375b0eb32d9407b591f230594707db6d54f25384e2b",
+    "CommonModules/AccessCatalogs.xml": "87b33d5f175af20126185f7253ea0939bdad0ec7664edcbdb55d727497b855b3",
+    "CommonModules/AccessPolicy/Ext/Module.bsl": "3dd10b741b4d388667943ad5a52128c924d3169a6940fba5cdc577eccea784b1",
+    "CommonModules/AccessPolicy.xml": "cfd2bc5d489d0862299b8af16f65015ded7bafec4327482040cac161ac97c78c",
+    "CommonModules/AccessRequests/Ext/Module.bsl": "3d6f7c535865dbf93dfc15d87791d76b39e0bd7fe26c3cfb23386a23393b38ac",
+    "CommonModules/AccessRequests.xml": "7480e6ca83553639b1ac7297d1dbd015977c047f7ef2f92b6c577f6d51ab6426",
+    "CommonModules/AccessSelfTest/Ext/Module.bsl": "12bb2eedc4d6bff61c2836232ea1c14b50588c8c898df9704d1be286359ea362",
+    "CommonModules/AccessSelfTest.xml": "3b8d266d683eadbb939914071767ca61983187d8675e8d02cf23cd9bad6912fd",
+    "ConfigDumpInfo.xml": "0463216a9878e982a9f3a1483eb38f11a810d9bd55df3fa7e425afce1b14f764",
+    "Configuration.xml": "8cd669ac8c92cfb694a111433c0b50a63e9f59a9c0427409436708bc045ee158",
+    "Documents/Requests/Ext/ObjectModule.bsl": "5ac48385dc5fe0472fe3f7a9e1059e118d09a699d99481a12f34d7e720f993f1",
+    "Documents/Requests.xml": "4c792685e3cf392912bf0d256f11dee4e50c76a018def087901eea1a5ebfd3bc",
+    "Ext/ManagedApplicationModule.bsl": "8f999aa288785dc31961711821cb5df7f20a9f2f7ac4588d635d749fafde4fe3",
+    "Languages/English.xml": "b289a8bc80d973005329f1d92fd0b414f23ff3f391a5a9f985bac01f9515af43"
+  }
+}

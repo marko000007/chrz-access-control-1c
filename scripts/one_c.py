@@ -2,6 +2,7 @@
 import argparse
 import os
 import json
+import re
 import subprocess
 from pathlib import Path
 
@@ -24,14 +25,21 @@ def command(arguments,label,timeout=40):
 
 
 def main():
+    global LOCAL
     parser=argparse.ArgumentParser();parser.add_argument("operation",choices=["create","load","check","dump","smoke"])
-    args=parser.parse_args();base=LOCAL/"development"
+    parser.add_argument("--base-name",default="development",help="Имя отдельной базы внутри .local/1c")
+    args=parser.parse_args()
+    if not re.fullmatch(r"[a-z0-9][a-z0-9_-]{0,39}",args.base_name):parser.error("Недопустимое имя базы")
+    workspace=LOCAL
+    base=workspace/args.base_name
+    LOCAL=workspace/"logs"/args.base_name
     if args.operation=="create":
         if (base/"1Cv8.1CD").is_file():print("База уже существует; не перезаписывается");return
         result=LOCAL/"create-result.txt";result.unlink(missing_ok=True)
         command(["CREATEINFOBASE",f'File="{base}";',"/DumpResult",str(result)],"create")
         if not result.exists() or result.read_text(encoding="utf-8-sig").strip()!="0" or not (base/"1Cv8.1CD").is_file():raise SystemExit("Создание базы не подтверждено")
         return
+    if not (base/"1Cv8.1CD").is_file():raise SystemExit("Сначала создайте отдельную базу командой create")
     if args.operation=="smoke":
         result=LOCAL/"smoke.json";result.unlink(missing_ok=True)
         command(["ENTERPRISE","/F",str(base),"/C","selftest:"+str(result),"/DisableStartupMessages","/DisableStartupDialogs"],"runtime")
