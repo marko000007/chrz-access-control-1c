@@ -13,7 +13,7 @@ import uuid
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT))
 from portal.local_gateway import OneCRuntime, create_server
-from portal.integration import ERPClient, ERPConflict, ERPForbidden, ERPRejected
+from portal.integration import ERPClient, ERPConflict, ERPForbidden, ERPRejected, ERPMissing
 
 
 def verify(name, report_path):
@@ -60,14 +60,19 @@ def verify(name, report_path):
         try:client.create_request('demo.guard',payload,str(uuid.uuid4()))
         except ERPForbidden:checks.append('guard_cannot_create_request')
         else:raise AssertionError('Wrong role was accepted')
+        card=client.request_detail('demo.requester',first['id']);assert card['decision_at'] is None and card['host'];checks.append('native_request_card_before_decision')
         foreign=client.create_request('demo.admin',payload,str(uuid.uuid4()))
         assert foreign['id'] not in {item['id'] for item in client.requests('demo.requester')};checks.append('requester_scope_isolation')
+        try:client.request_detail('demo.requester',foreign['id'])
+        except ERPMissing:checks.append('native_request_card_foreign_404')
+        else:raise AssertionError('Foreign card was returned')
         decision={'id':first['id'],'expected_status':'submitted','reason':'Вымышленное решение проверки'}
         key=str(uuid.uuid4())
         result=client.request('POST','/requests/approve','demo.approver',decision,key)
         assert result['status']=='approved'
         assert result==client.request('POST','/requests/approve','demo.approver',decision,key);checks.append('approval_and_durable_repeat')
         key=str(uuid.uuid4())
+        card=client.request_detail('demo.requester',first['id']);assert card['decision_by']=='demo.approver' and card['decision_reason']==decision['reason'] and card['decision_at'] is not None;checks.append('native_decision_reason_card')
         issued=client.issue_pass('demo.guard',first['id'],key)
         assert issued==client.issue_pass('demo.guard',first['id'],key);checks.append('pass_issue_and_durable_repeat')
         key=str(uuid.uuid4())

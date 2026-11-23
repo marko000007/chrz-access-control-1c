@@ -128,7 +128,8 @@ def create_server(runtime, username, password, port=0):
                 if not hmac.compare_digest(supplied.encode(), authorization.encode()):
                     self.reply(401, {"error":"Доступ закрыт."}); return
                 parsed = urlsplit(self.path)
-                if parsed.query or parsed.fragment or parsed.path not in ROUTES.get(self.command, set()):
+                detail = self.command == "GET" and re.fullmatch(r"/requests/[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}", parsed.path)
+                if parsed.query or parsed.fragment or (parsed.path not in ROUTES.get(self.command, set()) and not detail):
                     self.reply(404, {"error":"Маршрут не найден."}); return
                 actor = base64.b64decode(self.headers.get("X-Portal-Actor", ""), validate=True).decode("utf-8")
                 if not actor or len(actor)>150 or any(ord(char)<32 for char in actor):

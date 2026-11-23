@@ -22,6 +22,10 @@ class ERPForbidden(ERPUnavailable):
     pass
 
 
+class ERPMissing(ERPUnavailable):
+    pass
+
+
 class ERPConflict(ERPUnavailable):
     pass
 
@@ -80,6 +84,8 @@ class ERPClient:
             exc.close()
             if exc.code in {401,403}:
                 raise ERPForbidden("1С не разрешила выполнение действия.") from None
+            if exc.code == 404:
+                raise ERPMissing("Запись не найдена или недоступна.") from None
             if exc.code == 409:
                 raise ERPConflict("Состояние записи изменилось или запрос конфликтует с предыдущим.") from None
             if exc.code == 400:
@@ -142,6 +148,27 @@ class ERPClient:
                 raise ERPUnavailable("Некорректная запись заявки 1С.") from None
             result.append({"id":key,"visitor":visitor,"requester_login":author,"status":item["status"],**dates})
         return result
+
+    def request_detail(self, actor, identifier):
+        identifier=str(UUID(str(identifier)))
+        data=self.request("GET","/requests/"+identifier,actor)
+        try:
+            value=dict(data["item"])
+            if str(UUID(value["id"])) != str(identifier):raise ValueError
+            for field in ["visitor","host","checkpoint","purpose","requester_login"]:
+                if not isinstance(value[field],str) or not 1<=len(value[field])<=150:raise ValueError
+            for field in ["decision_by","decision_reason"]:
+                if not isinstance(value[field],str) or len(value[field])>150:raise ValueError
+            if value["status"] not in {"submitted","approved","rejected","cancelled"}:raise ValueError
+            for field in ["starts_at","ends_at","created_at","decision_at"]:
+                if field=="decision_at" and value.get(field) is None:continue
+                value[field]=datetime.fromisoformat(value[field])
+                if value[field].tzinfo is None:raise ValueError
+            if value["ends_at"]<=value["starts_at"]:raise ValueError
+            if (value["status"]=="submitted") != (value["decision_at"] is None):raise ValueError
+        except (KeyError,TypeError,ValueError,AttributeError):
+            raise ERPUnavailable("Некорректная карточка заявки 1С.") from None
+        return value
 
     def create_request(self, actor, payload, key):
         result=self.request("POST","/requests",actor,payload,key)
