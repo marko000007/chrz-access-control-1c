@@ -38,7 +38,15 @@ def verify(name, report_path):
     try:
         assert client.health('demo.admin')['system']=='1c-enterprise';checks.append('real_1c_health')
         assert client.actor('demo.approver')['role']=='approver';checks.append('authoritative_1c_role')
+        visitor_payload={'name':'QA вымышленный посетитель '+uuid.uuid4().hex[:8],'company':'QA учебная организация'}
+        visitor_key=str(uuid.uuid4());new_visitor=client.create_visitor('demo.admin',visitor_payload,visitor_key)
+        assert new_visitor==client.create_visitor('demo.admin',visitor_payload,visitor_key);checks.append('native_visitor_creation_and_repeat')
+        try:client.create_visitor('demo.requester',visitor_payload,str(uuid.uuid4()))
+        except ERPForbidden:checks.append('native_visitor_creation_role_403')
+        else:raise AssertionError('Requester changed visitor catalog')
         references=client.references('demo.requester')
+        matching=[row for row in references['visitors'] if row['id']==new_visitor['id']]
+        assert len(matching)==1 and matching[0]['company']==visitor_payload['company'];checks.append('native_visitor_company_readback')
         assert all(references.values());checks.append('real_1c_references')
         before=client.requests('demo.requester')
         start=(datetime.now(timezone.utc)-timedelta(minutes=1)).replace(microsecond=0)

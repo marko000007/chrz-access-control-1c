@@ -121,7 +121,12 @@ class ERPClient:
                     if not isinstance(item["name"],str) or not 1 <= len(item["name"]) <= 150 or key in seen:raise ValueError
                 except (KeyError,TypeError,ValueError,AttributeError):
                     raise ERPUnavailable("Недопустимая запись справочника 1С.") from None
-                checked.append({"id":key,"name":item["name"]});seen.add(key)
+                row={"id":key,"name":item["name"]}
+                if kind=="visitors":
+                    company=item.get("company","")
+                    if not isinstance(company,str) or len(company)>150:raise ERPUnavailable("Некорректная организация посетителя.")
+                    row["company"]=company
+                checked.append(row);seen.add(key)
             result[kind]=checked
         return result
 
@@ -168,6 +173,15 @@ class ERPClient:
             if (value["status"]=="submitted") != (value["decision_at"] is None):raise ValueError
         except (KeyError,TypeError,ValueError,AttributeError):
             raise ERPUnavailable("Некорректная карточка заявки 1С.") from None
+        return value
+
+    def create_visitor(self, actor, payload, key):
+        data=self.request("POST","/visitors",actor,payload,key)
+        try:
+            value={"id":str(UUID(data["id"])),"name":data["name"],"company":data["company"]}
+            if value["name"]!=payload["name"].strip() or value["company"]!=payload["company"].strip():raise ValueError
+        except (KeyError,TypeError,ValueError,AttributeError):
+            raise ERPUnavailable("1С не подтвердила нового посетителя.") from None
         return value
 
     def create_request(self, actor, payload, key):

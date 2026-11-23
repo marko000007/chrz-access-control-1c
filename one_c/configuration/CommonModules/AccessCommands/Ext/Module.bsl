@@ -77,7 +77,9 @@
     Если Своя Тогда НачатьТранзакцию(); КонецЕсли;
     Попытка
         AccessPolicy.БлокироватьПрава();
-        Если Команда = "request.create" Тогда
+        Если Команда = "visitor.create" Тогда
+            AccessPolicy.Разрешить(Логин, СтрРазделить("admin", ","));
+        ИначеЕсли Команда = "request.create" Тогда
             AccessPolicy.Разрешить(Логин, СтрРазделить("requester,admin", ","));
         ИначеЕсли Команда = "request.cancel" Тогда
             AccessPolicy.Разрешить(Логин, СтрРазделить("requester,admin", ","));
@@ -108,7 +110,10 @@
             Возврат Ответ;
         КонецЕсли;
         Данные = JSONЗначение(Тело);
-        Если Команда = "request.create" Тогда
+        Если Команда = "visitor.create" Тогда
+            ПроверитьПоля(Данные, "name,company");
+            Ответ = AccessCatalogs.НовыйПосетитель(Логин, Данные["name"], Данные["company"]);
+        ИначеЕсли Команда = "request.create" Тогда
             ПроверитьПоля(Данные, "visitor_id,host_id,checkpoint_id,purpose_id,starts_at,ends_at");
             Ответ = СоздатьЗаявку(Логин, Данные);
         ИначеЕсли Команда = "pass.issue" Тогда

@@ -21,7 +21,7 @@ class NewRequestForm(forms.Form):
     def __init__(self,*args,references,**kwargs):
         super().__init__(*args,**kwargs)
         for field,kind in [("visitor_id","visitors"),("host_id","employees"),("checkpoint_id","checkpoints"),("purpose_id","purposes")]:
-            self.fields[field].choices=[("","Выберите значение"),*[(item["id"],item["name"]) for item in references[kind]]]
+            self.fields[field].choices=[("","Выберите значение"),*[(item["id"], (" · ".join(filter(None,[item["name"],item.get("company",""),item["id"][:8]]))) if kind=="visitors" else item["name"]) for item in references[kind]]]
 
     def clean(self):
         values=super().clean()
