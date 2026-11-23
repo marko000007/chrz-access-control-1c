@@ -1,5 +1,7 @@
 """Chrome acceptance of the real local portal and 1C business cycle."""
 import argparse
+import csv
+import io
 from datetime import datetime, timedelta
 import json
 from importlib.metadata import version
@@ -30,9 +32,18 @@ def check(url, accounts_path, output):
         def shot(page,name):
             page.screenshot(path=str(output/name),full_page=True);screens.append(name)
         try:
+            administrator=signed_in('demo.admin')
+            administrator.goto(url+'/visitors/new/')
+            administrator.locator('#id_name').fill('Браузерный вымышленный посетитель')
+            administrator.locator('#id_company').fill('Учебная организация браузерной проверки')
+            administrator.get_by_role('button',name='Записать в справочник',exact=True).click();administrator.wait_for_url('**/visitors/')
+            visitor=administrator.locator('article').filter(has=administrator.get_by_role('heading',name='Браузерный вымышленный посетитель',exact=True))
+            visitor_id=visitor.locator('.record-id').inner_text().strip()
+            assert re.fullmatch(r'[a-f0-9-]{36}',visitor_id);checks.append('browser_native_visitor_created_by_admin')
             requester=signed_in('demo.requester')
             requester.goto(url+'/requests/new/')
-            for name in ['visitor_id','host_id','checkpoint_id','purpose_id']:
+            requester.locator('#id_visitor_id').select_option(visitor_id)
+            for name in ['host_id','checkpoint_id','purpose_id']:
                 requester.locator('#id_'+name).select_option(index=1)
             now=datetime.now(ZoneInfo('Asia/Tbilisi'))
             requester.locator('#id_starts_at').fill((now-timedelta(minutes=5)).strftime('%Y-%m-%dT%H:%M'))
@@ -48,6 +59,9 @@ def check(url, accounts_path, output):
             approver.locator('#id_reason').fill('Вымышленное согласование браузерной проверки')
             confirm(approver);approver.wait_for_url('**/requests/')
             checks.append('browser_approval')
+            requester.goto(url+f'/requests/{identifier}/')
+            assert 'Вымышленное согласование браузерной проверки' in requester.locator('main').inner_text()
+            checks.append('browser_request_decision_card');shot(requester,'request-card-desktop.png')
             guard=signed_in('demo.guard')
             guard.goto(url+f'/requests/{identifier}/issue/')
             confirm(guard);guard.wait_for_url('**/passes/')
@@ -67,10 +81,27 @@ def check(url, accounts_path, output):
             guard.goto(url+'/events/')
             assert guard.locator('tbody tr').count()==2
             checks.append('browser_two_events');shot(guard,'events-desktop.png')
+            guard.goto(url+f'/passes/{pass_id}/')
+            assert 'Вымышленный отзыв браузерной проверки' in guard.locator('main').inner_text()
+            checks.append('browser_pass_revocation_card');shot(guard,'pass-card-desktop.png')
+            guard.set_viewport_size({'width':794,'height':1123});guard.emulate_media(media='print')
+            guard.pdf(path=str(output/'pass-print.pdf'),format='A4',print_background=True,prefer_css_page_size=True)
+            guard.locator('.pass-paper').screenshot(path=str(output/'pass-print-preview.png'));screens.append('pass-print-preview.png')
+            guard.emulate_media(media='screen');guard.set_viewport_size({'width':1440,'height':1000})
+            checks.append('browser_print_media_preview')
+            first=now.astimezone(ZoneInfo('UTC')).date().isoformat();last=datetime.now(ZoneInfo('UTC')).date().isoformat()
+            period=f'/reports/movements/?start={first}&end={last}'
+            guard.goto(url+period);assert guard.locator('tbody tr').count()==2;shot(guard,'report-desktop.png')
+            with guard.expect_download() as result:guard.get_by_role('link',name='Скачать журнал CSV',exact=True).click()
+            exported=output/'events-browser.csv';result.value.save_as(exported)
+            rows=list(csv.DictReader(io.StringIO(exported.read_text(encoding='utf-8-sig')),delimiter=';'))
+            assert len(rows)==2 and {row['Направление'] for row in rows}=={'Вход','Выход'}
+            checks.append('browser_native_period_report_and_csv')
+            assert requester.goto(url+period).status==403;checks.append('browser_report_role_403')
             response=requester.goto(url+f'/requests/{identifier}/approve/')
             assert response.status==403;checks.append('browser_requester_cannot_approve')
             mobile=signed_in('demo.guard',390,844)
-            for path,name in [('/passes/','passes-mobile.png'),('/events/','events-mobile.png'),('/requests/','requests-mobile.png')]:
+            for path,name in [('/passes/','passes-mobile.png'),('/events/','events-mobile.png'),('/requests/','requests-mobile.png'),(period,'report-mobile.png'),(f'/passes/{pass_id}/','pass-card-mobile.png'),(f'/requests/{identifier}/','request-card-mobile.png')]:
                 mobile.goto(url+path)
                 dimensions=mobile.evaluate('({width:document.documentElement.clientWidth,scroll:document.documentElement.scrollWidth})')
                 assert dimensions['scroll']<=dimensions['width']+1,(path,dimensions)

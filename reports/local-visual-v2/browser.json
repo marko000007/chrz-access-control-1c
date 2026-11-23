@@ -1,0 +1,50 @@
+{
+  "status": "passed",
+  "playwright_version": "1.65.2",
+  "browser": "Chrome 157.0.8103.80",
+  "viewports": [
+    [
+      1440,
+      1000
+    ],
+    [
+      390,
+      844
+    ]
+  ],
+  "backend": "actual 1C via local adapter",
+  "checks": [
+    "browser_native_visitor_created_by_admin",
+    "browser_request_created_in_real_1c",
+    "browser_approval",
+    "browser_request_decision_card",
+    "browser_pass_issue",
+    "browser_entry",
+    "browser_revocation_and_exit",
+    "browser_two_events",
+    "browser_pass_revocation_card",
+    "browser_print_media_preview",
+    "browser_native_period_report_and_csv",
+    "browser_report_role_403",
+    "browser_requester_cannot_approve",
+    "mobile_390_no_document_overflow"
+  ],
+  "screenshots": [
+    "requests-desktop.png",
+    "request-card-desktop.png",
+    "passes-desktop.png",
+    "events-desktop.png",
+    "pass-card-desktop.png",
+    "pass-print-preview.png",
+    "report-desktop.png",
+    "passes-mobile.png",
+    "events-mobile.png",
+    "requests-mobile.png",
+    "report-mobile.png",
+    "pass-card-mobile.png",
+    "request-card-mobile.png"
+  ],
+  "limits": [
+    "Only the bundled simulated scenario and Chrome; not a full cross-browser or accessibility audit."
+  ]
+}

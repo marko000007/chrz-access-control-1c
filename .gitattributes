@@ -1,3 +1,4 @@
 *.xml text eol=lf
 *.bsl text eol=lf
 *.py text eol=lf
+reports/**/*.csv -text whitespace=cr-at-eol

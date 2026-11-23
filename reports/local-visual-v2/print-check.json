@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "source": "actual 1C card rendered by Chrome print",
+  "data_origin": "synthetic",
+  "pdf_sha256": "016a978702ac7806f5e345cf71f999f64b573ee98eb76982cd80d0d73d7a6c85",
+  "pages": 1,
+  "page_size_pt": [
+    0.0,
+    0.0,
+    594.95996,
+    841.91998
+  ],
+  "reader": "pypdf 7.1.1",
+  "visual_renderer": "pdftoppm",
+  "visual_review": "passed",
+  "limits": [
+    "Simulated record and one A4 case, no physical printer test."
+  ]
+}

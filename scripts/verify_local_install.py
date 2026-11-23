@@ -20,7 +20,7 @@ ROOT=Path(__file__).resolve().parents[1]
 def verify(report_path, browser_python):
     names=subprocess.check_output(['git','ls-files','-z'],cwd=ROOT).decode().split('\0')
     sources={}
-    screenshots=report_path.parent/'local-visual-v1'
+    screenshots=report_path.parent/report_path.stem.replace('local-install','local-visual')
     with tempfile.TemporaryDirectory(prefix='chrz-install-') as folder:
         target=Path(folder)
         for name in filter(None,names):
@@ -55,7 +55,7 @@ def verify(report_path, browser_python):
                         time.sleep(.2)
                 with urlopen(f'http://127.0.0.1:{port}/static/portal/app.css',timeout=3) as response:assert response.status==200
                 completed=subprocess.run([str(browser_python),str(ROOT/'scripts/check_browser.py'),'--url',f'http://127.0.0.1:{port}',
-                    '--accounts',str(target/'.local/demo-accounts.json'),'--output',str(screenshots)],cwd=target,env=env,stdout=log,stderr=log,timeout=300)
+                    '--accounts',str(target/'.local/demo-accounts.json'),'--output',str(screenshots)],cwd=target,env=env,stdout=log,stderr=log,timeout=420)
                 if completed.returncode:
                     log.seek(0);raise RuntimeError(log.read()[-6000:])
             finally:
