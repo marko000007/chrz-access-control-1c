@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block crumb %}Находятся внутри{% endblock %}
+{% block content %}<h1>Находятся внутри</h1>
+<p>В 1С зарегистрирован вход без последующего выхода. Отозванные пропуска и истёкший срок не убирают посетителя из этого списка. Отчёт не заменяет физическую проверку помещений.</p>
+<p><a class="button" href="{% url 'presence' %}">Обновить снимок</a> <a href="?format=csv">Скачать снимок CSV</a></p>
+<p>Снимок: {{ report.generated_at|date:'d.m.Y H:i:s T' }}. CSV формирует новый снимок при скачивании.</p>
+<section class="grid"><article class="card"><h2>Внутри: {{ report.total }}</h2></article><article class="card"><h2>Отозванных: {{ report.revoked }}</h2></article><article class="card"><h2>С истёкшим сроком: {{ report.expired }}</h2></article></section>
+<p>Последние две группы могут пересекаться. До1000 пропусков, при превышении частичный список не выдаётся. Имена и названия точек отражают текущие справочники.</p>
+<div class="table-wrap"><table><thead><tr><th>Посетитель</th><th>Точка</th><th>Пропуск</th><th>Окончание срока</th></tr></thead><tbody>{% for row in report.items %}<tr><td data-label="Посетитель">{{ row.visitor }}</td><td data-label="Точка">{{ row.checkpoint }}</td><td data-label="Пропуск"><a href="{% url 'pass_detail' row.id %}">{% if row.state == 'revoked' %}Отозван{% else %}Действует{% endif %}</a></td><td data-label="Окончание срока">{{ row.ends_at|date:'d.m.Y H:i:s T' }}{% if row.ends_at <= report.generated_at %} · Срок истёк{% endif %}</td></tr>{% empty %}<tr><td colspan="4">Нет зарегистрированных посетителей внутри.</td></tr>{% endfor %}</tbody></table></div>{% endblock %}

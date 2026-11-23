@@ -275,6 +275,19 @@ class ERPClient:
             raise ERPUnavailable("Некорректный период или итоги отчёта 1С.") from None
         return {**checked,"items":items,"count_in":data["count_in"],"count_out":data["count_out"]}
 
+    def presence_report(self, actor):
+        data=self.request('GET','/reports/presence',actor)
+        items=self._parse_collection(data,'pass',maximum=1000)
+        try:
+            generated_at=datetime.fromisoformat(data['generated_at'])
+            if generated_at.tzinfo is None or any(row['position']!='inside' for row in items):raise ValueError
+            expected={'total':len(items),'revoked':sum(row['state']=='revoked' for row in items),
+                      'expired':sum(row['ends_at']<=generated_at for row in items)}
+            if any(type(data[key]) is not int or data[key]!=count for key,count in expected.items()):raise ValueError
+        except (KeyError,TypeError,ValueError,AttributeError):
+            raise ERPUnavailable('Некорректный снимок находящихся внутри из1С.') from None
+        return {**expected,'items':items,'generated_at':generated_at}
+
     def decide_request(self, actor, identifier, action, expected_status, reason, key):
         states = {"approve":"approved", "reject":"rejected", "cancel":"cancelled"}
         if action not in states: raise ValueError("Неизвестное решение")
