@@ -94,6 +94,15 @@ def verify(name, report_path):
         else:raise AssertionError('Revoked pass entered')
         assert len([item for item in client.events('demo.guard') if item['pass_id']==issued['id']])==2
         checks.append('exactly_two_durable_movement_events')
+        day=datetime.now(timezone.utc).date()
+        report=client.movement_report('demo.guard',day,day)
+        assert len([item for item in report['items'] if item['pass_id']==issued['id']])==2
+        assert report['count_in']+report['count_out']==len(report['items']);checks.append('native_period_report_complete_counts')
+        try:client.movement_report('demo.requester',day,day)
+        except ERPForbidden:checks.append('native_period_report_role_403')
+        else:raise AssertionError('Requester read operational report')
+        empty=client.movement_report('demo.guard',day.replace(year=2000,month=1,day=1),day.replace(year=2000,month=1,day=1))
+        assert not empty['items'];checks.append('native_empty_period_report')
     finally:
         server.shutdown();server.server_close();thread.join(3)
     sources={str(path.relative_to(ROOT)):hashlib.sha256(path.read_bytes()).hexdigest() for path in sorted((ROOT/'one_c/configuration').rglob('*')) if path.is_file()}

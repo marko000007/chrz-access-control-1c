@@ -1,7 +1,7 @@
 """Bounded HTTP client; domain records remain in 1C."""
 import base64
 import json
-from datetime import datetime
+from datetime import datetime, time, timedelta, timezone
 from uuid import UUID
 from http.client import HTTPException
 from urllib.error import HTTPError, URLError
@@ -192,10 +192,12 @@ class ERPClient:
         return self._collection(actor, "/events", "event")
 
     def _collection(self, actor, path, kind):
-        data = self.request("GET", path, actor)
+        return self._parse_collection(self.request("GET", path, actor), kind)
+
+    def _parse_collection(self, data, kind, maximum=100):
         try:
             items = data["items"]
-            if not isinstance(items, list) or len(items)>100: raise ValueError
+            if not isinstance(items, list) or len(items)>maximum: raise ValueError
             checked = []
             seen = set()
             for item in items:
@@ -223,6 +225,22 @@ class ERPClient:
         except (KeyError, TypeError, ValueError, AttributeError):
             raise ERPUnavailable("1С вернула некорректный список пропусков или событий.") from None
         return checked
+
+    def movement_report(self, actor, start, end):
+        path=f"/reports/movements/{start:%Y%m%d}/{end:%Y%m%d}"
+        data=self.request("GET",path,actor)
+        items=self._parse_collection(data,"event",maximum=1000)
+        try:
+            checked={key:datetime.fromisoformat(data[key]) for key in ["starts_at","ends_at","generated_at"]}
+            if any(value.tzinfo is None for value in checked.values()):raise ValueError
+            if checked["starts_at"]!=datetime.combine(start,time.min,timezone.utc):raise ValueError
+            if checked["ends_at"]!=datetime.combine(end+timedelta(days=1),time.min,timezone.utc):raise ValueError
+            if any(not checked["starts_at"]<=row["occurred_at"]<checked["ends_at"] for row in items):raise ValueError
+            for direction,key in [("in","count_in"),("out","count_out")]:
+                if type(data[key]) is not int or data[key]!=sum(row["direction"]==direction for row in items):raise ValueError
+        except (KeyError,TypeError,ValueError,AttributeError,OverflowError):
+            raise ERPUnavailable("Некорректный период или итоги отчёта 1С.") from None
+        return {**checked,"items":items,"count_in":data["count_in"],"count_out":data["count_out"]}
 
     def decide_request(self, actor, identifier, action, expected_status, reason, key):
         states = {"approve":"approved", "reject":"rejected", "cancel":"cancelled"}
