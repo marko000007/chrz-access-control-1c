@@ -260,6 +260,8 @@
 			<CommonModule>AccessApprovals</CommonModule>
 			<CommonModule>AccessCommands</CommonModule>
 			<Catalog>CommandJournal</Catalog>
+			<CommonModule>AccessApi</CommonModule>
+			<CommonModule>AccessLocalRpc</CommonModule>
 		</ChildObjects>
 	</Configuration>
 </MetaDataObject>

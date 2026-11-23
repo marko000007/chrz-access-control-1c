@@ -27,6 +27,9 @@ class NewRequestForm(forms.Form):
 
     def clean(self):
         values=super().clean()
+        for field in ["starts_at", "ends_at"]:
+            if values.get(field) and values[field].microsecond:
+                self.add_error(field, "1С хранит время с точностью до секунды.")
         if values.get("starts_at") and values.get("ends_at") and values["ends_at"]<=values["starts_at"]:
             self.add_error("ends_at","Окончание должно быть позже начала.")
         return values

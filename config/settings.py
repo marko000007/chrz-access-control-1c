@@ -41,3 +41,4 @@ AUTH_PASSWORD_VALIDATORS = [{"NAME":"django.contrib.auth.password_validation.Min
 ERP_BASE_URL = os.getenv("ERP_BASE_URL", "")
 ERP_USERNAME = os.getenv("ERP_USERNAME", "")
 ERP_PASSWORD = os.getenv("ERP_PASSWORD", "")
+ERP_TIMEOUT = float(os.getenv("ERP_TIMEOUT", "5"))

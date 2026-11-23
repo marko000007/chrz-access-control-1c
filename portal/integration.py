@@ -160,4 +160,4 @@ class ERPClient:
 
 
 def get_client():
-    return ERPClient(settings.ERP_BASE_URL,settings.ERP_USERNAME,settings.ERP_PASSWORD)
+    return ERPClient(settings.ERP_BASE_URL,settings.ERP_USERNAME,settings.ERP_PASSWORD,timeout=settings.ERP_TIMEOUT)

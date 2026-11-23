@@ -171,6 +171,13 @@
     },
     {
       "name": "AccessCommands"
+    },
+    {
+      "name": "AccessApi"
+    },
+    {
+      "name": "AccessLocalRpc",
+      "server_call": true
     }
   ]
 }
