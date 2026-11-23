@@ -46,11 +46,19 @@ def request_list(request):
         raise PermissionDenied("1С отозвала доступ.") from None
     except ERPUnavailable as exc:
         return render(request,"portal/unavailable.html",{"reason":str(exc)},status=503)
+    issued = {}
+    if request.erp_profile["role"] in {"admin", "guard"}:
+        try:
+            issued = {row["request_id"]:row["id"] for row in request.erp_client.passes(request.user.get_username())}
+        except ERPUnavailable as exc:
+            if isinstance(exc, ERPForbidden): raise PermissionDenied("1С отозвала доступ.") from None
+            return render(request,"portal/unavailable.html",{"reason":str(exc)},status=503)
     for item in items:
+        item["existing_pass_id"] = issued.get(item["id"])
         item["status_label"] = {"submitted":"Ожидает решения", "approved":"Согласована", "rejected":"Отклонена", "cancelled":"Отменена"}[item["status"]]
         item["can_decide"] = item["status"] == "submitted" and request.erp_profile["role"] in {"admin","approver"} and item["requester_login"] != request.user.get_username()
         item["can_cancel"] = item["status"] == "submitted" and (request.erp_profile["role"] == "admin" or (request.erp_profile["role"] == "requester" and item["requester_login"] == request.user.get_username()))
-        item["can_issue"] = item["status"] == "approved" and request.erp_profile["role"] in {"admin","guard"}
+        item["can_issue"] = item["status"] == "approved" and request.erp_profile["role"] in {"admin","guard"} and not item["existing_pass_id"]
     return render(request,"portal/requests.html",{"items":items,"can_create":request.erp_profile["role"] in {"admin","requester"}})
 
 

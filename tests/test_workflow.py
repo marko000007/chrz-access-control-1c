@@ -81,6 +81,14 @@ class WorkflowViewTests(TestCase):
         self.erp.events.return_value=[]
         self.assertContains(self.client.get('/events/'),'Проходов пока нет')
 
+    def test_existing_pass_links_to_state_instead_of_offering_duplicate_issue(self):
+        self.role='guard'
+        self.erp.requests.return_value[0]['status']='approved'
+        self.erp.passes.return_value=[{'request_id':self.identifier,'id':str(uuid.uuid4())}]
+        response=self.client.get('/requests/')
+        self.assertContains(response,'Открыть пропуск')
+        self.assertNotContains(response,'Выдать пропуск')
+
 
 class DurableCommandTests(TestCase):
     def setUp(self):

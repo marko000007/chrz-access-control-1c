@@ -10,3 +10,5 @@ __pycache__/
 *.log
 staticfiles/
 .DS_Store
+
+.qa-venv/

@@ -44,7 +44,7 @@ def execute_form(request, context, form, payload, callback, redirect_name):
     except ERPUnavailable as exc:
         form.add_error(None, str(exc)+" Сохранённую команду можно повторить без изменений.")
     else:
-        messages.success(request, "Команда подтверждена1С. Показано актуальное состояние.")
+        messages.success(request, "Команда подтверждена 1С. Показано актуальное состояние.")
         return redirect(redirect_name)
     return None
 
