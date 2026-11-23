@@ -22,6 +22,7 @@ class WorkflowViewTests(TestCase):
         self.erp.requests.return_value=[{'id':self.identifier,'visitor':'<script>Учебный</script>',
             'requester_login':'requester','status':'submitted','starts_at':timezone.now(),
             'ends_at':timezone.now()+timedelta(hours=1)}]
+        self.erp.request_detail.side_effect=lambda actor,identifier:next(item for item in self.erp.requests.return_value if item['id']==str(identifier))
         self.patch=patch('portal.permissions.get_client',return_value=self.erp);self.patch.start();self.addCleanup(self.patch.stop)
 
     def test_get_is_readonly_and_uncertain_command_retries_exactly(self):
@@ -88,6 +89,29 @@ class WorkflowViewTests(TestCase):
         response=self.client.get('/requests/')
         self.assertContains(response,'Открыть пропуск')
         self.assertNotContains(response,'Выдать пропуск')
+
+    def test_decision_uses_card_beyond_recent_list(self):
+        self.erp.requests.side_effect=AssertionError('The recent list is not a record lookup')
+        path=f'/requests/{self.identifier}/approve/'
+        response=self.client.get(path);self.assertEqual(response.status_code,200)
+        key=response.context['form']['command_key'].value()
+        self.erp.decide_request.return_value={'id':self.identifier,'status':'approved'}
+        self.assertEqual(self.client.post(path,{'command_key':key,'expected_status':'submitted','reason':'Учебное решение'}).status_code,302)
+        self.erp.requests.assert_not_called();self.erp.request_detail.assert_called_with(self.user.username,self.identifier)
+
+    def test_movement_uses_direct_card_and_missing_is_404(self):
+        from portal.integration import ERPMissing
+        self.role='guard';identifier=str(uuid.uuid4());checkpoint=str(uuid.uuid4())
+        self.erp.passes.side_effect=AssertionError('The recent list is not a record lookup')
+        self.erp.pass_detail.return_value={'id':identifier,'visitor':'Учебный посетитель','checkpoint':'Проходная','checkpoint_id':checkpoint}
+        path=f'/passes/{identifier}/in/'
+        response=self.client.get(path);self.assertEqual(response.status_code,200)
+        key=response.context['form']['command_key'].value()
+        self.assertEqual(self.client.post(path,{'command_key':key}).status_code,302)
+        self.erp.movement.assert_called_once_with(self.user.username,identifier,checkpoint,'in',key)
+        self.erp.passes.assert_not_called()
+        self.erp.pass_detail.side_effect=ERPMissing()
+        self.assertEqual(self.client.get(path).status_code,404)
 
 
 class DurableCommandTests(TestCase):

@@ -5,7 +5,7 @@ from django.http import Http404
 from django.shortcuts import redirect, render
 from django.utils import timezone
 from .commands import command_state, send_command, command_capacity
-from .integration import ERPUnavailable, ERPForbidden, ERPConflict, ERPRejected
+from .integration import ERPUnavailable, ERPForbidden, ERPConflict, ERPRejected, ERPMissing
 from .permissions import erp_roles
 
 
@@ -27,10 +27,6 @@ def unavailable(request, error):
     return render(request, "portal/unavailable.html", {"reason":str(error)}, status=503)
 
 
-def selected(items, identifier):
-    return next((item for item in items if item["id"] == str(identifier)), None)
-
-
 def execute_form(request, context, form, payload, callback, redirect_name):
     try:
         send_command(request, context, form.cleaned_data["command_key"], payload, callback)
@@ -38,7 +34,7 @@ def execute_form(request, context, form, payload, callback, redirect_name):
         form.add_error(None, exc)
     except ERPForbidden:
         raise PermissionDenied("1С отозвала доступ.") from None
-    except (ERPConflict, ERPRejected) as exc:
+    except (ERPConflict, ERPRejected, ERPMissing) as exc:
         messages.error(request, str(exc))
         return redirect(redirect_name)
     except ERPUnavailable as exc:
@@ -56,9 +52,9 @@ def request_action(request, pk, action):
     role = request.erp_profile["role"]
     if action in {"approve", "reject"} and role not in {"admin", "approver"}: raise PermissionDenied
     if action == "cancel" and role not in {"admin", "requester"}: raise PermissionDenied
-    try: item = selected(request.erp_client.requests(request.user.get_username()), pk)
+    try: item = request.erp_client.request_detail(request.user.get_username(), str(pk))
+    except ERPMissing: raise Http404 from None
     except ERPUnavailable as exc: return unavailable(request, exc)
-    if item is None: raise Http404
     if role == "requester" and item["requester_login"] != request.user.get_username(): raise PermissionDenied
     if action != "cancel" and item["requester_login"] == request.user.get_username():
         raise PermissionDenied("Собственную заявку согласовывает другой пользователь.")
@@ -97,9 +93,9 @@ def pass_list(request):
 @erp_roles("admin", "guard")
 @command_capacity
 def pass_issue(request, pk):
-    try: item = selected(request.erp_client.requests(request.user.get_username()), pk)
+    try: item = request.erp_client.request_detail(request.user.get_username(), str(pk))
+    except ERPMissing: raise Http404 from None
     except ERPUnavailable as exc: return unavailable(request, exc)
-    if item is None: raise Http404
     context = f"issue:{pk}"
     state = command_state(request, context)
     if item["status"] != "approved" and state["payload"] is None: raise PermissionDenied("Нужна согласованная заявка.")
@@ -115,9 +111,9 @@ def pass_issue(request, pk):
 @command_capacity
 def pass_action(request, pk, action):
     if action not in {"revoke", "in", "out"}: raise Http404
-    try: item = selected(request.erp_client.passes(request.user.get_username()), pk)
+    try: item = request.erp_client.pass_detail(request.user.get_username(), str(pk))
+    except ERPMissing: raise Http404 from None
     except ERPUnavailable as exc: return unavailable(request, exc)
-    if item is None: raise Http404
     context = f"pass:{pk}:{action}"
     state = command_state(request, context)
     initial = {**(state["payload"] or {}), "command_key":state["key"]}
