@@ -49,12 +49,13 @@ def catalog(spec, kind="Catalog"):
     standard = [("CodeLength",20),("DescriptionLength",150),("CodeType","String"),("CodeAllowedLength","Variable")] if kind=="Catalog" else [("NumberLength",11),("NumberType","String"),("NumberAllowedLength","Variable"),("NumberPeriodicity","Year"),("Posting","Deny")]
     for key,value in [*standard,("CheckUnique","true"),("Autonumbering","true"),("UseStandardCommands","true")]:node(props,key,value)
     children=node(item,"ChildObjects")
-    for field,caption,field_type in spec["fields"]:
+    for field_spec in spec["fields"]:
+        field,caption,field_type = field_spec[:3]
         attribute=node(children,"Attribute");attribute.set("uuid",uid(name+"/"+field))
         properties=node(attribute,"Properties");node(properties,"Name",field);title(properties,caption)
         value_type=node(properties,"Type");node(value_type,"Type",("cfg:"+field_type) if field_type.startswith(("CatalogRef.","DocumentRef.")) else "xs:"+field_type,V8)
         if field_type=="string":
-            qualifiers=node(value_type,"StringQualifiers",namespace=V8);node(qualifiers,"Length",150,V8);node(qualifiers,"AllowedLength","Variable",V8)
+            qualifiers=node(value_type,"StringQualifiers",namespace=V8);node(qualifiers,"Length",field_spec[3] if len(field_spec)>3 else 150,V8);node(qualifiers,"AllowedLength","Variable",V8)
     save(ROOT/"one_c/configuration"/(kind+"s")/(name+".xml"),root)
 
 

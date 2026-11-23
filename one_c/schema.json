@@ -68,6 +68,35 @@
           "boolean"
         ]
       ]
+    },
+    {
+      "name": "CommandJournal",
+      "title": "Журнал команд",
+      "fields": [
+        [
+          "ActorLogin",
+          "Автор команды",
+          "string"
+        ],
+        [
+          "CommandKey",
+          "Ключ команды",
+          "string",
+          36
+        ],
+        [
+          "PayloadSHA",
+          "SHA256 команды",
+          "string",
+          64
+        ],
+        [
+          "ResponseJSON",
+          "Результат JSON",
+          "string",
+          0
+        ]
+      ]
     }
   ],
   "documents": [
@@ -139,6 +168,9 @@
     },
     {
       "name": "AccessApprovals"
+    },
+    {
+      "name": "AccessCommands"
     }
   ]
 }

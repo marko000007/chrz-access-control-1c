@@ -258,6 +258,8 @@
 			<CommonModule>AccessSelfTest</CommonModule>
 			<CommonModule>AccessFixtures</CommonModule>
 			<CommonModule>AccessApprovals</CommonModule>
+			<CommonModule>AccessCommands</CommonModule>
+			<Catalog>CommandJournal</Catalog>
 		</ChildObjects>
 	</Configuration>
 </MetaDataObject>

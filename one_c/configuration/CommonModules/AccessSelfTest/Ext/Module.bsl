@@ -3,5 +3,6 @@
     Политика = AccessPolicy.Самопроверка();
     Заявки = AccessRequests.Самопроверка();
     Согласование = AccessApprovals.Самопроверка();
-    Возврат Новый Структура("ok,catalogs,policy,requests,approvals,data_origin", Истина, Каталоги, Политика, Заявки, Согласование, "synthetic");
+    Команды = AccessCommands.Самопроверка();
+    Возврат Новый Структура("ok,catalogs,policy,requests,approvals,commands,data_origin", Истина, Каталоги, Политика, Заявки, Согласование, Команды, "synthetic");
 КонецФункции
