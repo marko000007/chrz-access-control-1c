@@ -66,6 +66,16 @@ def main():
     props.find("{"+MD+"}Name").text="ChrzAccessControl"
     props.find("{"+MD+"}ScriptVariant").text="Russian"
     children=configuration.find("{"+MD+"}ChildObjects")
+    for spec in schema.get("common_modules", []):
+        name = spec["name"]
+        if not any(child.tag=="{"+MD+"}CommonModule" and child.text==name for child in children):
+            node(children,"CommonModule",name)
+        module_root=ET.Element("{"+MD+"}MetaDataObject",{"version":"2.20"})
+        module=node(module_root,"CommonModule");module.set("uuid",uid("CommonModule/"+name))
+        properties=node(module,"Properties");node(properties,"Name",name)
+        for key,value in [("Global","false"),("ClientManagedApplication","false"),("Server","true"),("ExternalConnection","false"),("ClientOrdinaryApplication","false"),("ServerCall","true" if spec.get("server_call") else "false"),("Privileged","false"),("ReturnValuesReuse","DontUse")]:
+            node(properties,key,value)
+        save(ROOT/"one_c/configuration/CommonModules"/(name+".xml"),module_root)
     for spec in schema["catalogs"]:
         if not any(child.tag=="{"+MD+"}Catalog" and child.text==spec["name"] for child in children):node(children,"Catalog",spec["name"])
         catalog(spec)

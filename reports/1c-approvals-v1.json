@@ -1,0 +1,28 @@
+{
+  "ok": true,
+  "catalogs": {
+    "ok": true,
+    "stage": "catalogs",
+    "checks": 3,
+    "data_origin": "synthetic"
+  },
+  "policy": {
+    "ok": true,
+    "stage": "policy",
+    "checks": 4,
+    "data_origin": "synthetic"
+  },
+  "requests": {
+    "ok": true,
+    "stage": "requests",
+    "checks": 3,
+    "data_origin": "synthetic"
+  },
+  "approvals": {
+    "ok": true,
+    "stage": "approvals",
+    "checks": 4,
+    "data_origin": "synthetic"
+  },
+  "data_origin": "synthetic"
+}

@@ -197,6 +197,68 @@
 					</Type>
 				</Properties>
 			</Attribute>
+			<Attribute uuid="5b5819aa-fda5-531c-9810-296fe4c3d2b6">
+				<Properties>
+					<Name>DecisionBy</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Принял решение</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Принял решение</v8:content>
+						</v8:item>
+					</Synonym>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>150</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Properties>
+			</Attribute>
+			<Attribute uuid="a3041c97-1c4e-59a8-8cf9-2e0acbd852b5">
+				<Properties>
+					<Name>DecisionAt</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Дата решения</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Дата решения</v8:content>
+						</v8:item>
+					</Synonym>
+					<Type>
+						<v8:Type>xs:dateTime</v8:Type>
+					</Type>
+				</Properties>
+			</Attribute>
+			<Attribute uuid="941398a3-23be-5fd1-8d02-84caf342e272">
+				<Properties>
+					<Name>DecisionReason</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Причина решения</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Причина решения</v8:content>
+						</v8:item>
+					</Synonym>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>150</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Properties>
+			</Attribute>
 		</ChildObjects>
 	</Document>
 </MetaDataObject>

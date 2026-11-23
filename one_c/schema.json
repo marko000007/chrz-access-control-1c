@@ -114,8 +114,31 @@
           "Status",
           "Статус",
           "string"
+        ],
+        [
+          "DecisionBy",
+          "Принял решение",
+          "string"
+        ],
+        [
+          "DecisionAt",
+          "Дата решения",
+          "dateTime"
+        ],
+        [
+          "DecisionReason",
+          "Причина решения",
+          "string"
         ]
       ]
+    }
+  ],
+  "common_modules": [
+    {
+      "name": "AccessFixtures"
+    },
+    {
+      "name": "AccessApprovals"
     }
   ]
 }
