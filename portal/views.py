@@ -11,7 +11,7 @@ def home(request):
 def dashboard(request):
     try:
         health=get_client().health(request.user.get_username())
-        status="Ответ сервиса 1С получен по контракту API v1."
+        status="Учёт подключён. Можно работать с заявками и пропусками."
     except ERPUnavailable as exc:
         status=str(exc)
     return render(request,"portal/dashboard.html",{"integration_status":status})

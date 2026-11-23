@@ -19,7 +19,7 @@ class RequestPortalTests(TestCase):
         self.remote.requests.return_value=[]
         patcher=patch('portal.permissions.get_client',return_value=self.remote);patcher.start();self.addCleanup(patcher.stop)
         self.client.get('/requests/new/')
-        self.key=self.client.session['request_create_key']
+        self.key=self.client.get('/requests/new/').context['form']['command_key'].value()
         date=(timezone.localdate()+timedelta(days=1)).isoformat()
         self.payload=dict(zip(['visitor_id','host_id','checkpoint_id','purpose_id'],self.identifiers))
         self.payload.update(starts_at=date+'T10:00',ends_at=date+'T11:00',command_key=self.key)
@@ -32,12 +32,12 @@ class RequestPortalTests(TestCase):
         actor,payload,key=self.remote.create_request.call_args.args
         self.assertEqual(actor,'requester');self.assertEqual(key,self.key)
         self.assertNotIn('actor',payload);self.assertNotIn('status',payload)
-        self.assertNotIn('request_create_key',self.client.session)
+        self.assertNotEqual(self.client.get('/requests/new/').context['form']['command_key'].value(),self.key)
 
     def test_uncertain_result_keeps_same_command_and_rejects_changed_payload(self):
         self.remote.create_request.side_effect=[ERPUnavailable('Ответ не получен'),{'id':str(uuid.uuid4()),'status':'submitted'}]
         self.assertEqual(self.client.post('/requests/new/',self.payload).status_code,503)
-        self.assertEqual(self.client.session['request_create_key'],self.key)
+        self.assertEqual(self.client.get('/requests/new/').context['form']['command_key'].value(),self.key)
         self.assertEqual(self.client.post('/requests/new/',{**self.payload,'ends_at':self.payload['ends_at'].replace('11:00','12:00')}).status_code,400)
         self.assertEqual(self.remote.create_request.call_count,1)
         self.assertEqual(self.client.post('/requests/new/',self.payload).status_code,302)

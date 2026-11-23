@@ -1,13 +1,11 @@
-import hashlib
-import hmac
-import json
-import uuid
 from datetime import datetime
 from django import forms
 from django.core.exceptions import PermissionDenied
 from django.contrib import messages
 from django.shortcuts import redirect,render
-from .integration import ERPUnavailable,ERPForbidden,ERPConflict
+from .integration import ERPUnavailable,ERPForbidden,ERPConflict,ERPRejected
+from .commands import command_state, send_command, command_capacity
+from django.core.exceptions import ValidationError
 from .permissions import erp_roles
 
 
@@ -38,7 +36,7 @@ class NewRequestForm(forms.Form):
         return {key:value.isoformat() if isinstance(value,datetime) else value for key,value in self.cleaned_data.items() if key!="command_key"}
 
 
-@erp_roles("admin","requester","approver")
+@erp_roles("admin","requester","approver","guard")
 def request_list(request):
     try:
         items=request.erp_client.requests(request.user.get_username())
@@ -48,10 +46,16 @@ def request_list(request):
         raise PermissionDenied("1С отозвала доступ.") from None
     except ERPUnavailable as exc:
         return render(request,"portal/unavailable.html",{"reason":str(exc)},status=503)
+    for item in items:
+        item["status_label"] = {"submitted":"Ожидает решения", "approved":"Согласована", "rejected":"Отклонена", "cancelled":"Отменена"}[item["status"]]
+        item["can_decide"] = item["status"] == "submitted" and request.erp_profile["role"] in {"admin","approver"} and item["requester_login"] != request.user.get_username()
+        item["can_cancel"] = item["status"] == "submitted" and (request.erp_profile["role"] == "admin" or (request.erp_profile["role"] == "requester" and item["requester_login"] == request.user.get_username()))
+        item["can_issue"] = item["status"] == "approved" and request.erp_profile["role"] in {"admin","guard"}
     return render(request,"portal/requests.html",{"items":items,"can_create":request.erp_profile["role"] in {"admin","requester"}})
 
 
 @erp_roles("admin","requester")
+@command_capacity
 def request_create(request):
     try:
         references=request.erp_client.references(request.user.get_username())
@@ -59,40 +63,31 @@ def request_create(request):
         raise PermissionDenied("1С отозвала доступ.") from None
     except ERPUnavailable as exc:
         return render(request,"portal/unavailable.html",{"reason":str(exc)},status=503)
-    key=request.session.get("request_create_key")
-    if not isinstance(key,str):
-        key=str(uuid.uuid4());request.session["request_create_key"]=key
-    initial=dict(request.session.get("request_create_pending",{}))
-    for field in ["starts_at","ends_at"]:
-        if field in initial:initial[field]=datetime.fromisoformat(initial[field])
+    state = command_state(request, "request:new")
+    key = state["key"]
+    initial = dict(state["payload"] or {})
+    for field in ["starts_at", "ends_at"]:
+        if field in initial: initial[field] = datetime.fromisoformat(initial[field])
     initial["command_key"]=key
     form=NewRequestForm(request.POST if request.method=="POST" else None,references=references,initial=initial)
     status=200
     if request.method=="POST":
         status=400
         if form.is_valid():
-            if not hmac.compare_digest(str(form.cleaned_data["command_key"]),key):
-                form.add_error(None,"Форма устарела. Обновите страницу перед отправкой.")
+            try:
+                send_command(request, "request:new", form.cleaned_data["command_key"], form.payload(),
+                    lambda nonce,payload:request.erp_client.create_request(request.user.get_username(),payload,nonce))
+            except ValidationError as exc:
+                form.add_error(None, exc)
+            except ERPForbidden:
+                raise PermissionDenied("1С отозвала доступ к отправке.") from None
+            except ERPConflict as exc:
+                form.add_error(None, str(exc));status=409
+            except ERPRejected as exc:
+                form.add_error(None, str(exc));status=400
+            except ERPUnavailable as exc:
+                form.add_error(None, str(exc));status=503
             else:
-                payload=form.payload()
-                digest=hashlib.sha256(json.dumps(payload,sort_keys=True).encode()).hexdigest()
-                pending=request.session.get("request_create_digest")
-                if pending is not None and not hmac.compare_digest(pending,digest):
-                    form.add_error(None,"Предыдущая отправка не подтверждена. Повторите её с теми же данными и проверьте список заявок.")
-                else:
-                    request.session["request_create_digest"]=digest
-                    request.session["request_create_pending"]=payload
-                    request.session.save()
-                    try:
-                        request.erp_client.create_request(request.user.get_username(),payload,key)
-                    except ERPForbidden:
-                        raise PermissionDenied("1С отозвала доступ к отправке.") from None
-                    except ERPConflict as exc:
-                        form.add_error(None,str(exc));status=409
-                    except ERPUnavailable as exc:
-                        form.add_error(None,str(exc));status=503
-                    else:
-                        for field in ["request_create_key","request_create_digest","request_create_pending"]:request.session.pop(field,None)
-                        messages.success(request,"1С подтвердила приём заявки на согласование.")
-                        return redirect("request_list")
+                messages.success(request,"1С подтвердила приём заявки на согласование.")
+                return redirect("request_list")
     return render(request,"portal/request_form.html",{"form":form},status=status)
