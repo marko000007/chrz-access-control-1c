@@ -19,8 +19,8 @@ import uuid
 ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_BINARY = Path("/Applications/1cv8t.localized/8.3.27.1606/1cv8t.app/Contents/MacOS/1cv8t")
 CONFIG = ROOT/".local/local-erp.json"
-ROUTES = {"GET": {"/health", "/actors/me", "/references", "/requests"},
-    "POST": {"/requests", "/requests/approve", "/requests/reject", "/requests/cancel"}}
+ROUTES = {"GET": {"/health", "/actors/me", "/references", "/requests", "/passes", "/events"},
+    "POST": {"/requests", "/requests/approve", "/requests/reject", "/requests/cancel", "/passes", "/passes/revoke", "/movements"}}
 
 
 class LocalERPError(Exception):

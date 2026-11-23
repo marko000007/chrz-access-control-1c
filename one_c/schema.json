@@ -97,6 +97,52 @@
           0
         ]
       ]
+    },
+    {
+      "name": "Passes",
+      "title": "Пропуска",
+      "fields": [
+        [
+          "Request",
+          "Заявка",
+          "DocumentRef.Requests"
+        ],
+        [
+          "State",
+          "Состояние",
+          "string"
+        ],
+        [
+          "Position",
+          "Местоположение",
+          "string"
+        ],
+        [
+          "IssuedBy",
+          "Кто выдал",
+          "string"
+        ],
+        [
+          "IssuedAt",
+          "Когда выдан",
+          "dateTime"
+        ],
+        [
+          "RevokedBy",
+          "Кто отозвал",
+          "string"
+        ],
+        [
+          "RevokedAt",
+          "Когда отозван",
+          "dateTime"
+        ],
+        [
+          "RevokeReason",
+          "Причина отзыва",
+          "string"
+        ]
+      ]
     }
   ],
   "documents": [
@@ -160,6 +206,37 @@
           "string"
         ]
       ]
+    },
+    {
+      "name": "GateEvents",
+      "title": "События прохода",
+      "fields": [
+        [
+          "Pass",
+          "Пропуск",
+          "CatalogRef.Passes"
+        ],
+        [
+          "Checkpoint",
+          "Точка прохода",
+          "CatalogRef.Checkpoints"
+        ],
+        [
+          "Direction",
+          "Направление",
+          "string"
+        ],
+        [
+          "ActorLogin",
+          "Регистратор",
+          "string"
+        ],
+        [
+          "OccurredAt",
+          "Время события",
+          "dateTime"
+        ]
+      ]
     }
   ],
   "common_modules": [
@@ -178,6 +255,9 @@
     {
       "name": "AccessLocalRpc",
       "server_call": true
+    },
+    {
+      "name": "AccessPasses"
     }
   ]
 }

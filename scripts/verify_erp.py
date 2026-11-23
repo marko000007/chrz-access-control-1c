@@ -13,7 +13,7 @@ import uuid
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT))
 from portal.local_gateway import OneCRuntime, create_server
-from portal.integration import ERPClient, ERPConflict, ERPForbidden
+from portal.integration import ERPClient, ERPConflict, ERPForbidden, ERPRejected
 
 
 def verify(name, report_path):
@@ -67,6 +67,28 @@ def verify(name, report_path):
         result=client.request('POST','/requests/approve','demo.approver',decision,key)
         assert result['status']=='approved'
         assert result==client.request('POST','/requests/approve','demo.approver',decision,key);checks.append('approval_and_durable_repeat')
+        key=str(uuid.uuid4())
+        issued=client.issue_pass('demo.guard',first['id'],key)
+        assert issued==client.issue_pass('demo.guard',first['id'],key);checks.append('pass_issue_and_durable_repeat')
+        key=str(uuid.uuid4())
+        entered=client.movement('demo.guard',issued['id'],payload['checkpoint_id'],'in',key)
+        assert entered==client.movement('demo.guard',issued['id'],payload['checkpoint_id'],'in',key)
+        assert len([item for item in client.events('demo.guard') if item['pass_id']==issued['id']])==1
+        checks.append('one_entry_event_after_http_repeat')
+        try:client.movement('demo.guard',issued['id'],payload['checkpoint_id'],'in',str(uuid.uuid4()))
+        except ERPConflict:checks.append('duplicate_entry_conflict_409')
+        else:raise AssertionError('Duplicate entry was accepted')
+        client.revoke_pass('demo.guard',issued['id'],'Вымышленный отзыв',str(uuid.uuid4()))
+        key=str(uuid.uuid4())
+        exited=client.movement('demo.guard',issued['id'],payload['checkpoint_id'],'out',key)
+        assert exited==client.movement('demo.guard',issued['id'],payload['checkpoint_id'],'out',key)
+        current=next(item for item in client.passes('demo.guard') if item['id']==issued['id'])
+        assert current['state']=='revoked' and current['position']=='outside';checks.append('exit_after_revocation_preserves_state')
+        try:client.movement('demo.guard',issued['id'],payload['checkpoint_id'],'in',str(uuid.uuid4()))
+        except ERPRejected:checks.append('revoked_pass_cannot_enter')
+        else:raise AssertionError('Revoked pass entered')
+        assert len([item for item in client.events('demo.guard') if item['pass_id']==issued['id']])==2
+        checks.append('exactly_two_durable_movement_events')
     finally:
         server.shutdown();server.server_close();thread.join(3)
     sources={str(path.relative_to(ROOT)):hashlib.sha256(path.read_bytes()).hexdigest() for path in sorted((ROOT/'one_c/configuration').rglob('*')) if path.is_file()}

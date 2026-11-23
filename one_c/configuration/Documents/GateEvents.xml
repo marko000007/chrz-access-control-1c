@@ -1,0 +1,148 @@
+<?xml version='1.0' encoding='utf-8'?>
+<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" version="2.20" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<Document uuid="92bd2828-751c-5962-b276-7140e78d7d28">
+		<InternalInfo>
+			<xr:GeneratedType name="DocumentObject.GateEvents" category="Object">
+				<xr:TypeId>8ed81c76-5649-5fc6-a4a1-943907b3831d</xr:TypeId>
+				<xr:ValueId>8732765b-c693-5454-bdcd-9cd8c032c8d1</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="DocumentRef.GateEvents" category="Ref">
+				<xr:TypeId>475f0cee-6e98-5baa-8619-b99d83ced5df</xr:TypeId>
+				<xr:ValueId>5416cb53-5818-5425-ac30-01806c86af8c</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="DocumentSelection.GateEvents" category="Selection">
+				<xr:TypeId>df520346-0ba3-564c-85d0-c7aec2c88be9</xr:TypeId>
+				<xr:ValueId>81ce9709-693c-5fbe-9066-d6179a160cb5</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="DocumentList.GateEvents" category="List">
+				<xr:TypeId>96987426-a883-5356-96bf-c809a32cd771</xr:TypeId>
+				<xr:ValueId>4f16c843-c03b-5ed8-9d9e-90aa518d1a8c</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="DocumentManager.GateEvents" category="Manager">
+				<xr:TypeId>18658949-53c4-5b00-9506-2334c74fcffa</xr:TypeId>
+				<xr:ValueId>47c83efa-be59-5540-be0c-284518ca0ac9</xr:ValueId>
+			</xr:GeneratedType>
+		</InternalInfo>
+		<Properties>
+			<Name>GateEvents</Name>
+			<Synonym>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>События прохода</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>События прохода</v8:content>
+				</v8:item>
+			</Synonym>
+			<NumberLength>11</NumberLength>
+			<NumberType>String</NumberType>
+			<NumberAllowedLength>Variable</NumberAllowedLength>
+			<NumberPeriodicity>Year</NumberPeriodicity>
+			<Posting>Deny</Posting>
+			<CheckUnique>true</CheckUnique>
+			<Autonumbering>true</Autonumbering>
+			<UseStandardCommands>true</UseStandardCommands>
+		</Properties>
+		<ChildObjects>
+			<Attribute uuid="b5ac064b-aba3-593f-805d-81b4e50a5817">
+				<Properties>
+					<Name>Pass</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Пропуск</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Пропуск</v8:content>
+						</v8:item>
+					</Synonym>
+					<Type>
+						<v8:Type>cfg:CatalogRef.Passes</v8:Type>
+					</Type>
+				</Properties>
+			</Attribute>
+			<Attribute uuid="2f452932-54ee-53f4-83b3-90be8b7fde30">
+				<Properties>
+					<Name>Checkpoint</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Точка прохода</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Точка прохода</v8:content>
+						</v8:item>
+					</Synonym>
+					<Type>
+						<v8:Type>cfg:CatalogRef.Checkpoints</v8:Type>
+					</Type>
+				</Properties>
+			</Attribute>
+			<Attribute uuid="e4a63b73-8053-5541-b0db-87129f392db5">
+				<Properties>
+					<Name>Direction</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Направление</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Направление</v8:content>
+						</v8:item>
+					</Synonym>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>150</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Properties>
+			</Attribute>
+			<Attribute uuid="33c25f55-f0c6-5c51-ae0c-c5ccdd30c06d">
+				<Properties>
+					<Name>ActorLogin</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Регистратор</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Регистратор</v8:content>
+						</v8:item>
+					</Synonym>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>150</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Properties>
+			</Attribute>
+			<Attribute uuid="e84995c6-ff28-59f4-8068-0ac385869744">
+				<Properties>
+					<Name>OccurredAt</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Время события</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Время события</v8:content>
+						</v8:item>
+					</Synonym>
+					<Type>
+						<v8:Type>xs:dateTime</v8:Type>
+					</Type>
+				</Properties>
+			</Attribute>
+		</ChildObjects>
+	</Document>
+</MetaDataObject>

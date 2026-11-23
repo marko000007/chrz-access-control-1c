@@ -26,6 +26,10 @@ class ERPConflict(ERPUnavailable):
     pass
 
 
+class ERPRejected(ERPUnavailable):
+    pass
+
+
 class NoRedirect(HTTPRedirectHandler):
     def redirect_request(self, req, fp, code, msg, headers, newurl):
         return None
@@ -78,6 +82,8 @@ class ERPClient:
                 raise ERPForbidden("1С не разрешила выполнение действия.") from None
             if exc.code == 409:
                 raise ERPConflict("Состояние записи изменилось или запрос конфликтует с предыдущим.") from None
+            if exc.code == 400:
+                raise ERPRejected("1С отклонила параметры или текущее состояние команды. Обновите данные.") from None
             raise ERPUnavailable("Не удалось выполнить запрос к 1С.") from None
         except (URLError,TimeoutError,OSError,HTTPException):
             raise ERPUnavailable("Сервис 1С временно недоступен.") from None
@@ -151,6 +157,82 @@ class ERPClient:
         if not isinstance(data,dict) or data.get("actor") != actor or data.get("role") not in {"admin","requester","approver","guard"}:
             raise ERPUnavailable("1С вернула некорректное сопоставление пользователя.")
         return data
+
+    def passes(self, actor):
+        return self._collection(actor, "/passes", "pass")
+
+    def events(self, actor):
+        return self._collection(actor, "/events", "event")
+
+    def _collection(self, actor, path, kind):
+        data = self.request("GET", path, actor)
+        try:
+            items = data["items"]
+            if not isinstance(items, list) or len(items)>100: raise ValueError
+            checked = []
+            seen = set()
+            for item in items:
+                if not isinstance(item, dict): raise ValueError
+                value = dict(item)
+                value["id"] = str(UUID(value["id"]))
+                if value["id"] in seen: raise ValueError
+                seen.add(value["id"])
+                for key in ["visitor", "checkpoint", "requester_login"]:
+                    if not isinstance(value[key], str) or not 1 <= len(value[key]) <= 150: raise ValueError
+                if kind == "pass":
+                    for key in ["request_id", "checkpoint_id"]: value[key] = str(UUID(value[key]))
+                    if value["state"] not in {"active", "revoked"} or value["position"] not in {"inside", "outside"}: raise ValueError
+                    dates = ["starts_at", "ends_at", "issued_at"]
+                else:
+                    value["pass_id"] = str(UUID(value["pass_id"]))
+                    if value["direction"] not in {"in", "out"}: raise ValueError
+                    if not isinstance(value["actor"], str) or not 1 <= len(value["actor"]) <= 150: raise ValueError
+                    dates = ["occurred_at"]
+                for key in dates:
+                    value[key] = datetime.fromisoformat(value[key])
+                    if value[key].tzinfo is None: raise ValueError
+                if kind == "pass" and value["ends_at"] <= value["starts_at"]: raise ValueError
+                checked.append(value)
+        except (KeyError, TypeError, ValueError, AttributeError):
+            raise ERPUnavailable("1С вернула некорректный список пропусков или событий.") from None
+        return checked
+
+    def decide_request(self, actor, identifier, action, expected_status, reason, key):
+        states = {"approve":"approved", "reject":"rejected", "cancel":"cancelled"}
+        if action not in states: raise ValueError("Неизвестное решение")
+        result = self.request("POST", "/requests/"+action, actor,
+            {"id":str(identifier), "expected_status":expected_status, "reason":reason}, key)
+        if not isinstance(result, dict) or result.get("id") != str(identifier) or result.get("status") != states[action]:
+            raise ERPUnavailable("1С не подтвердила решение.")
+        return result
+
+    def issue_pass(self, actor, request_id, key):
+        result = self.request("POST", "/passes", actor, {"request_id":str(request_id)}, key)
+        return self._pass_result(result, "active")
+
+    def revoke_pass(self, actor, identifier, reason, key):
+        result = self.request("POST", "/passes/revoke", actor, {"id":str(identifier), "reason":reason}, key)
+        return self._pass_result(result, "revoked")
+
+    @staticmethod
+    def _pass_result(result, state):
+        try:
+            if not isinstance(result, dict) or result.get("state") != state or result.get("position") not in {"inside", "outside"}: raise ValueError
+            result["id"] = str(UUID(result["id"]))
+        except (KeyError, TypeError, ValueError, AttributeError):
+            raise ERPUnavailable("1С не подтвердила команду пропуска.") from None
+        return result
+
+    def movement(self, actor, identifier, checkpoint_id, direction, key):
+        if direction not in {"in", "out"}: raise ValueError("Неизвестное направление")
+        result = self.request("POST", "/movements", actor,
+            {"pass_id":str(identifier), "checkpoint_id":str(checkpoint_id), "direction":direction}, key)
+        try:
+            if not isinstance(result, dict) or result.get("pass_id") != str(identifier) or result.get("direction") != direction: raise ValueError
+            result["id"] = str(UUID(result["id"]))
+        except (KeyError, TypeError, ValueError, AttributeError):
+            raise ERPUnavailable("1С не подтвердила запись прохода.") from None
+        return result
 
     def health(self, actor):
         data=self.request("GET","/health",actor)

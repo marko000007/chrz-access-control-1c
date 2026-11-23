@@ -4,5 +4,6 @@
     Заявки = AccessRequests.Самопроверка();
     Согласование = AccessApprovals.Самопроверка();
     Команды = AccessCommands.Самопроверка();
-    Возврат Новый Структура("ok,catalogs,policy,requests,approvals,commands,data_origin", Истина, Каталоги, Политика, Заявки, Согласование, Команды, "synthetic");
+    Пропуска = AccessPasses.Самопроверка();
+    Возврат Новый Структура("ok,catalogs,policy,requests,approvals,commands,passes,data_origin", Истина, Каталоги, Политика, Заявки, Согласование, Команды, Пропуска, "synthetic");
 КонецФункции

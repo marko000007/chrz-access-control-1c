@@ -262,6 +262,9 @@
 			<Catalog>CommandJournal</Catalog>
 			<CommonModule>AccessApi</CommonModule>
 			<CommonModule>AccessLocalRpc</CommonModule>
+			<CommonModule>AccessPasses</CommonModule>
+			<Catalog>Passes</Catalog>
+			<Document>GateEvents</Document>
 		</ChildObjects>
 	</Configuration>
 </MetaDataObject>
