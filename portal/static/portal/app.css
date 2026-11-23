@@ -7,3 +7,5 @@ tbody tr{padding:16px;background:#fff;border:1px solid #dce2eb;border-radius:12p
 td{padding:0 0 14px;border:0;overflow-wrap:anywhere}td:last-child{padding-bottom:0}td:empty{display:none}
 td[data-label]::before{content:attr(data-label);display:block;font-size:13px;font-weight:600;color:#536477;margin-bottom:4px}
 }
+
+.pass-paper{overflow-wrap:anywhere}dt{font-weight:650;margin-top:12px}dd{margin:3px 0 0;overflow-wrap:anywhere}@media print{@page{size:A4;margin:16mm}body{background:#fff;color:#000;font-size:11pt}header,footer,.crumb,button,.pass-paper~p{display:none!important}main{margin:0;padding:0;max-width:none}h1{font-size:24pt}.card{border:1px solid #777;border-radius:0;padding:16px}.notice{background:none;border:1px solid #777}.pass-paper{break-inside:avoid}}

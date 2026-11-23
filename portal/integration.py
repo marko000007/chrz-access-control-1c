@@ -226,6 +226,25 @@ class ERPClient:
             raise ERPUnavailable("1С вернула некорректный список пропусков или событий.") from None
         return checked
 
+    def pass_detail(self, actor, identifier):
+        identifier=str(UUID(str(identifier)))
+        data=self.request("GET","/passes/"+identifier,actor)
+        try:
+            value=self._parse_collection({"items":[data["item"]]},"pass")[0]
+            if value["id"]!=identifier:raise ValueError
+            for field in ["host","purpose","issued_by"]:
+                if not isinstance(value[field],str) or not 1<=len(value[field])<=150:raise ValueError
+            for field in ["revoke_reason","revoked_by"]:
+                if not isinstance(value[field],str) or len(value[field])>150:raise ValueError
+            for field in ["snapshot_at","revoked_at"]:
+                if field=="revoked_at" and value[field] is None:continue
+                value[field]=datetime.fromisoformat(value[field])
+                if value[field].tzinfo is None:raise ValueError
+            if (value["state"]=="active") != (value["revoked_at"] is None):raise ValueError
+        except (KeyError,TypeError,ValueError,AttributeError):
+            raise ERPUnavailable("Некорректная карточка пропуска 1С.") from None
+        return value
+
     def movement_report(self, actor, start, end):
         path=f"/reports/movements/{start:%Y%m%d}/{end:%Y%m%d}"
         data=self.request("GET",path,actor)
