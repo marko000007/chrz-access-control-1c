@@ -1,5 +1,6 @@
 """Запуск loopback-адаптера к установленной файловой 1С."""
 import argparse
+import os
 from pathlib import Path
 import sys
 
@@ -13,7 +14,11 @@ def main():
     parser.add_argument("operation", choices=["setup", "serve"])
     parser.add_argument("--base-name", default="development")
     parser.add_argument("--user", help="Имя локального Django-администратора для первичной настройки")
+    parser.add_argument('--allow-gui-1c',action='store_true')
     args=parser.parse_args()
+    if args.allow_gui_1c:os.environ['ONE_C_ALLOW_GUI']='1'
+    if args.operation=='setup' and os.getenv('ONE_C_ALLOW_GUI','0')!='1':
+        parser.error('Подготовка1С требует явно включённого интерактивного режима --allow-gui-1c.')
     runtime=OneCRuntime(args.base_name)
     if args.operation=="setup":
         if not args.user: parser.error("Для setup укажите --user")

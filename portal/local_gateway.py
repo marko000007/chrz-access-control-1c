@@ -27,8 +27,17 @@ class LocalERPError(Exception):
     pass
 
 
+class LocalERPGUIDisabled(LocalERPError):
+    pass
+
+
+def gui_launch_enabled(explicit=None):
+    return explicit is True if explicit is not None else os.getenv('ONE_C_ALLOW_GUI','0')=='1'
+
+
 class OneCRuntime:
-    def __init__(self, base_name="development", root=ROOT, binary=None):
+    def __init__(self, base_name="development", root=ROOT, binary=None, allow_gui=None):
+        self.allow_gui=gui_launch_enabled(allow_gui)
         if not re.fullmatch(r"[a-z0-9][a-z0-9_-]{0,39}", base_name):
             raise LocalERPError("Некорректное имя локальной базы.")
         self.root = Path(root).resolve()
@@ -67,6 +76,8 @@ class OneCRuntime:
             self.lock.release()
 
     def invoke(self, payload):
+        if not self.allow_gui:
+            raise LocalERPGUIDisabled('Автоматический запуск окон1С отключён. Нужен явно включённый оператором режим обмена.')
         request_id = str(uuid.uuid4())
         encoded = json.dumps({**payload, "request_id": request_id}, ensure_ascii=False, allow_nan=False).encode("utf-8")
         if len(encoded) > 270000:
@@ -150,6 +161,8 @@ def create_server(runtime, username, password, port=0):
                 self.reply(status, result)
             except (ValueError, UnicodeError, binascii.Error, TimeoutError):
                 self.reply(400, {"error":"Некорректный запрос."})
+            except LocalERPGUIDisabled:
+                self.reply(503, {'error':'Запуск окон1С отключён. Администратор должен подключить локальный сервис учёта.','code':'gui_launch_disabled'})
             except LocalERPError:
                 self.reply(503, {"error":"Локальная 1С временно недоступна; сохраните ключ команды для повтора."})
 

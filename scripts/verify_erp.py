@@ -1,5 +1,6 @@
 """Real loopback HTTP → 1C integration in a separate owned verification base."""
 import argparse
+import os
 from datetime import datetime, timedelta, timezone
 import hashlib
 import json
@@ -16,7 +17,9 @@ from portal.local_gateway import OneCRuntime, create_server
 from portal.integration import ERPClient, ERPConflict, ERPForbidden, ERPRejected, ERPMissing
 
 
-def verify(name, report_path):
+def verify(name, report_path, allow_gui=False):
+    if not allow_gui:raise SystemExit("Нативная проверка отключена: она открывает окна1С. Автоматически не запускать.")
+    os.environ["ONE_C_ALLOW_GUI"]="1"
     if not name.startswith('qa-'):
         raise SystemExit('Используйте отдельное имя с префиксом qa-')
     base=ROOT/'.local/1c'/name
@@ -145,4 +148,5 @@ if __name__=='__main__':
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--base-name',default='qa-http-20261123')
     parser.add_argument('--report',type=Path,default=Path('reports/1c-http-v1.json'))
-    args=parser.parse_args();verify(args.base_name,args.report.resolve())
+    parser.add_argument("--allow-gui-1c",action="store_true")
+    args=parser.parse_args();verify(args.base_name,args.report.resolve(),args.allow_gui_1c)

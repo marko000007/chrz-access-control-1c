@@ -12,10 +12,15 @@ PORT = 8044
 
 def main():
     parser = argparse.ArgumentParser(description="Локальный запуск приложения")
+    parser.add_argument("--allow-gui-1c",action="store_true",help="Явно разрешить интерактивный запуск окон1С")
     parser.add_argument("--setup-demo", action="store_true", help="Однократно собрать локальную1С и вымышленные демоаккаунты")
     parser.add_argument("--check", action="store_true", help="Подготовить базу и проверить конфигурацию без запуска сервера")
     parser.add_argument("--port", type=int, default=PORT, help="Локальный порт приложения")
     args = parser.parse_args()
+    if args.allow_gui_1c:
+        os.environ['ONE_C_ALLOW_GUI']='1'
+    if args.setup_demo and os.getenv('ONE_C_ALLOW_GUI','0')!='1':
+        parser.error('Подготовка1С открывает платформу. Интерактивный режим включается явно через --allow-gui-1c.')
     if not 1024 <= args.port <= 65535:
         parser.error("Порт должен быть от 1024 до 65535")
     os.chdir(BASE_DIR)

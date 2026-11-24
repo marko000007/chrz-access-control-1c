@@ -56,7 +56,7 @@ class RuntimeTransportTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as folder:
             root=Path(folder);base=root/'.local/1c/qa-test';base.mkdir(parents=True);(base/'1Cv8.1CD').touch()
             binary=root/'binary';binary.touch()
-            runtime=OneCRuntime('qa-test',root,binary)
+            runtime=OneCRuntime('qa-test',root,binary,allow_gui=True)
             def execute(*args,**kwargs):
                 payload=json.loads((runtime.directory/'request.json').read_text())
                 (runtime.directory/'response.json').write_text(json.dumps({'request_id':payload['request_id'],'status':200,'result':{'api_version':1,'data':{}}}))

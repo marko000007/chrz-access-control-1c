@@ -17,7 +17,8 @@ import venv
 ROOT=Path(__file__).resolve().parents[1]
 
 
-def verify(report_path, browser_python):
+def verify(report_path, browser_python, allow_gui=False):
+    if not allow_gui:raise SystemExit("Нативная установка отключена: она открывает окна1С. Автоматически не запускать.")
     names=subprocess.check_output(['git','ls-files','-z'],cwd=ROOT).decode().split('\0')
     sources={}
     screenshots=report_path.parent/report_path.stem.replace('local-install','local-visual')
@@ -39,11 +40,11 @@ def verify(report_path, browser_python):
             run('-m','pip','install','-r','requirements.txt')
             run('-m','pip','check')
             run('main.py','test','tests','--verbosity','1')
-            run('run_local.py','--setup-demo','--check')
+            run('run_local.py','--setup-demo','--check','--allow-gui-1c')
             run('main.py','makemigrations','--check','--dry-run')
             with socket.socket() as listener:
                 listener.bind(('127.0.0.1',0));port=listener.getsockname()[1]
-            server=subprocess.Popen([str(python),str(target/'run_local.py'),'--port',str(port)],cwd=ROOT.parent,env=env,stdout=log,stderr=log)
+            server=subprocess.Popen([str(python),str(target/'run_local.py'),'--allow-gui-1c','--port',str(port)],cwd=ROOT.parent,env=env,stdout=log,stderr=log)
             try:
                 deadline=time.monotonic()+30
                 while True:
@@ -76,4 +77,5 @@ if __name__=='__main__':
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--report',type=Path,default=Path('reports/local-install-v1.json'))
     parser.add_argument('--browser-python',type=Path,required=True,help='Python с Playwright и доступным каналом Chrome')
-    args=parser.parse_args();verify(args.report.resolve(),Path(os.path.abspath(args.browser_python)))
+    parser.add_argument("--allow-gui-1c",action="store_true")
+    args=parser.parse_args();verify(args.report.resolve(),Path(os.path.abspath(args.browser_python)),args.allow_gui_1c)
