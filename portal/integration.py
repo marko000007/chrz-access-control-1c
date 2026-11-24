@@ -8,7 +8,7 @@ from urllib.error import HTTPError, URLError
 from urllib.parse import urlsplit
 from urllib.request import HTTPRedirectHandler, Request, build_opener
 from django.conf import settings
-from .protocol import strict_json
+from .protocol import strict_json, entity_id
 
 
 class ERPUnavailable(Exception):
@@ -122,7 +122,7 @@ class ERPClient:
             for item in values:
                 try:
                     if not isinstance(item,dict):raise ValueError
-                    key=str(UUID(item["id"]))
+                    key=entity_id(item["id"])
                     if not isinstance(item["name"],str) or not 1 <= len(item["name"]) <= 150 or key in seen:raise ValueError
                 except (KeyError,TypeError,ValueError,AttributeError):
                     raise ERPUnavailable("Недопустимая запись справочника 1С.") from None
@@ -140,10 +140,13 @@ class ERPClient:
         if not isinstance(data,dict) or not isinstance(data.get("items"),list) or len(data["items"])>100:
             raise ERPUnavailable("Некорректный список заявок 1С.")
         result=[]
+        seen=set()
         for item in data["items"]:
             try:
                 if not isinstance(item,dict):raise ValueError
-                key=str(UUID(item["id"]))
+                key=entity_id(item["id"])
+                if key in seen:raise ValueError
+                seen.add(key)
                 author=item["requester_login"]
                 visitor=item["visitor"]
                 if not isinstance(author,str) or not 1 <= len(author) <= 150 or not isinstance(visitor,str) or not 1 <= len(visitor) <= 150:raise ValueError
@@ -164,7 +167,7 @@ class ERPClient:
         data=self.request("GET","/requests/"+identifier,actor)
         try:
             value=dict(data["item"])
-            if str(UUID(value["id"])) != str(identifier):raise ValueError
+            if entity_id(value["id"]) != str(identifier):raise ValueError
             for field in ["visitor","host","checkpoint","purpose","requester_login"]:
                 if not isinstance(value[field],str) or not 1<=len(value[field])<=150:raise ValueError
             for field in ["decision_by","decision_reason"]:
@@ -183,7 +186,7 @@ class ERPClient:
     def create_visitor(self, actor, payload, key):
         data=self.request("POST","/visitors",actor,payload,key)
         try:
-            value={"id":str(UUID(data["id"])),"name":data["name"],"company":data["company"]}
+            value={"id":entity_id(data["id"]),"name":data["name"],"company":data["company"]}
             if value["name"]!=payload["name"].strip() or value["company"]!=payload["company"].strip():raise ValueError
         except (KeyError,TypeError,ValueError,AttributeError):
             raise ERPUnavailable("1С не подтвердила нового посетителя.") from None
@@ -193,7 +196,7 @@ class ERPClient:
         result=self.request("POST","/requests",actor,payload,key)
         try:
             if not isinstance(result,dict) or result.get("status")!="submitted":raise ValueError
-            identifier=str(UUID(result["id"]))
+            identifier=entity_id(result["id"])
         except (KeyError,TypeError,ValueError,AttributeError):
             raise ERPUnavailable("1С не подтвердила создание заявки.") from None
         return {"id":identifier,"status":"submitted"}
@@ -222,17 +225,17 @@ class ERPClient:
             for item in items:
                 if not isinstance(item, dict): raise ValueError
                 value = dict(item)
-                value["id"] = str(UUID(value["id"]))
+                value["id"] = entity_id(value["id"])
                 if value["id"] in seen: raise ValueError
                 seen.add(value["id"])
                 for key in ["visitor", "checkpoint", "requester_login"]:
                     if not isinstance(value[key], str) or not 1 <= len(value[key]) <= 150: raise ValueError
                 if kind == "pass":
-                    for key in ["request_id", "checkpoint_id"]: value[key] = str(UUID(value[key]))
+                    for key in ["request_id", "checkpoint_id"]: value[key] = entity_id(value[key])
                     if value["state"] not in {"active", "revoked"} or value["position"] not in {"inside", "outside"}: raise ValueError
                     dates = ["starts_at", "ends_at", "issued_at"]
                 else:
-                    value["pass_id"] = str(UUID(value["pass_id"]))
+                    value["pass_id"] = entity_id(value["pass_id"])
                     if value["direction"] not in {"in", "out"}: raise ValueError
                     if not isinstance(value["actor"], str) or not 1 <= len(value["actor"]) <= 150: raise ValueError
                     dates = ["occurred_at"]
@@ -308,13 +311,16 @@ class ERPClient:
 
     def revoke_pass(self, actor, identifier, reason, key):
         result = self.request("POST", "/passes/revoke", actor, {"id":str(identifier), "reason":reason}, key)
-        return self._pass_result(result, "revoked")
+        value=self._pass_result(result, "revoked")
+        if value["id"]!=str(UUID(str(identifier))):
+            raise ERPUnavailable("1С подтвердила другой пропуск; результат команды не подтверждён.")
+        return value
 
     @staticmethod
     def _pass_result(result, state):
         try:
             if not isinstance(result, dict) or result.get("state") != state or result.get("position") not in {"inside", "outside"}: raise ValueError
-            result["id"] = str(UUID(result["id"]))
+            result["id"] = entity_id(result["id"])
         except (KeyError, TypeError, ValueError, AttributeError):
             raise ERPUnavailable("1С не подтвердила команду пропуска.") from None
         return result
@@ -324,8 +330,8 @@ class ERPClient:
         result = self.request("POST", "/movements", actor,
             {"pass_id":str(identifier), "checkpoint_id":str(checkpoint_id), "direction":direction}, key)
         try:
-            if not isinstance(result, dict) or result.get("pass_id") != str(identifier) or result.get("direction") != direction: raise ValueError
-            result["id"] = str(UUID(result["id"]))
+            if not isinstance(result, dict) or entity_id(result.get("pass_id")) != str(UUID(str(identifier))) or result.get("direction") != direction: raise ValueError
+            result["id"] = entity_id(result["id"])
         except (KeyError, TypeError, ValueError, AttributeError):
             raise ERPUnavailable("1С не подтвердила запись прохода.") from None
         return result

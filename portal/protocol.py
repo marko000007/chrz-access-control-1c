@@ -29,3 +29,11 @@ def strict_json(raw):
         return result
     except RecursionError:
         raise ValueError('JSON is too deeply nested') from None
+
+
+def entity_id(value):
+    from uuid import UUID
+    if not isinstance(value,str):raise ValueError('Entity identifier must be a string')
+    identifier=UUID(value)
+    if not identifier.int:raise ValueError('Empty entity identifier')
+    return str(identifier)
