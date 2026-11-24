@@ -8,6 +8,7 @@ from urllib.error import HTTPError, URLError
 from urllib.parse import urlsplit
 from urllib.request import HTTPRedirectHandler, Request, build_opener
 from django.conf import settings
+from .protocol import strict_json
 
 
 class ERPUnavailable(Exception):
@@ -77,6 +78,8 @@ class ERPClient:
         request=Request(self.base_url+path,data=data,headers=headers,method=method)
         try:
             with self.opener.open(request,timeout=self.timeout) as response:
+                if response.status != 200:
+                    raise ERPUnavailable("Сервис не подтвердил завершение запроса ответом200.")
                 if response.headers.get_content_type() != "application/json":
                     raise ERPUnavailable("1С вернула ответ неизвестного формата.")
                 raw=response.read(self.MAX_RESPONSE+1)
@@ -96,11 +99,13 @@ class ERPClient:
         if len(raw)>self.MAX_RESPONSE:
             raise ERPUnavailable("Ответ 1С превышает допустимый размер.")
         try:
-            result=json.loads(raw)
+            result=strict_json(raw)
         except (ValueError,UnicodeDecodeError):
             raise ERPUnavailable("Не удалось прочитать JSON 1С.") from None
         if not isinstance(result,dict) or type(result.get("api_version")) is not int or result["api_version"] != 1 or "data" not in result:
             raise ERPUnavailable("Версия или структура API 1С не поддерживается.")
+        if "error" in result and result["error"] != "":
+            raise ERPUnavailable("Ответ1С содержит неподтверждённый результат.")
         return result["data"]
 
     def references(self, actor):
@@ -195,7 +200,7 @@ class ERPClient:
 
     def actor(self, actor):
         data=self.request("GET","/actors/me",actor)
-        if not isinstance(data,dict) or data.get("actor") != actor or data.get("role") not in {"admin","requester","approver","guard"}:
+        if not isinstance(data,dict) or data.get("actor") != actor or not isinstance(data.get("role"),str) or data.get("role") not in {"admin","requester","approver","guard"}:
             raise ERPUnavailable("1С вернула некорректное сопоставление пользователя.")
         return data
 

@@ -32,6 +32,13 @@ class GatewayTransportTests(unittest.TestCase):
             self.assertEqual(response.status,200)
         self.assertEqual(self.runtime.invoke.call_args.args[0],{'method':'POST','path':'/requests','actor':'Тестовый','body':body.decode(),'key':key})
 
+    def test_ambiguous_json_is_rejected_before_runtime(self):
+        for body in [b'{"id":"first","id":"second"}',b'{"x":NaN}',b'{"x":1e999}']:
+            with self.assertRaises(HTTPError) as caught:
+                urlopen(Request(self.url+'/requests',data=body,headers={**self.headers,'Idempotency-Key':str(uuid.uuid4())}),timeout=3)
+            self.assertEqual(caught.exception.code,400);caught.exception.close()
+        self.runtime.invoke.assert_not_called()
+
     def test_auth_origin_host_route_and_key_rejected_before_runtime(self):
         for path,headers,data,code in [('/health',{'Authorization':'bad'},None,401),
             ('/health',{'Origin':'https://foreign.invalid'},None,403),

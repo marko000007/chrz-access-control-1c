@@ -1,4 +1,5 @@
 """Loopback HTTP adapter: every business response is executed by the real 1C runtime."""
+from .protocol import strict_json
 import base64
 import binascii
 from contextlib import contextmanager
@@ -94,7 +95,7 @@ class OneCRuntime:
                     "/Out", str(self.directory/"runtime.log")], cwd=self.binary.parent, capture_output=True, timeout=25)
                 if result.returncode or not response.is_file() or response.stat().st_size > 1024*1024:
                     raise LocalERPError("Локальная 1С не подтвердила выполнение запроса.")
-                data = json.loads(response.read_text(encoding="utf-8-sig"))
+                data = strict_json(response.read_text(encoding="utf-8-sig"))
                 if data.get("local_error"):
                     diagnostic = self.directory/"last-error.log"
                     diagnostic.write_text(str(data["local_error"])[:6000], encoding="utf-8")
@@ -156,7 +157,7 @@ def create_server(runtime, username, password, port=0):
                     raw = self.rfile.read(length)
                     if len(raw) != length: raise ValueError
                     body = raw.decode("utf-8")
-                    if not isinstance(json.loads(body), dict): raise ValueError
+                    if not isinstance(strict_json(body), dict): raise ValueError
                 status, result = runtime.invoke({"method":self.command, "path":parsed.path, "actor":actor, "body":body, "key":key})
                 self.reply(status, result)
             except (ValueError, UnicodeError, binascii.Error, TimeoutError):
