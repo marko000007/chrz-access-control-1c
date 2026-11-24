@@ -56,7 +56,7 @@ def verify(report_path, browser_python, allow_gui=False):
                         time.sleep(.2)
                 with urlopen(f'http://127.0.0.1:{port}/static/portal/app.css',timeout=3) as response:assert response.status==200
                 completed=subprocess.run([str(browser_python),str(ROOT/'scripts/check_browser.py'),'--url',f'http://127.0.0.1:{port}',
-                    '--accounts',str(target/'.local/demo-accounts.json'),'--output',str(screenshots)],cwd=target,env=env,stdout=log,stderr=log,timeout=420)
+                    '--accounts',str(target/'.local/demo-accounts.json'),'--allow-gui-1c','--output',str(screenshots)],cwd=target,env=env,stdout=log,stderr=log,timeout=420)
                 if completed.returncode:
                     log.seek(0);raise RuntimeError(log.read()[-6000:])
             finally:

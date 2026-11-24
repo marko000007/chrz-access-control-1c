@@ -12,6 +12,7 @@ DEFAULT="/Applications/1cv8t.localized/8.3.27.1606/1cv8t.app/Contents/MacOS/1cv8
 
 
 def command(arguments,label,timeout=40):
+    if os.getenv("ONE_C_ALLOW_GUI","0")!="1":raise SystemExit("Запуск платформы отключён; нужен явный интерактивный режим.")
     binary=Path(os.getenv("ONE_C_BINARY",DEFAULT))
     if not binary.is_file():raise SystemExit("Укажите ONE_C_BINARY с установленной платформой 1С")
     LOCAL.mkdir(parents=True,exist_ok=True)
@@ -32,6 +33,7 @@ def main():
     args=parser.parse_args()
     if not args.allow_gui and os.getenv('ONE_C_ALLOW_GUI','0')!='1':
         parser.error('Запуск платформы отключён. Для интерактивной операции требуется --allow-gui.')
+    if args.allow_gui:os.environ["ONE_C_ALLOW_GUI"]="1"
     if not re.fullmatch(r"[a-z0-9][a-z0-9_-]{0,39}",args.base_name):parser.error("Недопустимое имя базы")
     workspace=LOCAL
     base=workspace/args.base_name

@@ -28,9 +28,10 @@ class GUIGuardTests(SimpleTestCase):
                 launch.assert_not_called()
 
     def test_native_verifiers_require_explicit_manual_optin_before_any_setup(self):
-        from scripts import verify_erp,verify_local_install
+        from scripts import verify_erp,verify_local_install,check_browser
         for run,args in [(verify_erp.verify,('qa-test',Path('/tmp/not-used.json'))),
-                         (verify_local_install.verify,(Path('/tmp/not-used.json'),Path(sys.executable)))]:
+                         (verify_local_install.verify,(Path('/tmp/not-used.json'),Path(sys.executable))),
+                         (check_browser.check,('http://127.0.0.1:1',Path('/tmp/not-used.json'),Path('/tmp/not-used-output')))]:
             with patch('subprocess.run') as launch:
                 with self.assertRaises(SystemExit):run(*args)
                 launch.assert_not_called()

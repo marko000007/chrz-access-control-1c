@@ -8,10 +8,11 @@ from importlib.metadata import version
 from pathlib import Path
 import re
 from zoneinfo import ZoneInfo
-from playwright.sync_api import sync_playwright
 
 
-def check(url, accounts_path, output):
+def check(url, accounts_path, output, allow_gui=False):
+    if not allow_gui:raise SystemExit("Браузерный бизнес-цикл1С отключён без явного ручного режима.")
+    from playwright.sync_api import sync_playwright
     accounts=json.loads(accounts_path.read_text())
     output.mkdir(parents=True,exist_ok=True)
     checks=[];screens=[]
@@ -139,4 +140,5 @@ if __name__=='__main__':
     parser.add_argument('--url',required=True)
     parser.add_argument('--accounts',type=Path,required=True)
     parser.add_argument('--output',type=Path,required=True)
-    args=parser.parse_args();check(args.url,args.accounts,args.output)
+    parser.add_argument("--allow-gui-1c",action="store_true")
+    args=parser.parse_args();check(args.url,args.accounts,args.output,args.allow_gui_1c)
