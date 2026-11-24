@@ -1,4 +1,4 @@
-"""Сохраняет точную команду до отправки; подтверждённый отказ освобождает форму."""
+"""Сохраняет точную команду; новая ошибка прав не стирает прежний неизвестный результат."""
 import hmac
 from functools import wraps
 from django.core.exceptions import ValidationError
@@ -45,8 +45,11 @@ def send_command(request, context, key, payload, callback):
         raise ValidationError("Результат предыдущей команды не подтверждён. Повторите её без изменений.")
     try:
         result = callback(state["key"], payload)
-    except (ERPConflict, ERPForbidden, ERPRejected):
-        clear_command(request, context, state["key"])
+    except (ERPConflict, ERPForbidden, ERPRejected) as exc:
+        # Отказ текущего повтора не доказывает, что прежняя попытка не выполнилась.
+        unknown_before_retry = state['payload'] is not None
+        if not (unknown_before_retry and isinstance(exc,(ERPConflict,ERPForbidden))):
+            clear_command(request, context, state["key"])
         raise
     clear_command(request, context, state["key"])
     return result
