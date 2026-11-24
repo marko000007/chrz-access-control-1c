@@ -53,3 +53,35 @@ def dismiss(request,pk):
         if removed:messages.success(request,'Неотправленная форма убрана. Учёт в1С не менялся.')
         else:messages.error(request,'Форма изменилась или ожидает подтверждения результата. Она сохранена для безопасного повтора.')
     return redirect('pending_commands')
+
+
+@login_required
+def export_pending(request):
+    """Личный диагностический снимок; не подтверждение выполнения и не импорт команд."""
+    import hashlib
+    from django.db import transaction
+    from django.http import JsonResponse
+    from django.utils import timezone
+    from .commands import canonical_payload,lock_owner,LIMIT
+    from django.core.exceptions import ValidationError
+    with transaction.atomic():
+        lock_owner(request.user)
+        items=list(PendingCommand.objects.filter(owner=request.user).order_by('created_at','pk')[:LIMIT+1])
+        if len(items)>LIMIT:
+            return JsonResponse({'error':'Очередь превышает предел20. Частичная выгрузка не формируется.'},status=409)
+        rows=[]
+        try:
+            for item in items:
+                payload_hash=hashlib.sha256(canonical_payload(item.payload).encode('utf-8')).hexdigest() if item.payload is not None else None
+                rows.append({'context':item.context,'key':str(item.key),'created_at':item.created_at.isoformat(),
+                    'state':'unknown' if item.payload is not None else 'draft','payload':item.payload,'payload_sha256':payload_hash})
+        except ValidationError:
+            return JsonResponse({'error':'Повреждено содержимое одной из команд. Очередь сохранена; выгрузка не сформирована.'},status=409)
+    response=JsonResponse({'schema_version':1,'actor':request.user.get_username(),'generated_at':timezone.now().isoformat(),
+        'hash_method':'SHA-256 of UTF-8 JSON with sorted keys; diagnostic representation, not the original wire bytes.',
+        'execution_status':'Unknown commands are not proof of execution or rejection in 1C. Export does not send or cancel commands.',
+        'commands':rows},json_dumps_params={'ensure_ascii':False})
+    response['Content-Disposition']='attachment; filename="pending-commands.json"'
+    response['Cache-Control']='private, no-store'
+    response['X-Content-Type-Options']='nosniff'
+    return response

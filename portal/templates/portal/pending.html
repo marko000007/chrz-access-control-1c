@@ -3,6 +3,7 @@
 {% block content %}<h1>Мои незавершённые действия</h1>
 <p>Ожидают подтверждения результата: {{ awaiting }}. Здесь сохраняются только ваши локальные формы. Просмотр списка не обращается к1С.</p>
 <p>Если ответ после отправки не получен, откройте прежнее действие и повторите его без изменений с тем же ключом. Удаление формы не отменяет операцию в1С, поэтому неподтверждённые команды здесь не удаляются.</p>
+<section class="card"><h2>Сохранить диагностическую копию</h2><p>В файл войдут ключи и содержимое ваших форм. Это снимок локальной очереди, а не подтверждение выполнения в1С.</p><a href="{% url 'export_pending' %}">Скачать свою очередь JSON</a></section>
 {% for row in rows %}<article class="card"><h2>{{ row.label }}</h2><p>Создана {{ row.item.created_at|date:'d.m.Y H:i:s' }} · {% if row.awaiting %}Ожидает подтверждения результата{% else %}Форма ещё не отправлена{% endif %}</p>
 {% if row.url %}<a href="{{ row.url }}">Продолжить то же действие</a>{% endif %}
 {% if not row.awaiting %}<form method="post" action="{% url 'dismiss_pending' row.item.pk %}">{% csrf_token %}<input type="hidden" name="key" value="{{ row.item.key }}"><button>Убрать неотправленную форму</button></form>{% endif %}</article>{% empty %}<p class="card">Незавершённых действий нет.</p>{% endfor %}{% endblock %}
