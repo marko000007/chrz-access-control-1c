@@ -9,6 +9,7 @@ from django.db import transaction
 from django.http import HttpResponseBadRequest
 from .integration import ERPConflict, ERPForbidden, ERPRejected
 from .models import PendingCommand
+from .command_lock import sending_slot
 
 LIMIT=20
 
@@ -85,12 +86,14 @@ def prepare_command(request,context,key,payload):
 
 
 def send_command(request, context, key, payload, callback):
-    frozen_key,frozen_payload,unknown_before_retry=prepare_command(request,context,key,payload)
-    try:
-        result=callback(frozen_key,frozen_payload)
-    except (ERPConflict, ERPForbidden, ERPRejected) as exc:
-        if not (unknown_before_retry and isinstance(exc,(ERPConflict,ERPForbidden))):
-            clear_command(request,context,frozen_key)
-        raise
-    clear_command(request,context,frozen_key)
-    return result
+    with sending_slot(request.user):
+        frozen_key,frozen_payload,unknown_before_retry=prepare_command(request,context,key,payload)
+        try:
+            result=callback(frozen_key,frozen_payload)
+        except (ERPConflict, ERPForbidden, ERPRejected):
+            # Любой текущий отказ не устанавливает исход предыдущей потерянной попытки.
+            if not unknown_before_retry:
+                clear_command(request,context,frozen_key)
+            raise
+        clear_command(request,context,frozen_key)
+        return result

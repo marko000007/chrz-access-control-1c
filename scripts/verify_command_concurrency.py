@@ -64,7 +64,7 @@ with ThreadPoolExecutor(max_workers=2) as pool:
     finally:released.set()
     assert future.result(timeout=5)=='unknown'
 assert command_state(r,'same')['payload']=={'reason':'original'}
-checks.extend(['changed_payload_blocked_while_first_response_unknown','callback_runs_after_sqlite_commit'])
+checks.extend(['second_send_blocked_while_first_response_unknown','callback_runs_after_sqlite_commit'])
 assert connection.settings_dict['OPTIONS']['transaction_mode']=='IMMEDIATE'
 print(json.dumps({'status':'passed','checks':checks,'backend':'isolated file SQLite','native_1c_execution':False,'rpc_requests':0}))
 '''
@@ -98,5 +98,5 @@ def verify(app_python,output):
 if __name__=='__main__':
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--app-python',default='.venv/bin/python')
-    parser.add_argument('--output',type=Path,default=Path('reports/queue-concurrency-v1.json'))
+    parser.add_argument('--output',type=Path,default=Path('reports/queue-concurrency-v2.json'))
     args=parser.parse_args();verify(args.app_python,args.output)

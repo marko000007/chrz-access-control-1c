@@ -31,6 +31,20 @@ class UncertainCommandTests(TestCase):
         self.assertEqual(command_state(self.request,self.context)['key'],self.key)
         self.assertEqual(PendingCommand.objects.get().payload,self.payload)
 
+    def test_later_rejection_cannot_erase_an_earlier_unknown_result(self):
+        PendingCommand.objects.filter(owner=self.user,context=self.context).update(payload=self.payload)
+        with self.assertRaises(ERPRejected):send_command(self.request,self.context,self.key,self.payload,Mock(side_effect=ERPRejected('current rejection')))
+        self.assertEqual(command_state(self.request,self.context),{'key':self.key,'payload':self.payload})
+
+    def test_inflight_command_blocks_a_second_callback_without_touching_queue(self):
+        from portal.command_lock import sending_slot
+        from django.core.exceptions import ValidationError
+        callback=Mock()
+        with sending_slot(self.user):
+            with self.assertRaises(ValidationError):send_command(self.request,self.context,self.key,self.payload,callback)
+        callback.assert_not_called();self.assertIsNone(PendingCommand.objects.get().payload)
+        self.assertEqual(send_command(self.request,self.context,self.key,self.payload,Mock(return_value={'ok':True})),{'ok':True})
+
     def test_fresh_confirmed_refusal_does_not_leave_an_uncertain_command(self):
         for error in [ERPForbidden('denied'),ERPRejected('rejected')]:
             key=command_state(self.request,self.context)['key']
