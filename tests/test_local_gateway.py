@@ -8,7 +8,7 @@ from unittest.mock import Mock, patch
 from urllib.error import HTTPError
 from urllib.request import Request, urlopen
 import uuid
-from portal.local_gateway import create_server, OneCRuntime, LocalERPError
+from portal.local_gateway import create_server, OneCRuntime, LocalERPError, LocalERPGUIDisabled
 
 
 class GatewayTransportTests(unittest.TestCase):
@@ -49,6 +49,15 @@ class GatewayTransportTests(unittest.TestCase):
         self.assertEqual(caught.exception.code,503)
         content=caught.exception.read();caught.exception.close()
         self.assertNotIn(b'private',content)
+
+    def test_disabled_gui_is_reported_without_private_diagnostic(self):
+        self.runtime.invoke.side_effect=LocalERPGUIDisabled('private diagnostic')
+        with self.assertRaises(HTTPError) as caught:
+            urlopen(Request(self.url+'/health',headers=self.headers),timeout=3)
+        self.assertEqual(caught.exception.code,503)
+        result=json.loads(caught.exception.read());caught.exception.close()
+        self.assertEqual(result['code'],'gui_launch_disabled')
+        self.assertNotIn('private',json.dumps(result))
 
 
 class RuntimeTransportTests(unittest.TestCase):
