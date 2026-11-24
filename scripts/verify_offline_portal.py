@@ -40,7 +40,7 @@ def verify(app_python,output):
                         time.sleep(.1)
                 with sync_playwright() as p:
                     browser=p.chromium.launch(channel='chrome',headless=True)
-                    context=browser.new_context(viewport={'width':1440,'height':1000},locale='ru-RU',timezone_id='Asia/Tbilisi')
+                    context=browser.new_context(viewport={'width':1440,'height':1000},locale='ru-RU',timezone_id='Asia/Tbilisi',accept_downloads=True)
                     page=context.new_page();errors=[];page.on('pageerror',lambda error:errors.append(str(error)))
                     def visit(path):
                         response=page.goto(url+path);assert response.status==200,(path,response.status)
@@ -58,6 +58,13 @@ def verify(app_python,output):
                     text=page.locator('main').inner_text();assert 'RAW_PAYLOAD_NOT_PUBLIC' not in text and 'FOREIGN_NOT_PUBLIC' not in text
                     assert 'Ожидают подтверждения результата: 1' in text
                     checks.append('own_pending_metadata_without_payload');shot('pending-desktop.png')
+                    with page.expect_download() as result:page.get_by_role('link',name='Скачать свою очередь JSON',exact=True).click()
+                    downloaded=target/'pending-browser.json';result.value.save_as(downloaded)
+                    exported=json.loads(downloaded.read_text())
+                    assert exported['actor']=='offline.operator' and len(exported['commands'])==2
+                    assert 'FOREIGN_NOT_PUBLIC' not in downloaded.read_text()
+                    assert next(row for row in exported['commands'] if row['state']=='unknown')['payload']['secret']=='RAW_PAYLOAD_NOT_PUBLIC'
+                    checks.append('download_own_pending_snapshot_without_rpc')
                     page.get_by_role('button',name='Убрать неотправленную форму',exact=True).click();page.wait_for_url('**/pending/')
                     assert page.get_by_role('button',name='Убрать неотправленную форму',exact=True).count()==0
                     assert 'Ожидает подтверждения результата' in page.locator('main').inner_text()
