@@ -74,8 +74,14 @@ def request_create(request):
     state = command_state(request, "request:new")
     key = state["key"]
     initial = dict(state["payload"] or {})
-    for field in ["starts_at", "ends_at"]:
-        if field in initial: initial[field] = datetime.fromisoformat(initial[field])
+    try:
+        for field in ['starts_at','ends_at']:
+            if field in initial:
+                value=datetime.fromisoformat(initial[field])
+                if value.tzinfo is None or value.microsecond:raise ValueError
+                initial[field]=value
+    except (ValueError,TypeError,OverflowError):
+        return render(request,'portal/unavailable.html',{'reason':'Повреждены даты сохранённой команды. Очередь сохранена: скачайте диагностическую копию на странице незавершённых действий.'},status=409)
     initial["command_key"]=key
     form=NewRequestForm(request.POST if request.method=="POST" else None,references=references,initial=initial)
     status=200

@@ -58,3 +58,13 @@ class RequestPortalTests(TestCase):
         self.assertEqual(self.client.post('/requests/new/',self.payload).status_code,403)
         client=Client(enforce_csrf_checks=True);client.force_login(self.user)
         self.assertEqual(client.post('/requests/new/',self.payload).status_code,403)
+
+    def test_damaged_saved_dates_preserve_original_command_without_backend_mutation(self):
+        from portal.models import PendingCommand
+        for value in ['not-a-date',12,'2026-11-28T10:00:00','2026-11-28T10:00:00.123456+04:00']:
+            frozen={'starts_at':value,'ends_at':'2026-11-29T11:00:00+04:00'}
+            PendingCommand.objects.filter(owner=self.user,context='request:new').update(payload=frozen)
+            response=self.client.get('/requests/new/')
+            self.assertEqual(response.status_code,409)
+            self.assertEqual(PendingCommand.objects.get(owner=self.user,context='request:new').payload,frozen)
+        self.remote.create_request.assert_not_called()
