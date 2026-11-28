@@ -17,11 +17,20 @@ class VisitorForm(CommandForm):
         return values
 
 
+class VisitorSearchForm(forms.Form):
+    q=forms.CharField(label='ФИО, организация или ID содержит',max_length=150,required=False)
+
+
 @erp_roles("admin","requester","approver","guard")
 def visitor_list(request):
+    form=VisitorSearchForm(request.GET)
+    if not form.is_valid():return render(request,'portal/visitors.html',{'form':form,'items':[]},status=400)
     try:items=request.erp_client.references(request.user.get_username())["visitors"]
     except ERPUnavailable as exc:return unavailable(request,exc)
-    return render(request,"portal/visitors.html",{"items":items,"can_create":request.erp_profile["role"]=="admin"})
+    total=len(items);query=form.cleaned_data['q'].casefold()
+    if query:items=[row for row in items if any(query in row.get(key,'').casefold() for key in ['name','company','id'])]
+    return render(request,'portal/visitors.html',{'items':items,'form':form,'source_count':total,'found':len(items),
+        'can_create':request.erp_profile['role']=='admin'})
 
 
 @erp_roles("admin")

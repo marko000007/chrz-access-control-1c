@@ -34,3 +34,17 @@ class VisitorCatalogTests(TestCase):
         client=Client(enforce_csrf_checks=True);client.force_login(self.user)
         self.assertEqual(client.post('/visitors/new/',{}).status_code,403)
         self.erp.create_visitor.assert_not_called()
+
+    def test_search_uses_name_company_and_id_without_mutating_catalog(self):
+        first=self.erp.references.return_value['visitors'][0]
+        second={'id':str(uuid.uuid4()),'name':'Иванов','company':'Другая компания'}
+        self.erp.references.return_value['visitors'].append(second)
+        for query in ['ОРГАНИЗАЦИЯ',first['id'][:12],'<img>']:
+            response=self.client.get('/visitors/',{'q':query})
+            self.assertEqual(response.status_code,200)
+            self.assertEqual(response.context['items'],[first])
+            self.assertEqual(response.context['source_count'],2)
+        self.assertEqual(self.client.get('/visitors/',{'q':'missing'}).context['items'],[])
+        self.erp.references.reset_mock()
+        self.assertEqual(self.client.get('/visitors/',{'q':'x'*151}).status_code,400)
+        self.erp.references.assert_not_called();self.erp.create_visitor.assert_not_called()
