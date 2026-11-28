@@ -44,9 +44,15 @@ class ERPClient:
     MAX_RESPONSE = 1024 * 1024
 
     def __init__(self, base_url, username, password, timeout=5):
-        if not base_url or not username or not password:
+        if not all(isinstance(value,str) and value for value in [base_url,username,password]):
             raise ERPNotConfigured("Сервис учёта 1С ещё не настроен.")
-        parsed=urlsplit(base_url)
+        try:
+            if len(base_url)>2048 or any(c.isspace() or ord(c)<32 for c in base_url):raise ValueError
+            if ':' in username or any(ord(c)<32 for c in username):raise ValueError
+            parsed=urlsplit(base_url)
+            if parsed.port is not None and not 1<=parsed.port<=65535:raise ValueError
+        except ValueError:
+            raise ERPNotConfigured('Некорректный адрес или имя пользователя сервиса1С.') from None
         if parsed.scheme not in {"http","https"} or not parsed.hostname or parsed.username or parsed.password or parsed.query or parsed.fragment:
             raise ERPNotConfigured("Некорректный адрес сервиса 1С.")
         if parsed.scheme == "http" and parsed.hostname not in {"localhost","127.0.0.1","::1"}:
