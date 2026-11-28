@@ -70,6 +70,7 @@ class PresenceViewTests(TestCase):
         self.assertEqual((response.context['report']['total'],response.context['report']['source_total']),(1,2))
         response=self.client.get('/reports/presence/',{'state':'revoked','format':'csv'})
         rows=list(csv.reader(io.StringIO(response.content.decode('utf-8-sig')),delimiter=';'))
+        self.assertTrue(all(len(row)==len(rows[0]) for row in rows))
         self.assertEqual(len(rows),3);self.assertEqual(rows[1][11],'2');self.assertEqual(rows[1][-1],'revoked')
         self.erp.presence_report.reset_mock()
         self.assertEqual(self.client.get('/reports/presence/',{'state':'unknown'}).status_code,400)

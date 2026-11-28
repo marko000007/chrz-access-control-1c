@@ -38,7 +38,7 @@ def presence_csv(report):
     for row in report['items']:
         writer.writerow([csv_cell(value) for value in ['Посетитель',row['id'],row['visitor'],row['checkpoint'],
             'Отозван' if row['state']=='revoked' else 'Действует',row['ends_at'].astimezone(timezone.utc).isoformat(),
-            'Да' if row['ends_at']<=report['generated_at'] else 'Нет','','','',stamp]])
+            'Да' if row['ends_at']<=report['generated_at'] else 'Нет','','','',stamp,'','','','']])
     response=HttpResponse('\ufeff'+stream.getvalue(),content_type='text/csv; charset=utf-8')
     response['Content-Disposition']='attachment; filename="visitors-inside.csv"'
     response['Cache-Control']='private, no-store'
