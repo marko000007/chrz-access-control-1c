@@ -26,6 +26,10 @@ class NewRequestForm(forms.Form):
     def clean(self):
         values=super().clean()
         for field in ["starts_at", "ends_at"]:
+            if values.get(field):
+                offset=values[field].utcoffset()
+                if offset is None or abs(offset.total_seconds())>14*3600 or offset.total_seconds()%60:
+                    self.add_error(field,'Для1С нужен часовой пояс с целым числом минут в пределах±14:00.')
             if values.get(field) and values[field].microsecond:
                 self.add_error(field, "1С хранит время с точностью до секунды.")
         if values.get("starts_at") and values.get("ends_at") and values["ends_at"]<=values["starts_at"]:

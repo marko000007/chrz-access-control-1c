@@ -68,3 +68,12 @@ class RequestPortalTests(TestCase):
             self.assertEqual(response.status_code,409)
             self.assertEqual(PendingCommand.objects.get(owner=self.user,context='request:new').payload,frozen)
         self.remote.create_request.assert_not_called()
+
+    def test_unsupported_timezone_never_freezes_or_sends_request(self):
+        from portal.models import PendingCommand
+        for zone in ['+15:00','+14:01','+04:00:30']:
+            response=self.client.post('/requests/new/',{**self.payload,
+                'starts_at':'2026-11-28T10:00:00'+zone,'ends_at':'2026-11-28T11:00:00'+zone})
+            self.assertEqual(response.status_code,400)
+            self.assertIsNone(PendingCommand.objects.get(owner=self.user,context='request:new').payload)
+        self.remote.create_request.assert_not_called()
