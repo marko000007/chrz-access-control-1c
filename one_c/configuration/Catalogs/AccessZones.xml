@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='utf-8'?>
+<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" version="2.20" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<Catalog uuid="2e8457c6-71f4-5747-b296-2ce820e5112b">
+		<InternalInfo>
+			<xr:GeneratedType name="CatalogObject.AccessZones" category="Object">
+				<xr:TypeId>791c3137-1d4f-5552-b983-04f77c34f565</xr:TypeId>
+				<xr:ValueId>42a79d72-ada3-5eb4-8c99-d8da3433f79a</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="CatalogRef.AccessZones" category="Ref">
+				<xr:TypeId>c806ec0d-3ed8-5253-8c7b-65761cb023c8</xr:TypeId>
+				<xr:ValueId>90790a31-6026-561e-a8c8-341979ad74d1</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="CatalogSelection.AccessZones" category="Selection">
+				<xr:TypeId>4fcb45d0-3f33-5051-9abb-f5219cc82a22</xr:TypeId>
+				<xr:ValueId>bc37f18a-759e-51f0-93fc-5e7b107419c4</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="CatalogList.AccessZones" category="List">
+				<xr:TypeId>dbd3e42d-76eb-5e97-929e-60356250806e</xr:TypeId>
+				<xr:ValueId>5cc705b0-9632-5b7f-a874-dbdc3e065951</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="CatalogManager.AccessZones" category="Manager">
+				<xr:TypeId>ee91d0ce-fa90-51a0-8642-22eb0efbe7a5</xr:TypeId>
+				<xr:ValueId>caa37f0d-26f2-5a21-b6bd-9c9fcb3d8a33</xr:ValueId>
+			</xr:GeneratedType>
+		</InternalInfo>
+		<Properties>
+			<Name>AccessZones</Name>
+			<Synonym>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Зоны доступа</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Зоны доступа</v8:content>
+				</v8:item>
+			</Synonym>
+			<CodeLength>20</CodeLength>
+			<DescriptionLength>150</DescriptionLength>
+			<CodeType>String</CodeType>
+			<CodeAllowedLength>Variable</CodeAllowedLength>
+			<CheckUnique>true</CheckUnique>
+			<Autonumbering>true</Autonumbering>
+			<UseStandardCommands>true</UseStandardCommands>
+			<Hierarchical>true</Hierarchical>
+			<HierarchyType>HierarchyFoldersAndItems</HierarchyType>
+		</Properties>
+		<ChildObjects>
+			<Attribute uuid="94f97cc7-3237-59a6-8d9b-cb6688c70f01">
+				<Properties>
+					<Name>Site</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Площадка</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Площадка</v8:content>
+						</v8:item>
+					</Synonym>
+					<Type>
+						<v8:Type>cfg:CatalogRef.Sites</v8:Type>
+					</Type>
+				</Properties>
+			</Attribute>
+		</ChildObjects>
+	</Catalog>
+</MetaDataObject>

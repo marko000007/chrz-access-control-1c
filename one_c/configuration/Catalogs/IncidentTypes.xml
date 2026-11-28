@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='utf-8'?>
+<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" version="2.20" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<Catalog uuid="cf30b8da-7e63-5f00-913c-5204af4d0b5d">
+		<InternalInfo>
+			<xr:GeneratedType name="CatalogObject.IncidentTypes" category="Object">
+				<xr:TypeId>6d1132ae-2561-5425-946c-670ae717a472</xr:TypeId>
+				<xr:ValueId>797076fb-3113-5506-bcc5-c56050b3c05d</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="CatalogRef.IncidentTypes" category="Ref">
+				<xr:TypeId>233d2faf-7326-5ace-a547-5c2ce30bda1c</xr:TypeId>
+				<xr:ValueId>7850c476-c1f0-5e46-96b4-48376d6a0b54</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="CatalogSelection.IncidentTypes" category="Selection">
+				<xr:TypeId>fe91c301-851f-50f1-9f11-ad5e0065bad6</xr:TypeId>
+				<xr:ValueId>7ae3fcc4-39e6-5ac5-bf4b-106df4a73489</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="CatalogList.IncidentTypes" category="List">
+				<xr:TypeId>3f0c0867-ce9d-5268-9dc6-b0f1c02fcb0f</xr:TypeId>
+				<xr:ValueId>ffa85afa-9877-501a-92a6-128c79bc2c2e</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="CatalogManager.IncidentTypes" category="Manager">
+				<xr:TypeId>d4c59e62-7a6a-5ab5-879f-ea5bfc8edae4</xr:TypeId>
+				<xr:ValueId>a14e066c-1b78-5395-8127-d34f24882dfc</xr:ValueId>
+			</xr:GeneratedType>
+		</InternalInfo>
+		<Properties>
+			<Name>IncidentTypes</Name>
+			<Synonym>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Виды нарушений</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Виды нарушений</v8:content>
+				</v8:item>
+			</Synonym>
+			<CodeLength>20</CodeLength>
+			<DescriptionLength>150</DescriptionLength>
+			<CodeType>String</CodeType>
+			<CodeAllowedLength>Variable</CodeAllowedLength>
+			<CheckUnique>true</CheckUnique>
+			<Autonumbering>true</Autonumbering>
+			<UseStandardCommands>true</UseStandardCommands>
+		</Properties>
+		<ChildObjects>
+			<Attribute uuid="2020287c-4fbf-501d-82a8-5e23b106f228">
+				<Properties>
+					<Name>Severity</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Тяжесть</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Тяжесть</v8:content>
+						</v8:item>
+					</Synonym>
+					<Type>
+						<v8:Type>cfg:EnumRef.IncidentSeverities</v8:Type>
+					</Type>
+				</Properties>
+			</Attribute>
+		</ChildObjects>
+	</Catalog>
+</MetaDataObject>

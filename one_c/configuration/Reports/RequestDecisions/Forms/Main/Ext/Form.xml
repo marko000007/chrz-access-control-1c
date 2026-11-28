@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ns0:Form xmlns:ns0="http://v8.1c.ru/8.3/xcf/logform" xmlns:v8="http://v8.1c.ru/8.1/data/core" version="2.20" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<ns0:AutoCommandBar name="Панель" id="-1">
+		<ns0:ChildItems>
+			<ns0:Button name="Generate" id="10">
+				<ns0:Type>CommandBarButton</ns0:Type>
+				<ns0:CommandName>Form.Command.Generate</ns0:CommandName>
+			</ns0:Button>
+			<ns0:Button name="Print" id="11">
+				<ns0:Type>CommandBarButton</ns0:Type>
+				<ns0:CommandName>Form.Command.Print</ns0:CommandName>
+			</ns0:Button>
+		</ns0:ChildItems>
+	</ns0:AutoCommandBar>
+	<ns0:ChildItems>
+		<ns0:InputField name="PeriodStart" id="20">
+			<ns0:DataPath>PeriodStart</ns0:DataPath>
+		</ns0:InputField>
+		<ns0:InputField name="PeriodEnd" id="21">
+			<ns0:DataPath>PeriodEnd</ns0:DataPath>
+		</ns0:InputField>
+		<ns0:SpreadSheetDocumentField name="Result" id="1">
+			<ns0:DataPath>Result</ns0:DataPath>
+			<ns0:TitleLocation>None</ns0:TitleLocation>
+			<ns0:Width>100</ns0:Width>
+		</ns0:SpreadSheetDocumentField>
+	</ns0:ChildItems>
+	<ns0:Attributes>
+		<ns0:Attribute name="Object" id="1">
+			<ns0:Type>
+				<v8:Type>cfg:ReportObject.RequestDecisions</v8:Type>
+			</ns0:Type>
+			<ns0:MainAttribute>true</ns0:MainAttribute>
+		</ns0:Attribute>
+		<ns0:Attribute name="Result" id="2">
+			<ns0:Type>
+				<v8:Type xmlns:mxl="http://v8.1c.ru/8.2/data/spreadsheet">mxl:SpreadsheetDocument</v8:Type>
+			</ns0:Type>
+		</ns0:Attribute>
+		<ns0:Attribute name="PeriodStart" id="3">
+			<ns0:Type>
+				<v8:Type>xs:dateTime</v8:Type>
+			</ns0:Type>
+		</ns0:Attribute>
+		<ns0:Attribute name="PeriodEnd" id="4">
+			<ns0:Type>
+				<v8:Type>xs:dateTime</v8:Type>
+			</ns0:Type>
+		</ns0:Attribute>
+	</ns0:Attributes>
+	<ns0:Commands>
+		<ns0:Command name="Generate" id="1">
+			<ns0:Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сформировать</v8:content>
+				</v8:item>
+			</ns0:Title>
+			<ns0:Action>Generate</ns0:Action>
+		</ns0:Command>
+		<ns0:Command name="Print" id="2">
+			<ns0:Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Печать</v8:content>
+				</v8:item>
+			</ns0:Title>
+			<ns0:Action>Print</ns0:Action>
+		</ns0:Command>
+	</ns0:Commands>
+	<ns0:Events>
+		<ns0:Event name="OnCreateAtServer">ПриСозданииНаСервере</ns0:Event>
+	</ns0:Events>
+</ns0:Form>

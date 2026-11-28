@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='utf-8'?>
+<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" version="2.20" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<Catalog uuid="bdfe8a93-51cc-5ba6-aae4-3b814f6028c0">
+		<InternalInfo>
+			<xr:GeneratedType name="CatalogObject.Vehicles" category="Object">
+				<xr:TypeId>7e17119e-1238-5da4-8e7b-ecb45598ff80</xr:TypeId>
+				<xr:ValueId>c47c4e2e-d19e-5f65-80a2-843e6241b0a5</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="CatalogRef.Vehicles" category="Ref">
+				<xr:TypeId>43fa5931-8d74-5494-adb0-bb5adbcff23a</xr:TypeId>
+				<xr:ValueId>b9dea749-f92f-5ae3-82ae-39e442226287</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="CatalogSelection.Vehicles" category="Selection">
+				<xr:TypeId>123b50f6-9f6c-5b81-bb92-5fee28063c35</xr:TypeId>
+				<xr:ValueId>5b4a820d-c6d5-596a-b891-8b178a7f96ba</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="CatalogList.Vehicles" category="List">
+				<xr:TypeId>dbc11390-a916-5fcd-be3d-38333761f3b6</xr:TypeId>
+				<xr:ValueId>6dcefb09-d4ce-5233-92e0-54b846eefafb</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="CatalogManager.Vehicles" category="Manager">
+				<xr:TypeId>c659856c-1181-56e5-9d30-5b070974fd2a</xr:TypeId>
+				<xr:ValueId>c23c5c96-0b42-5594-bd8d-949dc7f6f77c</xr:ValueId>
+			</xr:GeneratedType>
+		</InternalInfo>
+		<Properties>
+			<Name>Vehicles</Name>
+			<Synonym>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Транспорт</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Транспорт</v8:content>
+				</v8:item>
+			</Synonym>
+			<CodeLength>20</CodeLength>
+			<DescriptionLength>150</DescriptionLength>
+			<CodeType>String</CodeType>
+			<CodeAllowedLength>Variable</CodeAllowedLength>
+			<CheckUnique>true</CheckUnique>
+			<Autonumbering>true</Autonumbering>
+			<UseStandardCommands>true</UseStandardCommands>
+		</Properties>
+		<ChildObjects>
+			<Attribute uuid="bf47fc71-8c21-59a9-9553-c4120b18e1ad">
+				<Properties>
+					<Name>LicensePlate</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Государственный номер</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Государственный номер</v8:content>
+						</v8:item>
+					</Synonym>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>150</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Properties>
+			</Attribute>
+			<Attribute uuid="f179647c-c9e6-5d36-a26d-8a186a46ba0d">
+				<Properties>
+					<Name>Company</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Владелец</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Владелец</v8:content>
+						</v8:item>
+					</Synonym>
+					<Type>
+						<v8:Type>cfg:CatalogRef.Contractors</v8:Type>
+					</Type>
+				</Properties>
+			</Attribute>
+		</ChildObjects>
+	</Catalog>
+</MetaDataObject>

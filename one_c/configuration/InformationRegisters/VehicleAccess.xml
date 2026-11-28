@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='utf-8'?>
+<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" version="2.20" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<InformationRegister uuid="cf55a333-121d-59bc-b1a0-a97a8fa9542f">
+		<InternalInfo>
+			<xr:GeneratedType name="InformationRegisterRecord.VehicleAccess" category="Record">
+				<xr:TypeId>3555f115-333f-5e91-b3ee-fa703b3408ec</xr:TypeId>
+				<xr:ValueId>63fd2236-32b7-5ab0-aad2-eb8f4bbae00a</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="InformationRegisterManager.VehicleAccess" category="Manager">
+				<xr:TypeId>2dc58999-1f29-5977-a09f-6cf121fb4db9</xr:TypeId>
+				<xr:ValueId>19acd600-61b0-5828-a57b-34fb72d974fc</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="InformationRegisterSelection.VehicleAccess" category="Selection">
+				<xr:TypeId>6c77b920-1b9f-5b15-a4e0-bb9c298f4be3</xr:TypeId>
+				<xr:ValueId>85710cec-ebf1-5c4a-835f-8d0a0e1547a8</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="InformationRegisterList.VehicleAccess" category="List">
+				<xr:TypeId>7e8b3ae5-9c40-52bd-8e3e-bbea42477471</xr:TypeId>
+				<xr:ValueId>5dfb0c53-cddc-5101-b28b-1f771d39d7f2</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="InformationRegisterRecordSet.VehicleAccess" category="RecordSet">
+				<xr:TypeId>5cc7cdbd-15a0-53c2-bd7c-b6be7dd8aad9</xr:TypeId>
+				<xr:ValueId>742f745f-2ef3-5461-9a17-1eddc311915b</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="InformationRegisterRecordKey.VehicleAccess" category="RecordKey">
+				<xr:TypeId>1dc804bf-9ef6-59c2-bfa3-020fff61f142</xr:TypeId>
+				<xr:ValueId>3604e67b-73db-5777-af4d-909910c9c72e</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="InformationRegisterRecordManager.VehicleAccess" category="RecordManager">
+				<xr:TypeId>6f3ba7ee-0d2a-5c4c-a284-0eaea254d286</xr:TypeId>
+				<xr:ValueId>3a814f51-f68d-59de-9a6c-177b1a190fbd</xr:ValueId>
+			</xr:GeneratedType>
+		</InternalInfo>
+		<Properties>
+			<Name>VehicleAccess</Name>
+			<Synonym>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Допуски транспорта</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Допуски транспорта</v8:content>
+				</v8:item>
+			</Synonym>
+			<UseStandardCommands>true</UseStandardCommands>
+			<DataLockControlMode>Managed</DataLockControlMode>
+			<InformationRegisterPeriodicity>Nonperiodical</InformationRegisterPeriodicity>
+			<WriteMode>Independent</WriteMode>
+		</Properties>
+		<ChildObjects>
+			<Resource uuid="a22d3a4b-c825-5d9c-9040-a11f85152c5d">
+				<Properties>
+					<Name>ValidUntil</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Действует до</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Действует до</v8:content>
+						</v8:item>
+					</Synonym>
+					<Type>
+						<v8:Type>xs:dateTime</v8:Type>
+					</Type>
+				</Properties>
+			</Resource>
+			<Dimension uuid="f7fec06a-1b87-5a8f-9c1d-7466673c5af1">
+				<Properties>
+					<Name>Vehicle</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Транспорт</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Транспорт</v8:content>
+						</v8:item>
+					</Synonym>
+					<Type>
+						<v8:Type>cfg:CatalogRef.Vehicles</v8:Type>
+					</Type>
+					<Indexing>Index</Indexing>
+				</Properties>
+			</Dimension>
+			<Dimension uuid="f0cd44fd-01d9-5af4-9808-1f3e1cbc30f9">
+				<Properties>
+					<Name>Checkpoint</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Точка прохода</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Точка прохода</v8:content>
+						</v8:item>
+					</Synonym>
+					<Type>
+						<v8:Type>cfg:CatalogRef.Checkpoints</v8:Type>
+					</Type>
+					<Indexing>Index</Indexing>
+				</Properties>
+			</Dimension>
+		</ChildObjects>
+	</InformationRegister>
+</MetaDataObject>

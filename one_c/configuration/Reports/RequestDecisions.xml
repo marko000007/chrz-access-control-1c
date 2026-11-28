@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='utf-8'?>
+<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" version="2.20" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<Report uuid="382ebbe5-322e-579b-95f3-36955d963475">
+		<InternalInfo>
+			<xr:GeneratedType name="ReportObject.RequestDecisions" category="Object">
+				<xr:TypeId>c352f9bd-7968-5d7c-b986-e061cf133950</xr:TypeId>
+				<xr:ValueId>2b49bb03-8917-52f4-9e22-5179e81080f0</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="ReportManager.RequestDecisions" category="Manager">
+				<xr:TypeId>16cf72bc-5c92-5578-be64-a390cb7f591f</xr:TypeId>
+				<xr:ValueId>393d9f4a-26d6-54ac-992d-1f3f16ebfe85</xr:ValueId>
+			</xr:GeneratedType>
+		</InternalInfo>
+		<Properties>
+			<Name>RequestDecisions</Name>
+			<Synonym>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Решения по заявкам</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Решения по заявкам</v8:content>
+				</v8:item>
+			</Synonym>
+			<UseStandardCommands>true</UseStandardCommands>
+			<DefaultForm>Report.RequestDecisions.Form.Main</DefaultForm>
+		</Properties>
+		<ChildObjects>
+			<Form>Main</Form>
+		</ChildObjects>
+	</Report>
+</MetaDataObject>

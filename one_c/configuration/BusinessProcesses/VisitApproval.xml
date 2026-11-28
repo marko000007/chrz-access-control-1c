@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='utf-8'?>
+<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" version="2.20" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<BusinessProcess uuid="e292efbd-d550-5c75-8eda-98a402d57e0d">
+		<InternalInfo>
+			<xr:GeneratedType name="BusinessProcessObject.VisitApproval" category="Object">
+				<xr:TypeId>13114736-c67f-53a9-b131-2e8837406b6f</xr:TypeId>
+				<xr:ValueId>90ae74f5-d887-50e4-8b42-341a0ce14705</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="BusinessProcessRef.VisitApproval" category="Ref">
+				<xr:TypeId>bf0b460d-d710-5697-9fb5-b27c1f0a0fa7</xr:TypeId>
+				<xr:ValueId>224803e7-2369-56a9-98ed-b785e6d180ea</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="BusinessProcessSelection.VisitApproval" category="Selection">
+				<xr:TypeId>ad3423d9-7315-5a6d-bb1e-e8cd447cefd3</xr:TypeId>
+				<xr:ValueId>6107c0d4-e202-5a7c-9d44-c054bd194fdb</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="BusinessProcessList.VisitApproval" category="List">
+				<xr:TypeId>41e744de-7fb5-50d3-b366-efd309f1cab6</xr:TypeId>
+				<xr:ValueId>535bee06-78b0-538c-b3ab-f50806190271</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="BusinessProcessManager.VisitApproval" category="Manager">
+				<xr:TypeId>3a2df8f2-d0cf-595d-929c-ab41a9dd9a00</xr:TypeId>
+				<xr:ValueId>8c588879-f3df-518d-a3b7-114f71a7c4a7</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="BusinessProcessRoutePointRef.VisitApproval" category="RoutePointRef">
+				<xr:TypeId>9ab314e9-bd8e-5e19-ab9e-5ebb496adfac</xr:TypeId>
+				<xr:ValueId>5d0eac7d-662c-5656-b56d-08e0e4365a32</xr:ValueId>
+			</xr:GeneratedType>
+		</InternalInfo>
+		<Properties>
+			<Name>VisitApproval</Name>
+			<Synonym>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Согласование и выдача пропуска</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Согласование и выдача пропуска</v8:content>
+				</v8:item>
+			</Synonym>
+			<UseStandardCommands>true</UseStandardCommands>
+			<NumberType>String</NumberType>
+			<NumberLength>11</NumberLength>
+			<Autonumbering>true</Autonumbering>
+			<Task>Task.AccessTasks</Task>
+		</Properties>
+		<ChildObjects>
+			<Attribute uuid="553c9b7d-874b-5763-9657-45e2f2e35f87">
+				<Properties>
+					<Name>Request</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Заявка</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Заявка</v8:content>
+						</v8:item>
+					</Synonym>
+					<Type>
+						<v8:Type>cfg:DocumentRef.Requests</v8:Type>
+					</Type>
+				</Properties>
+			</Attribute>
+			<Attribute uuid="9846b6e7-e26f-54dc-b413-f043aa0567a9">
+				<Properties>
+					<Name>Resolution</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Результат рассмотрения</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Результат рассмотрения</v8:content>
+						</v8:item>
+					</Synonym>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>150</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Properties>
+			</Attribute>
+		</ChildObjects>
+	</BusinessProcess>
+</MetaDataObject>

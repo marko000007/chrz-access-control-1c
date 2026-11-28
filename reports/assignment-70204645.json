@@ -1,0 +1,70 @@
+{
+  "ok": true,
+  "counts": {
+    "Catalog.Departments": 20,
+    "Catalog.Employees": 20,
+    "Document.PassReturns": 10,
+    "Catalog.Vehicles": 10,
+    "Catalog.Visitors": 20,
+    "Catalog.Checkpoints": 20,
+    "Catalog.VisitPurposes": 20,
+    "Document.ShiftTransfers": 10,
+    "Catalog.PortalUsers": 80,
+    "Catalog.CommandJournal": 10,
+    "Catalog.Passes": 20,
+    "Catalog.IncidentTypes": 10,
+    "Document.PassRevocations": 10,
+    "Catalog.Sites": 11,
+    "Catalog.Contractors": 10,
+    "Catalog.Assets": 10,
+    "Document.VehiclePermits": 10,
+    "Catalog.AccessZones": 11,
+    "Document.AssetReceipts": 10,
+    "Document.Requests": 20,
+    "Document.AssetExpenses": 10,
+    "BusinessProcess.IncidentHandling": 10,
+    "Document.GateEvents": 20,
+    "Document.SecurityIncidents": 10,
+    "Task.AccessTasks": 40,
+    "Document.PassIssues": 20,
+    "Catalog.Positions": 11,
+    "BusinessProcess.VisitApproval": 10
+  },
+  "reports": {
+    "VisitJournal": 20,
+    "ActivePasses": 10,
+    "IncidentSummary": 10,
+    "RequestDecisions": 20,
+    "AssetBalance": 10
+  },
+  "stock_check": true,
+  "workflow_role_check": true,
+  "data_origin": "synthetic",
+  "configuration_name": "ПодворныйВиталийОлегович70204645",
+  "metadata_counts": {
+    "Language": 1,
+    "Catalog": 15,
+    "CommonModule": 14,
+    "Document": 10,
+    "Enum": 3,
+    "Constant": 2,
+    "AccumulationRegister": 3,
+    "InformationRegister": 1,
+    "Report": 5,
+    "DataProcessor": 1,
+    "Subsystem": 4,
+    "Role": 4,
+    "Task": 1,
+    "BusinessProcess": 2
+  },
+  "platform": "1С:Предприятие 8.3.27.1606, учебная версия macOS",
+  "artifact": {
+    "path": "one_c/releases/ПодворныйВиталийОлегович70204645.dt",
+    "bytes": 183143,
+    "sha256": "646952f411c89d3fd08fe7c7b662582527869215e610a9060c99350987292bf8"
+  },
+  "limits": [
+    "Учебная файловая база; не серверная публикация или многопользовательская приёмка.",
+    "Печатные табличные документы сформированы; аппаратная печать из учебной 1С отдельно не проверялась."
+  ]
+}

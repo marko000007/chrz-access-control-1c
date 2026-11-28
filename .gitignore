@@ -12,3 +12,6 @@ staticfiles/
 .DS_Store
 
 .qa-venv/
+
+# Проверенная учебная выгрузка входит в сдаваемый комплект.
+!one_c/releases/*.dt

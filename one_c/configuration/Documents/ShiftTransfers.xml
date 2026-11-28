@@ -1,0 +1,130 @@
+<?xml version='1.0' encoding='utf-8'?>
+<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" version="2.20" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<Document uuid="730609a2-65a4-5ca8-a8b3-bf7d51ecbe94">
+		<InternalInfo>
+			<xr:GeneratedType name="DocumentObject.ShiftTransfers" category="Object">
+				<xr:TypeId>67962635-d9f0-59a8-9fcc-6997f820b815</xr:TypeId>
+				<xr:ValueId>f11c3407-0ee0-5479-80f0-aa1c1e0163e7</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="DocumentRef.ShiftTransfers" category="Ref">
+				<xr:TypeId>41b8b96d-d18f-5995-92cf-105457252894</xr:TypeId>
+				<xr:ValueId>1c172d03-d049-5744-a404-1a1973564de3</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="DocumentSelection.ShiftTransfers" category="Selection">
+				<xr:TypeId>3b0f19f5-4256-5231-8c2f-217a2097e84b</xr:TypeId>
+				<xr:ValueId>6759c3d2-9016-5135-8b97-81ba7a47a161</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="DocumentList.ShiftTransfers" category="List">
+				<xr:TypeId>148f4117-af47-504d-b6ca-2794f3a42f37</xr:TypeId>
+				<xr:ValueId>f6b51040-7f93-5b5f-8863-b5daaa06ceea</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="DocumentManager.ShiftTransfers" category="Manager">
+				<xr:TypeId>3a5df0ae-36b8-5d08-8fa0-c0edc5899149</xr:TypeId>
+				<xr:ValueId>ef0a7e2d-b0ba-531b-a839-01e8d6bf12ad</xr:ValueId>
+			</xr:GeneratedType>
+		</InternalInfo>
+		<Properties>
+			<Name>ShiftTransfers</Name>
+			<Synonym>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Передача смены</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Передача смены</v8:content>
+				</v8:item>
+			</Synonym>
+			<NumberLength>11</NumberLength>
+			<NumberType>String</NumberType>
+			<NumberAllowedLength>Variable</NumberAllowedLength>
+			<NumberPeriodicity>Year</NumberPeriodicity>
+			<Posting>Allow</Posting>
+			<CheckUnique>true</CheckUnique>
+			<Autonumbering>true</Autonumbering>
+			<UseStandardCommands>true</UseStandardCommands>
+		</Properties>
+		<ChildObjects>
+			<Attribute uuid="47e93840-bca0-59a8-b747-6e7fb0103ff5">
+				<Properties>
+					<Name>Checkpoint</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Точка прохода</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Точка прохода</v8:content>
+						</v8:item>
+					</Synonym>
+					<Type>
+						<v8:Type>cfg:CatalogRef.Checkpoints</v8:Type>
+					</Type>
+				</Properties>
+			</Attribute>
+			<Attribute uuid="3a91cf26-d81f-5775-a949-5f9471368d06">
+				<Properties>
+					<Name>NextGuard</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Принимающий смену</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Принимающий смену</v8:content>
+						</v8:item>
+					</Synonym>
+					<Type>
+						<v8:Type>cfg:CatalogRef.PortalUsers</v8:Type>
+					</Type>
+				</Properties>
+			</Attribute>
+			<Attribute uuid="3c4334e7-9561-580b-9d22-da7ed8ea29b1">
+				<Properties>
+					<Name>CommentText</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Примечание</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Примечание</v8:content>
+						</v8:item>
+					</Synonym>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>150</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Properties>
+			</Attribute>
+			<Attribute uuid="7fc868a3-2cc0-58af-b5c6-09e23ac1c3e6">
+				<Properties>
+					<Name>ActorLogin</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Ответственный</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Ответственный</v8:content>
+						</v8:item>
+					</Synonym>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>150</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Properties>
+			</Attribute>
+		</ChildObjects>
+	</Document>
+</MetaDataObject>

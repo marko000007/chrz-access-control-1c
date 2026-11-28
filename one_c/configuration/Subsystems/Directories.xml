@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='utf-8'?>
+<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.20" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<Subsystem uuid="11c84419-a24f-512c-a557-ccf1e44661ba">
+		<Properties>
+			<Name>Directories</Name>
+			<Synonym>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Справочники</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Справочники</v8:content>
+				</v8:item>
+			</Synonym>
+			<IncludeInCommandInterface>true</IncludeInCommandInterface>
+			<UseOneCommand>false</UseOneCommand>
+			<Content>
+				<xr:Item xsi:type="xr:MDObjectRef">Catalog.Departments</xr:Item>
+				<xr:Item xsi:type="xr:MDObjectRef">Catalog.Employees</xr:Item>
+				<xr:Item xsi:type="xr:MDObjectRef">Catalog.Visitors</xr:Item>
+				<xr:Item xsi:type="xr:MDObjectRef">Catalog.Checkpoints</xr:Item>
+				<xr:Item xsi:type="xr:MDObjectRef">Catalog.VisitPurposes</xr:Item>
+				<xr:Item xsi:type="xr:MDObjectRef">Catalog.PortalUsers</xr:Item>
+				<xr:Item xsi:type="xr:MDObjectRef">Catalog.CommandJournal</xr:Item>
+				<xr:Item xsi:type="xr:MDObjectRef">Catalog.Passes</xr:Item>
+				<xr:Item xsi:type="xr:MDObjectRef">Catalog.Sites</xr:Item>
+				<xr:Item xsi:type="xr:MDObjectRef">Catalog.AccessZones</xr:Item>
+				<xr:Item xsi:type="xr:MDObjectRef">Catalog.Positions</xr:Item>
+				<xr:Item xsi:type="xr:MDObjectRef">Catalog.Contractors</xr:Item>
+				<xr:Item xsi:type="xr:MDObjectRef">Catalog.Vehicles</xr:Item>
+				<xr:Item xsi:type="xr:MDObjectRef">Catalog.Assets</xr:Item>
+				<xr:Item xsi:type="xr:MDObjectRef">Catalog.IncidentTypes</xr:Item>
+			</Content>
+		</Properties>
+		<ChildObjects />
+	</Subsystem>
+</MetaDataObject>

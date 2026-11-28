@@ -27,7 +27,7 @@ def command(arguments,label,timeout=40):
 
 def main():
     global LOCAL
-    parser=argparse.ArgumentParser();parser.add_argument("operation",choices=["create","load","check","dump","smoke"])
+    parser=argparse.ArgumentParser();parser.add_argument("operation",choices=["create","load","check","dump","smoke","assignment","export"])
     parser.add_argument("--base-name",default="development",help="Имя отдельной базы внутри .local/1c")
     parser.add_argument('--allow-gui',action='store_true',help='Явно разрешить интерактивный запуск платформы')
     args=parser.parse_args()
@@ -45,13 +45,21 @@ def main():
         if not result.exists() or result.read_text(encoding="utf-8-sig").strip()!="0" or not (base/"1Cv8.1CD").is_file():raise SystemExit("Создание базы не подтверждено")
         return
     if not (base/"1Cv8.1CD").is_file():raise SystemExit("Сначала создайте отдельную базу командой create")
-    if args.operation=="smoke":
-        result=LOCAL/"smoke.json";result.unlink(missing_ok=True)
-        command(["ENTERPRISE","/F",str(base),"/C","selftest:"+str(result),"/DisableStartupMessages","/DisableStartupDialogs"],"runtime")
-        if not result.exists() or json.loads(result.read_text(encoding="utf-8-sig")).get("ok") is not True:raise SystemExit("Самопроверка 1С не подтверждена; изучите smoke.json и runtime.log")
+    if args.operation in {"smoke", "assignment"}:
+        result=LOCAL/(args.operation+".json");result.unlink(missing_ok=True)
+        prefix="selftest:" if args.operation=="smoke" else "assignment:"
+        command(["ENTERPRISE","/F",str(base),"/C",prefix+str(result),"/DisableStartupMessages","/DisableStartupDialogs"],args.operation,timeout=90)
+        if not result.exists() or json.loads(result.read_text(encoding="utf-8-sig")).get("ok") is not True:raise SystemExit("Проверка 1С не подтверждена; изучите " + str(result))
         print("Самопроверка 1С подтверждена")
         return
     prefix=["DESIGNER","/F",str(base),"/DisableStartupDialogs","/DisableStartupMessages"]
+    if args.operation=="export":
+        target=ROOT/"one_c/releases/ПодворныйВиталийОлегович70204645.dt"
+        target.parent.mkdir(parents=True,exist_ok=True)
+        command(prefix+["/DumpIB",str(target)],"export",timeout=90)
+        if not target.is_file() or target.stat().st_size==0:raise SystemExit("Выгрузка базы не подтверждена")
+        print("Выгрузка учебной базы:",target)
+        return
     if args.operation=="load":
         command(prefix+["/LoadConfigFromFiles",str(ROOT/"one_c/configuration")],"load")
         command(prefix+["/UpdateDBCfg"],"update")

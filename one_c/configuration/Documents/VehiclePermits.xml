@@ -1,0 +1,126 @@
+<?xml version='1.0' encoding='utf-8'?>
+<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" version="2.20" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<Document uuid="13193507-d3f0-5551-b1bb-e9b3e39664d4">
+		<InternalInfo>
+			<xr:GeneratedType name="DocumentObject.VehiclePermits" category="Object">
+				<xr:TypeId>47f6682d-5290-5156-8164-382b91829534</xr:TypeId>
+				<xr:ValueId>aa64f3e8-77c5-51ea-9bfd-b75878b7c6fa</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="DocumentRef.VehiclePermits" category="Ref">
+				<xr:TypeId>6fd6690b-c7bb-5f42-a8d8-189f6631bb93</xr:TypeId>
+				<xr:ValueId>dd5a363d-c8b0-562c-ba90-18ec655c50d3</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="DocumentSelection.VehiclePermits" category="Selection">
+				<xr:TypeId>36894247-6006-5a4b-9cc5-d374a2860ec4</xr:TypeId>
+				<xr:ValueId>48162506-bed0-5bfa-ac7e-353374f6d92d</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="DocumentList.VehiclePermits" category="List">
+				<xr:TypeId>f213bc5e-d79c-5bfa-8928-f70ca6f2834c</xr:TypeId>
+				<xr:ValueId>e6aa7bb1-c29e-53c1-bd07-c7e085514b58</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="DocumentManager.VehiclePermits" category="Manager">
+				<xr:TypeId>92b414ee-18cd-5dd7-bbfb-1c52131fc03a</xr:TypeId>
+				<xr:ValueId>1f63aa9f-bdb9-55e7-a328-356c45b931d5</xr:ValueId>
+			</xr:GeneratedType>
+		</InternalInfo>
+		<Properties>
+			<Name>VehiclePermits</Name>
+			<Synonym>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Допуски транспорта</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Допуски транспорта</v8:content>
+				</v8:item>
+			</Synonym>
+			<NumberLength>11</NumberLength>
+			<NumberType>String</NumberType>
+			<NumberAllowedLength>Variable</NumberAllowedLength>
+			<NumberPeriodicity>Year</NumberPeriodicity>
+			<Posting>Allow</Posting>
+			<CheckUnique>true</CheckUnique>
+			<Autonumbering>true</Autonumbering>
+			<UseStandardCommands>true</UseStandardCommands>
+		</Properties>
+		<ChildObjects>
+			<Attribute uuid="c902a4dc-d6b1-5bec-9e4e-e876793197a5">
+				<Properties>
+					<Name>Vehicle</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Транспорт</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Транспорт</v8:content>
+						</v8:item>
+					</Synonym>
+					<Type>
+						<v8:Type>cfg:CatalogRef.Vehicles</v8:Type>
+					</Type>
+				</Properties>
+			</Attribute>
+			<Attribute uuid="2411be0c-0232-5df2-b8f0-bc4bc3b27fca">
+				<Properties>
+					<Name>Checkpoint</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Точка прохода</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Точка прохода</v8:content>
+						</v8:item>
+					</Synonym>
+					<Type>
+						<v8:Type>cfg:CatalogRef.Checkpoints</v8:Type>
+					</Type>
+				</Properties>
+			</Attribute>
+			<Attribute uuid="c12f2f7b-fd13-5296-97b3-ffef30c888d7">
+				<Properties>
+					<Name>ValidUntil</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Действует до</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Действует до</v8:content>
+						</v8:item>
+					</Synonym>
+					<Type>
+						<v8:Type>xs:dateTime</v8:Type>
+					</Type>
+				</Properties>
+			</Attribute>
+			<Attribute uuid="aebbd397-a2c7-5547-badc-c5c9454fc9fa">
+				<Properties>
+					<Name>ActorLogin</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Ответственный</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Ответственный</v8:content>
+						</v8:item>
+					</Synonym>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>150</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Properties>
+			</Attribute>
+		</ChildObjects>
+	</Document>
+</MetaDataObject>

@@ -80,6 +80,24 @@
 					</Type>
 				</Properties>
 			</Attribute>
+			<Attribute uuid="b9e7c415-83d7-5f04-8957-312a4e090bb9">
+				<Properties>
+					<Name>PositionTitle</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Должность</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Должность</v8:content>
+						</v8:item>
+					</Synonym>
+					<Type>
+						<v8:Type>cfg:CatalogRef.Positions</v8:Type>
+					</Type>
+				</Properties>
+			</Attribute>
 		</ChildObjects>
 	</Catalog>
 </MetaDataObject>

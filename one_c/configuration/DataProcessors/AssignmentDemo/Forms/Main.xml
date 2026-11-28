@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='utf-8'?>
+<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:v8="http://v8.1c.ru/8.1/data/core" version="2.20" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<Form uuid="80a55dcc-6c25-5dd8-921e-3a02fdef1862">
+		<Properties>
+			<Name>Main</Name>
+			<Synonym>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Подготовка учебной базы</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Подготовка учебной базы</v8:content>
+				</v8:item>
+			</Synonym>
+			<FormType>Managed</FormType>
+		</Properties>
+	</Form>
+</MetaDataObject>

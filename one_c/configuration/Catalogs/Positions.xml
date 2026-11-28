@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='utf-8'?>
+<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" version="2.20" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<Catalog uuid="cc002f2a-b44d-5067-adb1-d7760419b03b">
+		<InternalInfo>
+			<xr:GeneratedType name="CatalogObject.Positions" category="Object">
+				<xr:TypeId>42a06dc4-62f6-5e22-a18b-8922d0c40f6f</xr:TypeId>
+				<xr:ValueId>d999b380-c95b-552f-874f-12a46e590b70</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="CatalogRef.Positions" category="Ref">
+				<xr:TypeId>b98ab301-afaf-5b64-9c27-1706f80a1787</xr:TypeId>
+				<xr:ValueId>495c030a-4f88-5de1-ac86-8da56b006a85</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="CatalogSelection.Positions" category="Selection">
+				<xr:TypeId>94ae9d6e-cbd3-5362-a8a1-323c95cfa758</xr:TypeId>
+				<xr:ValueId>906c74c1-4c8a-5691-b0b4-cd3d38db031c</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="CatalogList.Positions" category="List">
+				<xr:TypeId>8e61d8b9-3e3f-5359-9474-dfd81f303e08</xr:TypeId>
+				<xr:ValueId>0c622b78-e2a4-52a1-a9f1-3d83c2e6fc55</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="CatalogManager.Positions" category="Manager">
+				<xr:TypeId>61bc0302-38fe-5b06-8ff6-c3d4ae92d130</xr:TypeId>
+				<xr:ValueId>17c8fa0a-d514-50b3-a5d4-883421f48c43</xr:ValueId>
+			</xr:GeneratedType>
+		</InternalInfo>
+		<Properties>
+			<Name>Positions</Name>
+			<Synonym>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Должности</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Должности</v8:content>
+				</v8:item>
+			</Synonym>
+			<CodeLength>20</CodeLength>
+			<DescriptionLength>150</DescriptionLength>
+			<CodeType>String</CodeType>
+			<CodeAllowedLength>Variable</CodeAllowedLength>
+			<CheckUnique>true</CheckUnique>
+			<Autonumbering>true</Autonumbering>
+			<UseStandardCommands>true</UseStandardCommands>
+			<Hierarchical>true</Hierarchical>
+			<HierarchyType>HierarchyFoldersAndItems</HierarchyType>
+		</Properties>
+		<ChildObjects />
+	</Catalog>
+</MetaDataObject>

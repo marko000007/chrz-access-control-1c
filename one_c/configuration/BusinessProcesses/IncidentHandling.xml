@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='utf-8'?>
+<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" version="2.20" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<BusinessProcess uuid="a23701f1-01f0-513e-b182-0b278c0cf4f4">
+		<InternalInfo>
+			<xr:GeneratedType name="BusinessProcessObject.IncidentHandling" category="Object">
+				<xr:TypeId>bce5db1a-809b-5ed3-af71-06f02ff0a2f9</xr:TypeId>
+				<xr:ValueId>d8510ee7-e32d-55ba-83da-63f7c96007a2</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="BusinessProcessRef.IncidentHandling" category="Ref">
+				<xr:TypeId>6b1a7fd9-1f45-5901-bf76-179779ab3ad6</xr:TypeId>
+				<xr:ValueId>f1f8d299-e1b4-509c-8ab2-dad102e7ba3c</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="BusinessProcessSelection.IncidentHandling" category="Selection">
+				<xr:TypeId>b5454db3-c31e-5b49-89f3-f4eb80c2d1d0</xr:TypeId>
+				<xr:ValueId>d3873e82-ffc5-5f1b-b4aa-3f12173b8ab1</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="BusinessProcessList.IncidentHandling" category="List">
+				<xr:TypeId>89630b29-d037-52ba-90cc-b5fd00043e9b</xr:TypeId>
+				<xr:ValueId>c4263895-b18f-5ff6-bdcc-87107b8cffc4</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="BusinessProcessManager.IncidentHandling" category="Manager">
+				<xr:TypeId>09c3322c-e8a4-57f0-9b01-446265399705</xr:TypeId>
+				<xr:ValueId>9d9d0471-cb75-575a-a65f-2b35013d35f8</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="BusinessProcessRoutePointRef.IncidentHandling" category="RoutePointRef">
+				<xr:TypeId>1fae898d-0a27-5f38-8a01-acdc42f84786</xr:TypeId>
+				<xr:ValueId>5d116d6f-11e2-57d9-82b8-39fc30ab17d8</xr:ValueId>
+			</xr:GeneratedType>
+		</InternalInfo>
+		<Properties>
+			<Name>IncidentHandling</Name>
+			<Synonym>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Разбор нарушения</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Разбор нарушения</v8:content>
+				</v8:item>
+			</Synonym>
+			<UseStandardCommands>true</UseStandardCommands>
+			<NumberType>String</NumberType>
+			<NumberLength>11</NumberLength>
+			<Autonumbering>true</Autonumbering>
+			<Task>Task.AccessTasks</Task>
+		</Properties>
+		<ChildObjects>
+			<Attribute uuid="84406502-4365-5308-9a05-3a09bfa647b5">
+				<Properties>
+					<Name>Incident</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Нарушение</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Нарушение</v8:content>
+						</v8:item>
+					</Synonym>
+					<Type>
+						<v8:Type>cfg:DocumentRef.SecurityIncidents</v8:Type>
+					</Type>
+				</Properties>
+			</Attribute>
+			<Attribute uuid="4e2703bc-d560-5545-9fb9-c40afd94bd89">
+				<Properties>
+					<Name>Resolution</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Результат рассмотрения</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Результат рассмотрения</v8:content>
+						</v8:item>
+					</Synonym>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>150</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Properties>
+			</Attribute>
+		</ChildObjects>
+	</BusinessProcess>
+</MetaDataObject>

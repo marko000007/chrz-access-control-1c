@@ -18,6 +18,11 @@
           "Active",
           "Действует",
           "boolean"
+        ],
+        [
+          "PositionTitle",
+          "Должность",
+          "CatalogRef.Positions"
         ]
       ]
     },
@@ -40,6 +45,11 @@
           "Active",
           "Действует",
           "boolean"
+        ],
+        [
+          "AccessZone",
+          "Зона доступа",
+          "CatalogRef.AccessZones"
         ]
       ]
     },
@@ -141,8 +151,90 @@
           "RevokeReason",
           "Причина отзыва",
           "string"
+        ],
+        [
+          "Kind",
+          "Вид пропуска",
+          "EnumRef.PassKinds"
         ]
       ]
+    },
+    {
+      "name": "Sites",
+      "title": "Площадки предприятия",
+      "fields": [],
+      "hierarchical": true
+    },
+    {
+      "name": "AccessZones",
+      "title": "Зоны доступа",
+      "fields": [
+        [
+          "Site",
+          "Площадка",
+          "CatalogRef.Sites"
+        ]
+      ],
+      "hierarchical": true
+    },
+    {
+      "name": "Positions",
+      "title": "Должности",
+      "fields": [],
+      "hierarchical": true
+    },
+    {
+      "name": "Contractors",
+      "title": "Контрагенты",
+      "fields": [
+        [
+          "TaxID",
+          "ИНН",
+          "string"
+        ]
+      ],
+      "hierarchical": false
+    },
+    {
+      "name": "Vehicles",
+      "title": "Транспорт",
+      "fields": [
+        [
+          "LicensePlate",
+          "Государственный номер",
+          "string"
+        ],
+        [
+          "Company",
+          "Владелец",
+          "CatalogRef.Contractors"
+        ]
+      ],
+      "hierarchical": false
+    },
+    {
+      "name": "Assets",
+      "title": "Материальные ценности",
+      "fields": [
+        [
+          "Unit",
+          "Единица измерения",
+          "string"
+        ]
+      ],
+      "hierarchical": false
+    },
+    {
+      "name": "IncidentTypes",
+      "title": "Виды нарушений",
+      "fields": [
+        [
+          "Severity",
+          "Тяжесть",
+          "EnumRef.IncidentSeverities"
+        ]
+      ],
+      "hierarchical": false
     }
   ],
   "documents": [
@@ -236,7 +328,227 @@
           "Время события",
           "dateTime"
         ]
+      ],
+      "registers": [
+        "AccumulationRegister.CheckpointVisits"
       ]
+    },
+    {
+      "name": "PassIssues",
+      "title": "Выдача пропусков",
+      "fields": [
+        [
+          "Pass",
+          "Пропуск",
+          "CatalogRef.Passes"
+        ],
+        [
+          "ActorLogin",
+          "Ответственный",
+          "string"
+        ]
+      ],
+      "registers": [
+        "AccumulationRegister.PassCustody"
+      ],
+      "postable": true
+    },
+    {
+      "name": "PassReturns",
+      "title": "Возврат пропусков",
+      "fields": [
+        [
+          "Pass",
+          "Пропуск",
+          "CatalogRef.Passes"
+        ],
+        [
+          "ActorLogin",
+          "Ответственный",
+          "string"
+        ]
+      ],
+      "registers": [
+        "AccumulationRegister.PassCustody"
+      ],
+      "postable": true
+    },
+    {
+      "name": "PassRevocations",
+      "title": "Акты отзыва",
+      "fields": [
+        [
+          "Pass",
+          "Пропуск",
+          "CatalogRef.Passes"
+        ],
+        [
+          "Reason",
+          "Основание отзыва",
+          "string"
+        ],
+        [
+          "ActorLogin",
+          "Ответственный",
+          "string"
+        ]
+      ],
+      "registers": [],
+      "postable": true
+    },
+    {
+      "name": "VehiclePermits",
+      "title": "Допуски транспорта",
+      "fields": [
+        [
+          "Vehicle",
+          "Транспорт",
+          "CatalogRef.Vehicles"
+        ],
+        [
+          "Checkpoint",
+          "Точка прохода",
+          "CatalogRef.Checkpoints"
+        ],
+        [
+          "ValidUntil",
+          "Действует до",
+          "dateTime"
+        ],
+        [
+          "ActorLogin",
+          "Ответственный",
+          "string"
+        ]
+      ],
+      "registers": [],
+      "postable": true
+    },
+    {
+      "name": "AssetReceipts",
+      "title": "Внос материальных ценностей",
+      "fields": [
+        [
+          "Asset",
+          "Материальная ценность",
+          "CatalogRef.Assets"
+        ],
+        [
+          "Checkpoint",
+          "Точка прохода",
+          "CatalogRef.Checkpoints"
+        ],
+        [
+          "Quantity",
+          "Количество",
+          "decimal"
+        ],
+        [
+          "Direction",
+          "Направление",
+          "EnumRef.AssetDirections"
+        ],
+        [
+          "ActorLogin",
+          "Ответственный",
+          "string"
+        ]
+      ],
+      "registers": [
+        "AccumulationRegister.AssetStock"
+      ],
+      "postable": true
+    },
+    {
+      "name": "AssetExpenses",
+      "title": "Вынос материальных ценностей",
+      "fields": [
+        [
+          "Asset",
+          "Материальная ценность",
+          "CatalogRef.Assets"
+        ],
+        [
+          "Checkpoint",
+          "Точка прохода",
+          "CatalogRef.Checkpoints"
+        ],
+        [
+          "Quantity",
+          "Количество",
+          "decimal"
+        ],
+        [
+          "Direction",
+          "Направление",
+          "EnumRef.AssetDirections"
+        ],
+        [
+          "ActorLogin",
+          "Ответственный",
+          "string"
+        ]
+      ],
+      "registers": [
+        "AccumulationRegister.AssetStock"
+      ],
+      "postable": true
+    },
+    {
+      "name": "SecurityIncidents",
+      "title": "Нарушения пропускного режима",
+      "fields": [
+        [
+          "IncidentType",
+          "Вид нарушения",
+          "CatalogRef.IncidentTypes"
+        ],
+        [
+          "Checkpoint",
+          "Точка прохода",
+          "CatalogRef.Checkpoints"
+        ],
+        [
+          "DescriptionText",
+          "Описание",
+          "string"
+        ],
+        [
+          "ActorLogin",
+          "Ответственный",
+          "string"
+        ]
+      ],
+      "registers": [],
+      "postable": true
+    },
+    {
+      "name": "ShiftTransfers",
+      "title": "Передача смены",
+      "fields": [
+        [
+          "Checkpoint",
+          "Точка прохода",
+          "CatalogRef.Checkpoints"
+        ],
+        [
+          "NextGuard",
+          "Принимающий смену",
+          "CatalogRef.PortalUsers"
+        ],
+        [
+          "CommentText",
+          "Примечание",
+          "string"
+        ],
+        [
+          "ActorLogin",
+          "Ответственный",
+          "string"
+        ]
+      ],
+      "registers": [],
+      "postable": true
     }
   ],
   "common_modules": [
@@ -258,6 +570,18 @@
     },
     {
       "name": "AccessPasses"
+    },
+    {
+      "name": "AccessOperations"
+    },
+    {
+      "name": "AccessReports"
+    },
+    {
+      "name": "AccessAssignmentDemo"
+    },
+    {
+      "name": "AccessWorkflows"
     }
   ]
 }

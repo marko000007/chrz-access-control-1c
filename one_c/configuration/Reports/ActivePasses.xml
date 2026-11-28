@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='utf-8'?>
+<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" version="2.20" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<Report uuid="5e820b4d-a288-516b-a67f-a649a34518d7">
+		<InternalInfo>
+			<xr:GeneratedType name="ReportObject.ActivePasses" category="Object">
+				<xr:TypeId>a34d2040-0bcb-5175-8281-d5a981f08381</xr:TypeId>
+				<xr:ValueId>a7ad8159-9a8a-5c11-b376-bf75aede51d4</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="ReportManager.ActivePasses" category="Manager">
+				<xr:TypeId>1a58fc33-32b6-530c-a379-5a717774e2c9</xr:TypeId>
+				<xr:ValueId>e44bbb31-7af1-552e-b525-ad063a8eed6b</xr:ValueId>
+			</xr:GeneratedType>
+		</InternalInfo>
+		<Properties>
+			<Name>ActivePasses</Name>
+			<Synonym>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Действующие пропуска</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Действующие пропуска</v8:content>
+				</v8:item>
+			</Synonym>
+			<UseStandardCommands>true</UseStandardCommands>
+			<DefaultForm>Report.ActivePasses.Form.Main</DefaultForm>
+		</Properties>
+		<ChildObjects>
+			<Form>Main</Form>
+		</ChildObjects>
+	</Report>
+</MetaDataObject>

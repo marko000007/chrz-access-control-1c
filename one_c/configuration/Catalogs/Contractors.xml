@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='utf-8'?>
+<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" version="2.20" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<Catalog uuid="a2d27486-5274-528d-a364-fd07bdc64c79">
+		<InternalInfo>
+			<xr:GeneratedType name="CatalogObject.Contractors" category="Object">
+				<xr:TypeId>244ff6d0-7946-5675-93db-1166882079aa</xr:TypeId>
+				<xr:ValueId>edb91478-1f0b-555b-b123-f1b500116493</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="CatalogRef.Contractors" category="Ref">
+				<xr:TypeId>7f38660c-c6d7-5da9-97ba-1a7667c62ffe</xr:TypeId>
+				<xr:ValueId>7b272ca5-5b3d-5674-9dde-8b2a615c6b0b</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="CatalogSelection.Contractors" category="Selection">
+				<xr:TypeId>681b5613-1ca2-5a64-9b36-50b6f65eed5f</xr:TypeId>
+				<xr:ValueId>ac1a2a12-33e8-599d-8467-6e8150aae06f</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="CatalogList.Contractors" category="List">
+				<xr:TypeId>c34cfee5-be5a-5b65-b192-ce683404d6cd</xr:TypeId>
+				<xr:ValueId>1ba88878-4518-5873-811d-37b008718831</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="CatalogManager.Contractors" category="Manager">
+				<xr:TypeId>92689903-b2e6-5c46-bde5-93a1f1f8991e</xr:TypeId>
+				<xr:ValueId>66dd3b79-488b-51a9-a699-addcfb6211df</xr:ValueId>
+			</xr:GeneratedType>
+		</InternalInfo>
+		<Properties>
+			<Name>Contractors</Name>
+			<Synonym>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Контрагенты</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Контрагенты</v8:content>
+				</v8:item>
+			</Synonym>
+			<CodeLength>20</CodeLength>
+			<DescriptionLength>150</DescriptionLength>
+			<CodeType>String</CodeType>
+			<CodeAllowedLength>Variable</CodeAllowedLength>
+			<CheckUnique>true</CheckUnique>
+			<Autonumbering>true</Autonumbering>
+			<UseStandardCommands>true</UseStandardCommands>
+		</Properties>
+		<ChildObjects>
+			<Attribute uuid="16bc6d8d-597f-5156-820a-eae2da83b6ae">
+				<Properties>
+					<Name>TaxID</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>ИНН</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>ИНН</v8:content>
+						</v8:item>
+					</Synonym>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>150</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Properties>
+			</Attribute>
+		</ChildObjects>
+	</Catalog>
+</MetaDataObject>

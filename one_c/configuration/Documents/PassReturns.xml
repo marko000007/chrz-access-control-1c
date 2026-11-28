@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='utf-8'?>
+<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.20" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<Document uuid="6ad3ed18-1fa9-5433-8c64-227947c0dc53">
+		<InternalInfo>
+			<xr:GeneratedType name="DocumentObject.PassReturns" category="Object">
+				<xr:TypeId>9147f6fd-c146-5326-a727-a7eeb1af659d</xr:TypeId>
+				<xr:ValueId>15e9dc9d-0d10-5d82-ae5c-82074faabaea</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="DocumentRef.PassReturns" category="Ref">
+				<xr:TypeId>908a9c59-8ccd-502e-a9f1-a25e1d8fb06b</xr:TypeId>
+				<xr:ValueId>778ca9db-c0d3-5b06-ac40-f3089d98e5f0</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="DocumentSelection.PassReturns" category="Selection">
+				<xr:TypeId>373fa67b-1921-5d58-8004-46c7aacf4ba8</xr:TypeId>
+				<xr:ValueId>e1d59e96-0446-5fae-9f48-e9e62a487ade</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="DocumentList.PassReturns" category="List">
+				<xr:TypeId>bc7be3d4-3f3a-5730-9a5f-13fe7d76cf82</xr:TypeId>
+				<xr:ValueId>0ec74578-d190-5a5d-885c-aef5d3ebb27c</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="DocumentManager.PassReturns" category="Manager">
+				<xr:TypeId>bae84ab9-bfa8-5357-9317-52376ebe9d2b</xr:TypeId>
+				<xr:ValueId>2cd47b48-7b81-5091-9206-da55a5d7d369</xr:ValueId>
+			</xr:GeneratedType>
+		</InternalInfo>
+		<Properties>
+			<Name>PassReturns</Name>
+			<Synonym>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Возврат пропусков</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Возврат пропусков</v8:content>
+				</v8:item>
+			</Synonym>
+			<NumberLength>11</NumberLength>
+			<NumberType>String</NumberType>
+			<NumberAllowedLength>Variable</NumberAllowedLength>
+			<NumberPeriodicity>Year</NumberPeriodicity>
+			<Posting>Allow</Posting>
+			<CheckUnique>true</CheckUnique>
+			<Autonumbering>true</Autonumbering>
+			<UseStandardCommands>true</UseStandardCommands>
+			<RegisterRecords>
+				<xr:Item xsi:type="xr:MDObjectRef">AccumulationRegister.PassCustody</xr:Item>
+			</RegisterRecords>
+		</Properties>
+		<ChildObjects>
+			<Attribute uuid="508af039-93dc-5f98-80ed-e89c75f60a3f">
+				<Properties>
+					<Name>Pass</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Пропуск</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Пропуск</v8:content>
+						</v8:item>
+					</Synonym>
+					<Type>
+						<v8:Type>cfg:CatalogRef.Passes</v8:Type>
+					</Type>
+				</Properties>
+			</Attribute>
+			<Attribute uuid="e3cebc2a-c884-508e-a8a2-a5071c3c03a0">
+				<Properties>
+					<Name>ActorLogin</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Ответственный</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Ответственный</v8:content>
+						</v8:item>
+					</Synonym>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>150</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Properties>
+			</Attribute>
+		</ChildObjects>
+	</Document>
+</MetaDataObject>

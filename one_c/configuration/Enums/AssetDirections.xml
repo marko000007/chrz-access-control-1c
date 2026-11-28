@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='utf-8'?>
+<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" version="2.20" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<Enum uuid="1ca0a3eb-2494-5536-8ff2-7b8dae76ccb0">
+		<InternalInfo>
+			<xr:GeneratedType name="EnumRef.AssetDirections" category="Ref">
+				<xr:TypeId>9ece6821-2c01-5f5d-83cd-c8619556891b</xr:TypeId>
+				<xr:ValueId>5df78d45-af5a-5bea-b338-1412df41736b</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="EnumManager.AssetDirections" category="Manager">
+				<xr:TypeId>2344f703-d92e-5f39-83b8-6a76b5987e2e</xr:TypeId>
+				<xr:ValueId>62efd9a7-2341-5d6f-b0b2-f698d7c73543</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="EnumList.AssetDirections" category="List">
+				<xr:TypeId>18b9e168-d2a9-525c-96fa-01260593f2a7</xr:TypeId>
+				<xr:ValueId>35ca85ec-1ff0-574e-83c2-a806f6b97bf1</xr:ValueId>
+			</xr:GeneratedType>
+		</InternalInfo>
+		<Properties>
+			<Name>AssetDirections</Name>
+			<Synonym>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Направление перемещения</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Направление перемещения</v8:content>
+				</v8:item>
+			</Synonym>
+		</Properties>
+		<ChildObjects>
+			<EnumValue uuid="3f742a8b-c1dd-5c76-bca6-591e61d59e44">
+				<Properties>
+					<Name>Receipt</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Внос</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Внос</v8:content>
+						</v8:item>
+					</Synonym>
+				</Properties>
+			</EnumValue>
+			<EnumValue uuid="0d352388-154e-5323-9b95-e7245d3caa15">
+				<Properties>
+					<Name>Expense</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Вынос</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Вынос</v8:content>
+						</v8:item>
+					</Synonym>
+				</Properties>
+			</EnumValue>
+		</ChildObjects>
+	</Enum>
+</MetaDataObject>

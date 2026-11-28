@@ -46,14 +46,25 @@ def catalog(spec, kind="Catalog"):
         node(generated,"TypeId",uid(name+category+"TypeId"),XR);node(generated,"ValueId",uid(name+category+"ValueId"),XR)
     props=node(item,"Properties")
     node(props,"Name",name);title(props,spec["title"])
-    standard = [("CodeLength",20),("DescriptionLength",150),("CodeType","String"),("CodeAllowedLength","Variable")] if kind=="Catalog" else [("NumberLength",11),("NumberType","String"),("NumberAllowedLength","Variable"),("NumberPeriodicity","Year"),("Posting","Deny")]
+    standard = [("CodeLength",20),("DescriptionLength",150),("CodeType","String"),("CodeAllowedLength","Variable")] if kind=="Catalog" else [("NumberLength",11),("NumberType","String"),("NumberAllowedLength","Variable"),("NumberPeriodicity","Year"),("Posting","Allow" if spec.get("registers") or spec.get("postable") else "Deny")]
     for key,value in [*standard,("CheckUnique","true"),("Autonumbering","true"),("UseStandardCommands","true")]:node(props,key,value)
+    if spec.get("hierarchical"):
+        node(props,"Hierarchical","true")
+        node(props,"HierarchyType","HierarchyFoldersAndItems")
+    if spec.get("registers"):
+        records=node(props,"RegisterRecords")
+        for register in spec["registers"]:
+            ref=node(records,"Item",register,XR)
+            ref.set("{http://www.w3.org/2001/XMLSchema-instance}type","xr:MDObjectRef")
     children=node(item,"ChildObjects")
     for field_spec in spec["fields"]:
         field,caption,field_type = field_spec[:3]
         attribute=node(children,"Attribute");attribute.set("uuid",uid(name+"/"+field))
         properties=node(attribute,"Properties");node(properties,"Name",field);title(properties,caption)
-        value_type=node(properties,"Type");node(value_type,"Type",("cfg:"+field_type) if field_type.startswith(("CatalogRef.","DocumentRef.")) else "xs:"+field_type,V8)
+        value_type=node(properties,"Type");node(value_type,"Type",("cfg:"+field_type) if "." in field_type else "xs:"+field_type,V8)
+        if field_type=="decimal":
+            q=node(value_type,"NumberQualifiers",namespace=V8)
+            for key,value in [("Digits",15),("FractionDigits",3),("AllowedSign","Any")]:node(q,key,value,V8)
         if field_type=="string":
             qualifiers=node(value_type,"StringQualifiers",namespace=V8);node(qualifiers,"Length",field_spec[3] if len(field_spec)>3 else 150,V8);node(qualifiers,"AllowedLength","Variable",V8)
     save(ROOT/"one_c/configuration"/(kind+"s")/(name+".xml"),root)
@@ -64,7 +75,7 @@ def main():
     path=ROOT/"one_c/configuration/Configuration.xml"
     tree=ET.parse(path);configuration=tree.getroot().find("{"+MD+"}Configuration")
     props=configuration.find("{"+MD+"}Properties")
-    props.find("{"+MD+"}Name").text="ChrzAccessControl"
+    props.find("{"+MD+"}Name").text="ПодворныйВиталийОлегович70204645"
     props.find("{"+MD+"}ScriptVariant").text="Russian"
     children=configuration.find("{"+MD+"}ChildObjects")
     for spec in schema.get("common_modules", []):
@@ -84,6 +95,8 @@ def main():
         if not any(child.tag=="{"+MD+"}Document" and child.text==spec["name"] for child in children):node(children,"Document",spec["name"])
         catalog(spec,"Document")
     save(path,tree.getroot())
+    from build_assignment_metadata import build
+    build()
 
 
 if __name__=="__main__":main()

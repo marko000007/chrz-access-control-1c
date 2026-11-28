@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='utf-8'?>
+<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" version="2.20" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<Enum uuid="e3caec93-d0e2-5fd7-976a-f066c25728a4">
+		<InternalInfo>
+			<xr:GeneratedType name="EnumRef.PassKinds" category="Ref">
+				<xr:TypeId>db4aa1a3-993e-53fb-9ba6-7e938c2d7539</xr:TypeId>
+				<xr:ValueId>6f4c49a4-6012-55d9-8185-7a420c886f38</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="EnumManager.PassKinds" category="Manager">
+				<xr:TypeId>1bd169ba-4bc5-5f74-a45d-3623a032dcde</xr:TypeId>
+				<xr:ValueId>a71da464-7e5f-5629-83c2-e0605ebdc002</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="EnumList.PassKinds" category="List">
+				<xr:TypeId>180925a5-d878-5722-bf97-12b4dca7ddb9</xr:TypeId>
+				<xr:ValueId>42774490-cfa5-5ae7-aaee-a7c15741363a</xr:ValueId>
+			</xr:GeneratedType>
+		</InternalInfo>
+		<Properties>
+			<Name>PassKinds</Name>
+			<Synonym>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Виды пропусков</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Виды пропусков</v8:content>
+				</v8:item>
+			</Synonym>
+		</Properties>
+		<ChildObjects>
+			<EnumValue uuid="033f7a44-4d08-54c0-85b0-af3998a89b66">
+				<Properties>
+					<Name>Visitor</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Разовый посетитель</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Разовый посетитель</v8:content>
+						</v8:item>
+					</Synonym>
+				</Properties>
+			</EnumValue>
+			<EnumValue uuid="56e7f513-ed51-57f2-aea0-e8d8adfeea9d">
+				<Properties>
+					<Name>Contractor</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Подрядчик</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Подрядчик</v8:content>
+						</v8:item>
+					</Synonym>
+				</Properties>
+			</EnumValue>
+			<EnumValue uuid="dfab5bf5-5ab5-5989-a332-a2a2e7999d0d">
+				<Properties>
+					<Name>Employee</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Сотрудник</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Сотрудник</v8:content>
+						</v8:item>
+					</Synonym>
+				</Properties>
+			</EnumValue>
+		</ChildObjects>
+	</Enum>
+</MetaDataObject>

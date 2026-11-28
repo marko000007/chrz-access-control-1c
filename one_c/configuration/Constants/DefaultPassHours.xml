@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='utf-8'?>
+<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" version="2.20" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<Constant uuid="b1a7b3f4-f4c6-5bcb-ae10-877929e31568">
+		<InternalInfo>
+			<xr:GeneratedType name="ConstantManager.DefaultPassHours" category="Manager">
+				<xr:TypeId>f4781f23-1bc6-5d33-993e-eed3a8257c61</xr:TypeId>
+				<xr:ValueId>649b8267-1b34-55ae-89cc-496be744be51</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="ConstantValueManager.DefaultPassHours" category="ValueManager">
+				<xr:TypeId>21344072-eab9-5217-933e-750e7202df65</xr:TypeId>
+				<xr:ValueId>d031b6a2-aaf1-50f1-bb9a-916a1172941c</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="ConstantValueKey.DefaultPassHours" category="ValueKey">
+				<xr:TypeId>1f41dff4-edc4-57de-8ced-392592b8b6f1</xr:TypeId>
+				<xr:ValueId>ed21b416-d8ac-58af-b710-33272baa2398</xr:ValueId>
+			</xr:GeneratedType>
+		</InternalInfo>
+		<Properties>
+			<Name>DefaultPassHours</Name>
+			<Synonym>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Срок разового пропуска в часах</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Срок разового пропуска в часах</v8:content>
+				</v8:item>
+			</Synonym>
+			<Type>
+				<v8:Type>xs:decimal</v8:Type>
+				<v8:NumberQualifiers>
+					<v8:Digits>15</v8:Digits>
+					<v8:FractionDigits>3</v8:FractionDigits>
+					<v8:AllowedSign>Any</v8:AllowedSign>
+				</v8:NumberQualifiers>
+			</Type>
+			<UseStandardCommands>true</UseStandardCommands>
+		</Properties>
+	</Constant>
+</MetaDataObject>

@@ -32,7 +32,7 @@
 			</xr:ContainedObject>
 		</InternalInfo>
 		<Properties>
-			<Name>ChrzAccessControl</Name>
+			<Name>ПодворныйВиталийОлегович70204645</Name>
 			<Synonym />
 			<Comment />
 			<NamePrefix />
@@ -265,6 +265,51 @@
 			<CommonModule>AccessPasses</CommonModule>
 			<Catalog>Passes</Catalog>
 			<Document>GateEvents</Document>
+			<CommonModule>AccessOperations</CommonModule>
+			<CommonModule>AccessReports</CommonModule>
+			<CommonModule>AccessAssignmentDemo</CommonModule>
+			<Catalog>Sites</Catalog>
+			<Catalog>AccessZones</Catalog>
+			<Catalog>Positions</Catalog>
+			<Catalog>Contractors</Catalog>
+			<Catalog>Vehicles</Catalog>
+			<Catalog>Assets</Catalog>
+			<Catalog>IncidentTypes</Catalog>
+			<Document>PassIssues</Document>
+			<Document>PassReturns</Document>
+			<Document>PassRevocations</Document>
+			<Document>VehiclePermits</Document>
+			<Document>AssetReceipts</Document>
+			<Document>AssetExpenses</Document>
+			<Document>SecurityIncidents</Document>
+			<Document>ShiftTransfers</Document>
+			<Enum>PassKinds</Enum>
+			<Enum>IncidentSeverities</Enum>
+			<Enum>AssetDirections</Enum>
+			<Constant>OrganizationName</Constant>
+			<Constant>DefaultPassHours</Constant>
+			<AccumulationRegister>PassCustody</AccumulationRegister>
+			<AccumulationRegister>AssetStock</AccumulationRegister>
+			<AccumulationRegister>CheckpointVisits</AccumulationRegister>
+			<InformationRegister>VehicleAccess</InformationRegister>
+			<Report>VisitJournal</Report>
+			<Report>ActivePasses</Report>
+			<Report>RequestDecisions</Report>
+			<Report>AssetBalance</Report>
+			<Report>IncidentSummary</Report>
+			<DataProcessor>AssignmentDemo</DataProcessor>
+			<Subsystem>Directories</Subsystem>
+			<Subsystem>VisitorAccess</Subsystem>
+			<Subsystem>GateControl</Subsystem>
+			<Subsystem>Analytics</Subsystem>
+			<Role>Administrator</Role>
+			<Role>Requester</Role>
+			<Role>Approver</Role>
+			<Role>Guard</Role>
+			<Task>AccessTasks</Task>
+			<BusinessProcess>VisitApproval</BusinessProcess>
+			<BusinessProcess>IncidentHandling</BusinessProcess>
+			<CommonModule>AccessWorkflows</CommonModule>
 		</ChildObjects>
 	</Configuration>
 </MetaDataObject>

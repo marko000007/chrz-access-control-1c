@@ -1,0 +1,112 @@
+<?xml version='1.0' encoding='utf-8'?>
+<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" version="2.20" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<Document uuid="8930e03f-100d-59c8-8dea-480646927608">
+		<InternalInfo>
+			<xr:GeneratedType name="DocumentObject.PassRevocations" category="Object">
+				<xr:TypeId>79d951a1-0709-5e27-82d3-f3dc3a837aa4</xr:TypeId>
+				<xr:ValueId>f9bb027f-6e37-552f-8b34-51da3ef008d7</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="DocumentRef.PassRevocations" category="Ref">
+				<xr:TypeId>9247e730-a7ca-5a04-879d-0442a9d6d824</xr:TypeId>
+				<xr:ValueId>429a1780-ff00-5367-bf60-408a6bd81f5d</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="DocumentSelection.PassRevocations" category="Selection">
+				<xr:TypeId>a5d2e78d-b828-54e9-9a75-7caef89fb0be</xr:TypeId>
+				<xr:ValueId>0adc7247-b0f9-54c9-86a7-9caef5965393</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="DocumentList.PassRevocations" category="List">
+				<xr:TypeId>311778d7-1220-5d8e-8dd9-e3a621f891f2</xr:TypeId>
+				<xr:ValueId>ffb8bee3-7fba-538f-bd68-86bb59c20aef</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="DocumentManager.PassRevocations" category="Manager">
+				<xr:TypeId>9274b860-921d-54e2-bb32-d8095793f3ab</xr:TypeId>
+				<xr:ValueId>875cbf2d-5c29-512b-b32d-5e7b11355c37</xr:ValueId>
+			</xr:GeneratedType>
+		</InternalInfo>
+		<Properties>
+			<Name>PassRevocations</Name>
+			<Synonym>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Акты отзыва</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Акты отзыва</v8:content>
+				</v8:item>
+			</Synonym>
+			<NumberLength>11</NumberLength>
+			<NumberType>String</NumberType>
+			<NumberAllowedLength>Variable</NumberAllowedLength>
+			<NumberPeriodicity>Year</NumberPeriodicity>
+			<Posting>Allow</Posting>
+			<CheckUnique>true</CheckUnique>
+			<Autonumbering>true</Autonumbering>
+			<UseStandardCommands>true</UseStandardCommands>
+		</Properties>
+		<ChildObjects>
+			<Attribute uuid="0868ddef-a5ca-59fc-87a3-80006cd55f91">
+				<Properties>
+					<Name>Pass</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Пропуск</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Пропуск</v8:content>
+						</v8:item>
+					</Synonym>
+					<Type>
+						<v8:Type>cfg:CatalogRef.Passes</v8:Type>
+					</Type>
+				</Properties>
+			</Attribute>
+			<Attribute uuid="d462b9d6-3d2d-54e4-910d-1ed842d5f297">
+				<Properties>
+					<Name>Reason</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Основание отзыва</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Основание отзыва</v8:content>
+						</v8:item>
+					</Synonym>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>150</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Properties>
+			</Attribute>
+			<Attribute uuid="c99fbe8e-dfde-581a-a36d-75723fd28b97">
+				<Properties>
+					<Name>ActorLogin</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Ответственный</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Ответственный</v8:content>
+						</v8:item>
+					</Synonym>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>150</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Properties>
+			</Attribute>
+		</ChildObjects>
+	</Document>
+</MetaDataObject>

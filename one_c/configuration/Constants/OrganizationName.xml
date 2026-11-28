@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='utf-8'?>
+<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" version="2.20" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<Constant uuid="b04e4876-86fd-5fe0-b09f-ae8cc0962dd1">
+		<InternalInfo>
+			<xr:GeneratedType name="ConstantManager.OrganizationName" category="Manager">
+				<xr:TypeId>6356473c-80d4-5fcb-88d7-123b36856585</xr:TypeId>
+				<xr:ValueId>0e4fe60c-f4fd-5c0a-8140-4760af6c8f2f</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="ConstantValueManager.OrganizationName" category="ValueManager">
+				<xr:TypeId>b7057977-c377-505e-946b-8665620486af</xr:TypeId>
+				<xr:ValueId>602c71ed-10ae-522d-9494-71de1ae3d626</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="ConstantValueKey.OrganizationName" category="ValueKey">
+				<xr:TypeId>81fd1197-1040-5781-85a9-c66f40919436</xr:TypeId>
+				<xr:ValueId>8781b08d-163f-55b8-ad98-65f545eb1f4a</xr:ValueId>
+			</xr:GeneratedType>
+		</InternalInfo>
+		<Properties>
+			<Name>OrganizationName</Name>
+			<Synonym>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Организация</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Организация</v8:content>
+				</v8:item>
+			</Synonym>
+			<Type>
+				<v8:Type>xs:string</v8:Type>
+				<v8:StringQualifiers>
+					<v8:Length>150</v8:Length>
+					<v8:AllowedLength>Variable</v8:AllowedLength>
+				</v8:StringQualifiers>
+			</Type>
+			<UseStandardCommands>true</UseStandardCommands>
+		</Properties>
+	</Constant>
+</MetaDataObject>

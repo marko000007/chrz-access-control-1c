@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='utf-8'?>
+<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" version="2.20" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<Catalog uuid="41c6c94e-cdec-5109-8218-70065fc20667">
+		<InternalInfo>
+			<xr:GeneratedType name="CatalogObject.Assets" category="Object">
+				<xr:TypeId>3d4504ad-7350-52fd-87ca-a120f47187c8</xr:TypeId>
+				<xr:ValueId>0795cb8b-08e2-5aa1-bd0d-06d51ee71cbc</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="CatalogRef.Assets" category="Ref">
+				<xr:TypeId>e2deece3-8b1a-5349-a625-01b7357f6de1</xr:TypeId>
+				<xr:ValueId>210a21d9-8ed7-5fd2-8bf8-eba03496b8e3</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="CatalogSelection.Assets" category="Selection">
+				<xr:TypeId>b1bef665-d627-5bcd-8c38-34e3ecd50876</xr:TypeId>
+				<xr:ValueId>8a8c5034-5e64-53f7-8493-46fbcf5cd87f</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="CatalogList.Assets" category="List">
+				<xr:TypeId>b94b16e0-5daf-5c85-ae50-a88ba478c588</xr:TypeId>
+				<xr:ValueId>3ed28950-ab81-5efd-a876-53f76e35dee9</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="CatalogManager.Assets" category="Manager">
+				<xr:TypeId>2574893a-3091-514d-911d-cfabba276ae2</xr:TypeId>
+				<xr:ValueId>84c476ed-dcec-57e4-b48b-08b83b42d916</xr:ValueId>
+			</xr:GeneratedType>
+		</InternalInfo>
+		<Properties>
+			<Name>Assets</Name>
+			<Synonym>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Материальные ценности</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Материальные ценности</v8:content>
+				</v8:item>
+			</Synonym>
+			<CodeLength>20</CodeLength>
+			<DescriptionLength>150</DescriptionLength>
+			<CodeType>String</CodeType>
+			<CodeAllowedLength>Variable</CodeAllowedLength>
+			<CheckUnique>true</CheckUnique>
+			<Autonumbering>true</Autonumbering>
+			<UseStandardCommands>true</UseStandardCommands>
+		</Properties>
+		<ChildObjects>
+			<Attribute uuid="47c68c9c-3532-54b6-b643-d944e151ce24">
+				<Properties>
+					<Name>Unit</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Единица измерения</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Единица измерения</v8:content>
+						</v8:item>
+					</Synonym>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>150</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Properties>
+			</Attribute>
+		</ChildObjects>
+	</Catalog>
+</MetaDataObject>

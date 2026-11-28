@@ -1,0 +1,14 @@
+{% extends "base.html" %}{% load static %}
+{% block crumb %}Отчёты 1С{% endblock %}
+{% block content %}
+<h1>Отчёты проходной</h1>
+<p>ООО «ЧРЗ» · Период до 31 дня, не более 1000 строк. Остатки ценностей рассчитываются на конец выбранного периода.</p>
+<form method="get" class="card no-print">{{ form.as_p }}<button class="button">Сформировать</button></form>
+{% if report %}
+<section class="card"><h2>{{ report.title }}</h2><p>Период: {{ form.cleaned_data.start|date:'d.m.Y' }} — {{ form.cleaned_data.end|date:'d.m.Y' }} (UTC). Строк: {{ report.rows|length }}.</p>
+<p class="no-print"><a href="?{{ query }}&amp;format=csv">Скачать CSV</a> · <button type="button" id="print-report">Печать</button></p></section>
+<div class="table-wrap"><table><thead><tr>{% for column in report.columns %}<th>{{ column }}</th>{% endfor %}</tr></thead>
+<tbody>{% for row in report.display_rows %}<tr>{% for label,cell in row %}<td data-label="{{ label }}">{{ cell }}</td>{% endfor %}</tr>{% empty %}<tr><td colspan="10">За выбранный период данных нет.</td></tr>{% endfor %}</tbody></table></div>
+<p>Подворный Виталий Олегович · 70204645</p>
+<script defer src="{% static 'portal/assignment-print.js' %}"></script>
+{% endif %}{% endblock %}

@@ -1,0 +1,157 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ns0:GraphicalSchema xmlns:ns0="http://v8.1c.ru/8.3/xcf/scheme" xmlns:v8="http://v8.1c.ru/8.1/data/core" version="2.20" xmlns:style="http://v8.1c.ru/8.1/data/ui/style">
+	<ns0:GridEnabled>true</ns0:GridEnabled>
+	<ns0:GridHorizontalStep>20</ns0:GridHorizontalStep>
+	<ns0:GridVerticalStep>20</ns0:GridVerticalStep>
+	<ns0:Items>
+		<ns0:Start id="1" uuid="977ed378-3c4f-5450-87b5-9922a0c2d874">
+			<ns0:Properties>
+				<ns0:Name>Start</ns0:Name>
+				<ns0:Title>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Начало</v8:content>
+					</v8:item>
+				</ns0:Title>
+				<ns0:TabOrder>1</ns0:TabOrder>
+				<ns0:BackColor>auto</ns0:BackColor>
+				<ns0:TextColor>style:FormTextColor</ns0:TextColor>
+				<ns0:LineColor>style:BorderColor</ns0:LineColor>
+				<ns0:HorizontalAlign>Center</ns0:HorizontalAlign>
+				<ns0:VerticalAlign>Center</ns0:VerticalAlign>
+				<ns0:Location top="20" left="100" bottom="80" right="300" />
+			</ns0:Properties>
+		</ns0:Start>
+		<ns0:Activity id="2" uuid="52480a21-2392-5ef7-9bcf-e40239ee4b21">
+			<ns0:Properties>
+				<ns0:Name>Approve</ns0:Name>
+				<ns0:Title>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Согласовать заявку</v8:content>
+					</v8:item>
+				</ns0:Title>
+				<ns0:TabOrder>2</ns0:TabOrder>
+				<ns0:BackColor>auto</ns0:BackColor>
+				<ns0:TextColor>style:FormTextColor</ns0:TextColor>
+				<ns0:LineColor>style:BorderColor</ns0:LineColor>
+				<ns0:HorizontalAlign>Center</ns0:HorizontalAlign>
+				<ns0:VerticalAlign>Center</ns0:VerticalAlign>
+				<ns0:Location top="120" left="100" bottom="180" right="300" />
+				<ns0:TaskDescription>Согласовать заявку</ns0:TaskDescription>
+				<ns0:Group>false</ns0:Group>
+				<ns0:AddressingAttributes />
+			</ns0:Properties>
+			<ns0:Events>
+				<ns0:Event name="OnCreateTask">ApproveCreate</ns0:Event>
+				<ns0:Event name="OnExecute">ApproveExecute</ns0:Event>
+			</ns0:Events>
+		</ns0:Activity>
+		<ns0:Activity id="3" uuid="c3f5242e-c2bc-52e6-982f-379ba78d791b">
+			<ns0:Properties>
+				<ns0:Name>Issue</ns0:Name>
+				<ns0:Title>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Выдать пропуск</v8:content>
+					</v8:item>
+				</ns0:Title>
+				<ns0:TabOrder>3</ns0:TabOrder>
+				<ns0:BackColor>auto</ns0:BackColor>
+				<ns0:TextColor>style:FormTextColor</ns0:TextColor>
+				<ns0:LineColor>style:BorderColor</ns0:LineColor>
+				<ns0:HorizontalAlign>Center</ns0:HorizontalAlign>
+				<ns0:VerticalAlign>Center</ns0:VerticalAlign>
+				<ns0:Location top="220" left="100" bottom="280" right="300" />
+				<ns0:TaskDescription>Выдать пропуск</ns0:TaskDescription>
+				<ns0:Group>false</ns0:Group>
+				<ns0:AddressingAttributes />
+			</ns0:Properties>
+			<ns0:Events>
+				<ns0:Event name="OnCreateTask">IssueCreate</ns0:Event>
+				<ns0:Event name="OnExecute">IssueExecute</ns0:Event>
+			</ns0:Events>
+		</ns0:Activity>
+		<ns0:Completion id="4" uuid="ebddd1f2-edc9-5c32-b82a-e769c48d098f">
+			<ns0:Properties>
+				<ns0:Name>Finish</ns0:Name>
+				<ns0:Title>
+					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Завершение</v8:content>
+					</v8:item>
+				</ns0:Title>
+				<ns0:TabOrder>4</ns0:TabOrder>
+				<ns0:BackColor>auto</ns0:BackColor>
+				<ns0:TextColor>style:FormTextColor</ns0:TextColor>
+				<ns0:LineColor>style:BorderColor</ns0:LineColor>
+				<ns0:HorizontalAlign>Center</ns0:HorizontalAlign>
+				<ns0:VerticalAlign>Center</ns0:VerticalAlign>
+				<ns0:Location top="320" left="100" bottom="380" right="300" />
+			</ns0:Properties>
+		</ns0:Completion>
+		<ns0:ConnectionLine id="10">
+			<ns0:Properties>
+				<ns0:Name>Line1</ns0:Name>
+				<ns0:PivotPoints>
+					<ns0:Point x="200" y="80" />
+					<ns0:Point x="200" y="120" />
+				</ns0:PivotPoints>
+				<ns0:Connect>
+					<ns0:From>
+						<ns0:Item>Start</ns0:Item>
+						<ns0:PortIndex>4</ns0:PortIndex>
+					</ns0:From>
+					<ns0:To>
+						<ns0:Item>Approve</ns0:Item>
+						<ns0:PortIndex>2</ns0:PortIndex>
+					</ns0:To>
+				</ns0:Connect>
+				<ns0:EndArrow>Filled</ns0:EndArrow>
+				<ns0:DecorativeLine>false</ns0:DecorativeLine>
+			</ns0:Properties>
+		</ns0:ConnectionLine>
+		<ns0:ConnectionLine id="11">
+			<ns0:Properties>
+				<ns0:Name>Line2</ns0:Name>
+				<ns0:PivotPoints>
+					<ns0:Point x="200" y="180" />
+					<ns0:Point x="200" y="220" />
+				</ns0:PivotPoints>
+				<ns0:Connect>
+					<ns0:From>
+						<ns0:Item>Approve</ns0:Item>
+						<ns0:PortIndex>4</ns0:PortIndex>
+					</ns0:From>
+					<ns0:To>
+						<ns0:Item>Issue</ns0:Item>
+						<ns0:PortIndex>2</ns0:PortIndex>
+					</ns0:To>
+				</ns0:Connect>
+				<ns0:EndArrow>Filled</ns0:EndArrow>
+				<ns0:DecorativeLine>false</ns0:DecorativeLine>
+			</ns0:Properties>
+		</ns0:ConnectionLine>
+		<ns0:ConnectionLine id="12">
+			<ns0:Properties>
+				<ns0:Name>Line3</ns0:Name>
+				<ns0:PivotPoints>
+					<ns0:Point x="200" y="280" />
+					<ns0:Point x="200" y="320" />
+				</ns0:PivotPoints>
+				<ns0:Connect>
+					<ns0:From>
+						<ns0:Item>Issue</ns0:Item>
+						<ns0:PortIndex>4</ns0:PortIndex>
+					</ns0:From>
+					<ns0:To>
+						<ns0:Item>Finish</ns0:Item>
+						<ns0:PortIndex>2</ns0:PortIndex>
+					</ns0:To>
+				</ns0:Connect>
+				<ns0:EndArrow>Filled</ns0:EndArrow>
+				<ns0:DecorativeLine>false</ns0:DecorativeLine>
+			</ns0:Properties>
+		</ns0:ConnectionLine>
+	</ns0:Items>
+</ns0:GraphicalSchema>

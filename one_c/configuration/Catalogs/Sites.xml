@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='utf-8'?>
+<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" version="2.20" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<Catalog uuid="ccc5d824-6b02-5e91-90d9-024ae3425cdc">
+		<InternalInfo>
+			<xr:GeneratedType name="CatalogObject.Sites" category="Object">
+				<xr:TypeId>b7a929ae-865d-58ef-919c-70448f7c553a</xr:TypeId>
+				<xr:ValueId>ba099c40-bff3-563b-91b7-455c198ac609</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="CatalogRef.Sites" category="Ref">
+				<xr:TypeId>9d84541c-a208-5aac-b3a9-24ecdab8de03</xr:TypeId>
+				<xr:ValueId>c67224cb-fe8c-5814-b4ce-1be687058f3c</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="CatalogSelection.Sites" category="Selection">
+				<xr:TypeId>fc153243-1b39-5f10-96d6-b2a548ce5a4a</xr:TypeId>
+				<xr:ValueId>7dfdbe90-5a62-5dd9-a9e8-71aeafcf107f</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="CatalogList.Sites" category="List">
+				<xr:TypeId>fc488457-f997-59bf-b891-dda6f0e1defd</xr:TypeId>
+				<xr:ValueId>06d42124-2c52-5c18-9a13-a448081fcddc</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="CatalogManager.Sites" category="Manager">
+				<xr:TypeId>6103c949-b563-585c-b04a-b0fa73b7d946</xr:TypeId>
+				<xr:ValueId>edc88306-0b8c-55ae-91bc-826fd1f2f510</xr:ValueId>
+			</xr:GeneratedType>
+		</InternalInfo>
+		<Properties>
+			<Name>Sites</Name>
+			<Synonym>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Площадки предприятия</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Площадки предприятия</v8:content>
+				</v8:item>
+			</Synonym>
+			<CodeLength>20</CodeLength>
+			<DescriptionLength>150</DescriptionLength>
+			<CodeType>String</CodeType>
+			<CodeAllowedLength>Variable</CodeAllowedLength>
+			<CheckUnique>true</CheckUnique>
+			<Autonumbering>true</Autonumbering>
+			<UseStandardCommands>true</UseStandardCommands>
+			<Hierarchical>true</Hierarchical>
+			<HierarchyType>HierarchyFoldersAndItems</HierarchyType>
+		</Properties>
+		<ChildObjects />
+	</Catalog>
+</MetaDataObject>

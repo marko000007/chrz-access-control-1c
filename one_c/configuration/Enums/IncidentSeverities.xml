@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='utf-8'?>
+<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" version="2.20" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<Enum uuid="be2f5d94-9104-54b3-964f-38fa3f969ff7">
+		<InternalInfo>
+			<xr:GeneratedType name="EnumRef.IncidentSeverities" category="Ref">
+				<xr:TypeId>44620996-d533-5944-b473-e7d6d48d8a53</xr:TypeId>
+				<xr:ValueId>a79f7e37-2e22-5f26-a36b-e1a260238729</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="EnumManager.IncidentSeverities" category="Manager">
+				<xr:TypeId>c0028df5-e94c-5711-befd-6f828fbeaeed</xr:TypeId>
+				<xr:ValueId>3935ac14-09ce-5ec2-aae2-5a6b34ffc0d2</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="EnumList.IncidentSeverities" category="List">
+				<xr:TypeId>b93f209e-3022-52cd-863b-bc13a0ed640a</xr:TypeId>
+				<xr:ValueId>c27fc7d4-6d36-5bf5-8b31-12822508409b</xr:ValueId>
+			</xr:GeneratedType>
+		</InternalInfo>
+		<Properties>
+			<Name>IncidentSeverities</Name>
+			<Synonym>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Тяжесть нарушения</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Тяжесть нарушения</v8:content>
+				</v8:item>
+			</Synonym>
+		</Properties>
+		<ChildObjects>
+			<EnumValue uuid="3516c804-302a-56e6-af11-f86b9fbe6c0d">
+				<Properties>
+					<Name>Low</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Незначительное</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Незначительное</v8:content>
+						</v8:item>
+					</Synonym>
+				</Properties>
+			</EnumValue>
+			<EnumValue uuid="cda31c4d-4658-59af-a23d-d4eed833ed24">
+				<Properties>
+					<Name>Medium</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Значительное</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Значительное</v8:content>
+						</v8:item>
+					</Synonym>
+				</Properties>
+			</EnumValue>
+			<EnumValue uuid="9639ac80-877b-5652-aa7f-4fd08824b5c8">
+				<Properties>
+					<Name>Critical</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Критическое</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Критическое</v8:content>
+						</v8:item>
+					</Synonym>
+				</Properties>
+			</EnumValue>
+		</ChildObjects>
+	</Enum>
+</MetaDataObject>

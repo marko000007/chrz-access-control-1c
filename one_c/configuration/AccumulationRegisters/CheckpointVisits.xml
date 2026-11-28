@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='utf-8'?>
+<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" version="2.20" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<AccumulationRegister uuid="b7c1bedc-03c8-5766-b3a8-a1242b5d29ac">
+		<InternalInfo>
+			<xr:GeneratedType name="AccumulationRegisterRecord.CheckpointVisits" category="Record">
+				<xr:TypeId>8c591442-58d8-574d-8679-0fb2f58a5b9d</xr:TypeId>
+				<xr:ValueId>f0244426-936e-58a3-b778-972f8d3d691a</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="AccumulationRegisterManager.CheckpointVisits" category="Manager">
+				<xr:TypeId>8ba04d94-31b3-5fc9-a12f-e14c0753cf8c</xr:TypeId>
+				<xr:ValueId>7ebd2fc2-6765-5122-b7f6-730691dd0b93</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="AccumulationRegisterSelection.CheckpointVisits" category="Selection">
+				<xr:TypeId>c879d5ba-fcfe-5203-805a-693ff88cdc34</xr:TypeId>
+				<xr:ValueId>23b1bea5-cc7f-585a-9116-2c62745dc173</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="AccumulationRegisterList.CheckpointVisits" category="List">
+				<xr:TypeId>9a1b76ae-68b4-5177-a2bf-edf2a7bba716</xr:TypeId>
+				<xr:ValueId>9b185881-5268-50f5-bf8a-a5f91327f2e0</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="AccumulationRegisterRecordSet.CheckpointVisits" category="RecordSet">
+				<xr:TypeId>1cddea3a-b186-57a0-8db9-621764544c88</xr:TypeId>
+				<xr:ValueId>d8d0af73-6db8-5720-8f3c-0a001fb348bc</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="AccumulationRegisterRecordKey.CheckpointVisits" category="RecordKey">
+				<xr:TypeId>af31111b-304b-578e-bd2b-779a7d802db4</xr:TypeId>
+				<xr:ValueId>fdb07e33-6bbe-54f6-b6b3-b3b4a6b2bd52</xr:ValueId>
+			</xr:GeneratedType>
+		</InternalInfo>
+		<Properties>
+			<Name>CheckpointVisits</Name>
+			<Synonym>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Посетители на территории</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Посетители на территории</v8:content>
+				</v8:item>
+			</Synonym>
+			<UseStandardCommands>true</UseStandardCommands>
+			<DataLockControlMode>Managed</DataLockControlMode>
+			<RegisterType>Balance</RegisterType>
+		</Properties>
+		<ChildObjects>
+			<Resource uuid="a398be63-4102-5c29-96bd-165a3b904447">
+				<Properties>
+					<Name>Quantity</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Количество</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Количество</v8:content>
+						</v8:item>
+					</Synonym>
+					<Type>
+						<v8:Type>xs:decimal</v8:Type>
+						<v8:NumberQualifiers>
+							<v8:Digits>15</v8:Digits>
+							<v8:FractionDigits>3</v8:FractionDigits>
+							<v8:AllowedSign>Any</v8:AllowedSign>
+						</v8:NumberQualifiers>
+					</Type>
+				</Properties>
+			</Resource>
+			<Dimension uuid="b9926bb7-5056-57cc-b37b-a11c42e32f05">
+				<Properties>
+					<Name>Visitor</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Посетитель</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Посетитель</v8:content>
+						</v8:item>
+					</Synonym>
+					<Type>
+						<v8:Type>cfg:CatalogRef.Visitors</v8:Type>
+					</Type>
+					<Indexing>Index</Indexing>
+				</Properties>
+			</Dimension>
+			<Dimension uuid="7ddf78c7-6dd2-5fc9-9c78-f5d0ec7a19c8">
+				<Properties>
+					<Name>Checkpoint</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Точка прохода</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Точка прохода</v8:content>
+						</v8:item>
+					</Synonym>
+					<Type>
+						<v8:Type>cfg:CatalogRef.Checkpoints</v8:Type>
+					</Type>
+					<Indexing>Index</Indexing>
+				</Properties>
+			</Dimension>
+		</ChildObjects>
+	</AccumulationRegister>
+</MetaDataObject>

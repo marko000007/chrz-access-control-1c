@@ -71,7 +71,8 @@ class ERPClient:
         if not isinstance(method,str) or method not in allowed or not isinstance(path,str):
             raise ValueError('Недопустимый маршрут интеграции.')
         dynamic=method=='GET' and (re.fullmatch(r'/(?:requests|passes)/[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}',path)
-            or re.fullmatch(r'/reports/movements/[0-9]{8}/[0-9]{8}',path))
+            or re.fullmatch(r'/reports/movements/[0-9]{8}/[0-9]{8}',path)
+            or re.fullmatch(r'/reports/assignment/(?:VisitJournal|ActivePasses|RequestDecisions|AssetBalance|IncidentSummary)/[0-9]{8}/[0-9]{8}',path))
         if path not in allowed[method] and not dynamic:raise ValueError('Недопустимый маршрут интеграции.')
         if (method=='GET' and payload is not None) or (method=='POST' and not isinstance(payload,dict)):
             raise ValueError('Недопустимое тело запроса.')
@@ -308,6 +309,23 @@ class ERPClient:
         except (KeyError,TypeError,ValueError,AttributeError,OverflowError):
             raise ERPUnavailable("Некорректный период или итоги отчёта 1С.") from None
         return {**checked,"items":items,"count_in":data["count_in"],"count_out":data["count_out"]}
+
+    def assignment_report(self, actor, name, start, end):
+        from .assignment_reports import REPORTS
+        if name not in REPORTS or not 0 <= (end-start).days < 31:
+            raise ValueError('Недопустимый отчёт или период.')
+        data = self.request('GET', f'/reports/assignment/{name}/{start:%Y%m%d}/{end:%Y%m%d}', actor)
+        if (not isinstance(data, dict) or data.get('name') != name
+                or not isinstance(data.get('title'), str) or not 1 <= len(data['title']) <= 150):
+            raise ERPUnavailable('Некорректное описание отчёта 1С.')
+        columns, rows = data.get('columns'), data.get('rows')
+        if (not isinstance(columns, list) or not 1 <= len(columns) <= 10
+                or not all(isinstance(c, str) and 1 <= len(c) <= 80 for c in columns)
+                or not isinstance(rows, list) or len(rows) > 1000
+                or any(not isinstance(row, list) or len(row) != len(columns)
+                       or any(not isinstance(cell, str) or len(cell) > 1000 for cell in row) for row in rows)):
+            raise ERPUnavailable('Некорректная таблица отчёта 1С.')
+        return data
 
     def presence_report(self, actor):
         data=self.request('GET','/reports/presence',actor)

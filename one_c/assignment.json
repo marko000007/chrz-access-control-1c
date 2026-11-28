@@ -1,0 +1,285 @@
+{
+  "enums": [
+    {
+      "name": "PassKinds",
+      "title": "Виды пропусков",
+      "values": [
+        [
+          "Visitor",
+          "Разовый посетитель"
+        ],
+        [
+          "Contractor",
+          "Подрядчик"
+        ],
+        [
+          "Employee",
+          "Сотрудник"
+        ]
+      ]
+    },
+    {
+      "name": "IncidentSeverities",
+      "title": "Тяжесть нарушения",
+      "values": [
+        [
+          "Low",
+          "Незначительное"
+        ],
+        [
+          "Medium",
+          "Значительное"
+        ],
+        [
+          "Critical",
+          "Критическое"
+        ]
+      ]
+    },
+    {
+      "name": "AssetDirections",
+      "title": "Направление перемещения",
+      "values": [
+        [
+          "Receipt",
+          "Внос"
+        ],
+        [
+          "Expense",
+          "Вынос"
+        ]
+      ]
+    }
+  ],
+  "constants": [
+    {
+      "name": "OrganizationName",
+      "title": "Организация",
+      "type": "string"
+    },
+    {
+      "name": "DefaultPassHours",
+      "title": "Срок разового пропуска в часах",
+      "type": "decimal"
+    }
+  ],
+  "accumulation_registers": [
+    {
+      "name": "PassCustody",
+      "title": "Пропуска на руках",
+      "dimensions": [
+        [
+          "Pass",
+          "Пропуск",
+          "CatalogRef.Passes"
+        ]
+      ],
+      "resources": [
+        [
+          "Quantity",
+          "Количество",
+          "decimal"
+        ]
+      ]
+    },
+    {
+      "name": "AssetStock",
+      "title": "Ценности на территории",
+      "dimensions": [
+        [
+          "Asset",
+          "Ценность",
+          "CatalogRef.Assets"
+        ],
+        [
+          "Checkpoint",
+          "Точка прохода",
+          "CatalogRef.Checkpoints"
+        ]
+      ],
+      "resources": [
+        [
+          "Quantity",
+          "Количество",
+          "decimal"
+        ]
+      ]
+    },
+    {
+      "name": "CheckpointVisits",
+      "title": "Посетители на территории",
+      "dimensions": [
+        [
+          "Visitor",
+          "Посетитель",
+          "CatalogRef.Visitors"
+        ],
+        [
+          "Checkpoint",
+          "Точка прохода",
+          "CatalogRef.Checkpoints"
+        ]
+      ],
+      "resources": [
+        [
+          "Quantity",
+          "Количество",
+          "decimal"
+        ]
+      ]
+    }
+  ],
+  "information_registers": [
+    {
+      "name": "VehicleAccess",
+      "title": "Допуски транспорта",
+      "dimensions": [
+        [
+          "Vehicle",
+          "Транспорт",
+          "CatalogRef.Vehicles"
+        ],
+        [
+          "Checkpoint",
+          "Точка прохода",
+          "CatalogRef.Checkpoints"
+        ]
+      ],
+      "resources": [
+        [
+          "ValidUntil",
+          "Действует до",
+          "dateTime"
+        ]
+      ]
+    }
+  ],
+  "reports": [
+    {
+      "name": "VisitJournal",
+      "title": "Журнал посещений"
+    },
+    {
+      "name": "ActivePasses",
+      "title": "Действующие пропуска"
+    },
+    {
+      "name": "RequestDecisions",
+      "title": "Решения по заявкам"
+    },
+    {
+      "name": "AssetBalance",
+      "title": "Остатки материальных ценностей"
+    },
+    {
+      "name": "IncidentSummary",
+      "title": "Нарушения за период"
+    }
+  ],
+  "data_processors": [
+    {
+      "name": "AssignmentDemo",
+      "title": "Подготовка учебной базы"
+    }
+  ],
+  "roles": [
+    {
+      "name": "Administrator",
+      "title": "Администратор",
+      "write_documents": []
+    },
+    {
+      "name": "Requester",
+      "title": "Заявитель",
+      "write_documents": [
+        "Requests"
+      ]
+    },
+    {
+      "name": "Approver",
+      "title": "Согласующий",
+      "write_documents": [
+        "Requests"
+      ]
+    },
+    {
+      "name": "Guard",
+      "title": "Сотрудник проходной",
+      "write_documents": [
+        "GateEvents",
+        "PassIssues",
+        "PassReturns",
+        "PassRevocations",
+        "VehiclePermits",
+        "AssetReceipts",
+        "AssetExpenses",
+        "SecurityIncidents",
+        "ShiftTransfers"
+      ]
+    }
+  ],
+  "subsystems": [
+    {
+      "name": "Directories",
+      "title": "Справочники",
+      "content": [
+        "Catalog.Departments",
+        "Catalog.Employees",
+        "Catalog.Visitors",
+        "Catalog.Checkpoints",
+        "Catalog.VisitPurposes",
+        "Catalog.PortalUsers",
+        "Catalog.CommandJournal",
+        "Catalog.Passes",
+        "Catalog.Sites",
+        "Catalog.AccessZones",
+        "Catalog.Positions",
+        "Catalog.Contractors",
+        "Catalog.Vehicles",
+        "Catalog.Assets",
+        "Catalog.IncidentTypes"
+      ]
+    },
+    {
+      "name": "VisitorAccess",
+      "title": "Пропуска и посетители",
+      "content": [
+        "Document.Requests",
+        "Document.PassIssues",
+        "Document.PassReturns",
+        "Document.PassRevocations",
+        "Document.VehiclePermits",
+        "Catalog.Passes",
+        "AccumulationRegister.PassCustody"
+      ]
+    },
+    {
+      "name": "GateControl",
+      "title": "Проходная",
+      "content": [
+        "Document.GateEvents",
+        "Document.AssetReceipts",
+        "Document.AssetExpenses",
+        "Document.SecurityIncidents",
+        "Document.ShiftTransfers",
+        "AccumulationRegister.AssetStock",
+        "AccumulationRegister.CheckpointVisits",
+        "InformationRegister.VehicleAccess"
+      ]
+    },
+    {
+      "name": "Analytics",
+      "title": "Отчёты и администрирование",
+      "content": [
+        "Report.VisitJournal",
+        "Report.ActivePasses",
+        "Report.RequestDecisions",
+        "Report.AssetBalance",
+        "Report.IncidentSummary",
+        "DataProcessor.AssignmentDemo",
+        "Constant.OrganizationName",
+        "Constant.DefaultPassHours"
+      ]
+    }
+  ]
+}

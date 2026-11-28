@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='utf-8'?>
+<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.20">
+	<Subsystem uuid="42521d59-55c9-5208-996b-22c341297349">
+		<Properties>
+			<Name>GateControl</Name>
+			<Synonym>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Проходная</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Проходная</v8:content>
+				</v8:item>
+			</Synonym>
+			<IncludeInCommandInterface>true</IncludeInCommandInterface>
+			<UseOneCommand>false</UseOneCommand>
+			<Content>
+				<xr:Item xsi:type="xr:MDObjectRef">Document.GateEvents</xr:Item>
+				<xr:Item xsi:type="xr:MDObjectRef">Document.AssetReceipts</xr:Item>
+				<xr:Item xsi:type="xr:MDObjectRef">Document.AssetExpenses</xr:Item>
+				<xr:Item xsi:type="xr:MDObjectRef">Document.SecurityIncidents</xr:Item>
+				<xr:Item xsi:type="xr:MDObjectRef">Document.ShiftTransfers</xr:Item>
+				<xr:Item xsi:type="xr:MDObjectRef">AccumulationRegister.AssetStock</xr:Item>
+				<xr:Item xsi:type="xr:MDObjectRef">AccumulationRegister.CheckpointVisits</xr:Item>
+				<xr:Item xsi:type="xr:MDObjectRef">InformationRegister.VehicleAccess</xr:Item>
+				<xr:Item xsi:type="xr:MDObjectRef">BusinessProcess.IncidentHandling</xr:Item>
+			</Content>
+		</Properties>
+		<ChildObjects />
+	</Subsystem>
+</MetaDataObject>

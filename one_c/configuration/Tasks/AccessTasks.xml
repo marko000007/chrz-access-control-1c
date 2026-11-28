@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='utf-8'?>
+<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" version="2.20" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<Task uuid="c9857f95-09c5-5048-bca5-fc5abe965ae8">
+		<InternalInfo>
+			<xr:GeneratedType name="TaskObject.AccessTasks" category="Object">
+				<xr:TypeId>4265f638-c519-5078-834b-e563ca4a5f6a</xr:TypeId>
+				<xr:ValueId>5df5b1e4-fcc1-5680-b231-29ec50b4c113</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="TaskRef.AccessTasks" category="Ref">
+				<xr:TypeId>831cebe8-1fa9-566a-9fe9-a231921f4a7a</xr:TypeId>
+				<xr:ValueId>81b34c0b-3cbd-5a5d-b702-c3cae4caf533</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="TaskSelection.AccessTasks" category="Selection">
+				<xr:TypeId>6c5e5422-3d4d-5740-a51c-416daf739cc5</xr:TypeId>
+				<xr:ValueId>4f82b14f-2064-549e-9746-b306d557b23d</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="TaskList.AccessTasks" category="List">
+				<xr:TypeId>9ea9307e-df36-5287-8e9f-136a45997491</xr:TypeId>
+				<xr:ValueId>7f25e910-bf61-55a7-981d-7d6086796baf</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="TaskManager.AccessTasks" category="Manager">
+				<xr:TypeId>477c52f8-9dc0-5728-80a0-be5be60fdc7f</xr:TypeId>
+				<xr:ValueId>da8c9488-419a-5b5d-ad07-82c85ccfebb6</xr:ValueId>
+			</xr:GeneratedType>
+		</InternalInfo>
+		<Properties>
+			<Name>AccessTasks</Name>
+			<Synonym>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Задачи проходной</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Задачи проходной</v8:content>
+				</v8:item>
+			</Synonym>
+			<UseStandardCommands>true</UseStandardCommands>
+			<NumberType>String</NumberType>
+			<NumberLength>11</NumberLength>
+			<Autonumbering>true</Autonumbering>
+			<DescriptionLength>150</DescriptionLength>
+		</Properties>
+		<ChildObjects>
+			<Attribute uuid="84d162a8-a292-5b2b-bc84-bc4096f5da73">
+				<Properties>
+					<Name>ActorLogin</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Исполнитель</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Исполнитель</v8:content>
+						</v8:item>
+					</Synonym>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>150</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Properties>
+			</Attribute>
+			<Attribute uuid="efe12a9f-161f-517f-bc59-3128f9ab0070">
+				<Properties>
+					<Name>RequiredRole</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Требуемая роль</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Требуемая роль</v8:content>
+						</v8:item>
+					</Synonym>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>150</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Properties>
+			</Attribute>
+		</ChildObjects>
+	</Task>
+</MetaDataObject>

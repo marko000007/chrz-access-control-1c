@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='utf-8'?>
+<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" version="2.20" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<AccumulationRegister uuid="c23e9be3-45a4-535b-bbd9-0c3629fbd080">
+		<InternalInfo>
+			<xr:GeneratedType name="AccumulationRegisterRecord.AssetStock" category="Record">
+				<xr:TypeId>6fbd97bf-aad4-529d-a3f9-95c25ddc6e50</xr:TypeId>
+				<xr:ValueId>75a5fabc-91e6-5e18-b1e4-504b02ac7161</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="AccumulationRegisterManager.AssetStock" category="Manager">
+				<xr:TypeId>8d69ecbe-f6c1-5ac3-9d52-9e9a9c2156e5</xr:TypeId>
+				<xr:ValueId>7e86d712-db9b-59b0-a439-9c46896580cb</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="AccumulationRegisterSelection.AssetStock" category="Selection">
+				<xr:TypeId>d3ae0360-e172-5b00-bf51-6bf0760bf7ad</xr:TypeId>
+				<xr:ValueId>e84c0b14-ec57-5c14-ab4d-040950ce84a8</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="AccumulationRegisterList.AssetStock" category="List">
+				<xr:TypeId>d852081f-babd-529d-a87b-98a48b863d0e</xr:TypeId>
+				<xr:ValueId>3c800921-8617-50ba-9d57-3fe284928c34</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="AccumulationRegisterRecordSet.AssetStock" category="RecordSet">
+				<xr:TypeId>f8f6feac-686c-5269-97a7-76d7e2eac69c</xr:TypeId>
+				<xr:ValueId>9f3aa74f-c942-559e-a8ad-fc53d7d44f11</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="AccumulationRegisterRecordKey.AssetStock" category="RecordKey">
+				<xr:TypeId>fd7301b9-400c-5f01-8494-f8396033bc14</xr:TypeId>
+				<xr:ValueId>ce1d2d34-6780-558d-b997-071a279f2402</xr:ValueId>
+			</xr:GeneratedType>
+		</InternalInfo>
+		<Properties>
+			<Name>AssetStock</Name>
+			<Synonym>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Ценности на территории</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Ценности на территории</v8:content>
+				</v8:item>
+			</Synonym>
+			<UseStandardCommands>true</UseStandardCommands>
+			<DataLockControlMode>Managed</DataLockControlMode>
+			<RegisterType>Balance</RegisterType>
+		</Properties>
+		<ChildObjects>
+			<Resource uuid="e291fa67-faed-51a5-a6dd-3383777cc4a1">
+				<Properties>
+					<Name>Quantity</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Количество</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Количество</v8:content>
+						</v8:item>
+					</Synonym>
+					<Type>
+						<v8:Type>xs:decimal</v8:Type>
+						<v8:NumberQualifiers>
+							<v8:Digits>15</v8:Digits>
+							<v8:FractionDigits>3</v8:FractionDigits>
+							<v8:AllowedSign>Any</v8:AllowedSign>
+						</v8:NumberQualifiers>
+					</Type>
+				</Properties>
+			</Resource>
+			<Dimension uuid="5195f7cd-56d2-5474-a4ec-2c27aa183e93">
+				<Properties>
+					<Name>Asset</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Ценность</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Ценность</v8:content>
+						</v8:item>
+					</Synonym>
+					<Type>
+						<v8:Type>cfg:CatalogRef.Assets</v8:Type>
+					</Type>
+					<Indexing>Index</Indexing>
+				</Properties>
+			</Dimension>
+			<Dimension uuid="b10f982a-3ef5-597b-b856-94d5f5bc2a6f">
+				<Properties>
+					<Name>Checkpoint</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Точка прохода</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Точка прохода</v8:content>
+						</v8:item>
+					</Synonym>
+					<Type>
+						<v8:Type>cfg:CatalogRef.Checkpoints</v8:Type>
+					</Type>
+					<Indexing>Index</Indexing>
+				</Properties>
+			</Dimension>
+		</ChildObjects>
+	</AccumulationRegister>
+</MetaDataObject>

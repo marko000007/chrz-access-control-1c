@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='utf-8'?>
+<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" version="2.20" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<Report uuid="74fc4d0d-3d3a-5f8a-8a66-3422e4a38cf4">
+		<InternalInfo>
+			<xr:GeneratedType name="ReportObject.AssetBalance" category="Object">
+				<xr:TypeId>e59200a6-bb3c-5775-87bc-ef4a4bb2feed</xr:TypeId>
+				<xr:ValueId>e610f411-0503-5030-8ef3-eeea9fd427a0</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="ReportManager.AssetBalance" category="Manager">
+				<xr:TypeId>c30a08eb-c68b-5779-8885-96e5aa2cdb69</xr:TypeId>
+				<xr:ValueId>de0e6a54-b58d-5fb9-8608-d9aaf535a17c</xr:ValueId>
+			</xr:GeneratedType>
+		</InternalInfo>
+		<Properties>
+			<Name>AssetBalance</Name>
+			<Synonym>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Остатки материальных ценностей</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Остатки материальных ценностей</v8:content>
+				</v8:item>
+			</Synonym>
+			<UseStandardCommands>true</UseStandardCommands>
+			<DefaultForm>Report.AssetBalance.Form.Main</DefaultForm>
+		</Properties>
+		<ChildObjects>
+			<Form>Main</Form>
+		</ChildObjects>
+	</Report>
+</MetaDataObject>

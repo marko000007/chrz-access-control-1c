@@ -141,7 +141,8 @@ def create_server(runtime, username, password, port=0):
                     self.reply(401, {"error":"Доступ закрыт."}); return
                 parsed = urlsplit(self.path)
                 detail = self.command == "GET" and re.fullmatch(r"/(?:requests|passes)/[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}", parsed.path)
-                report = self.command == "GET" and re.fullmatch(r"/reports/movements/[0-9]{8}/[0-9]{8}", parsed.path)
+                report = self.command == "GET" and (re.fullmatch(r"/reports/movements/[0-9]{8}/[0-9]{8}", parsed.path)
+                    or re.fullmatch(r"/reports/assignment/(?:VisitJournal|ActivePasses|RequestDecisions|AssetBalance|IncidentSummary)/[0-9]{8}/[0-9]{8}", parsed.path))
                 if parsed.query or parsed.fragment or (parsed.path not in ROUTES.get(self.command, set()) and not detail and not report):
                     self.reply(404, {"error":"Маршрут не найден."}); return
                 actor = base64.b64decode(self.headers.get("X-Portal-Actor", ""), validate=True).decode("utf-8")
