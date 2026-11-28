@@ -192,7 +192,13 @@ class ERPClient:
                 value[field]=datetime.fromisoformat(value[field])
                 if value[field].tzinfo is None:raise ValueError
             if value["ends_at"]<=value["starts_at"]:raise ValueError
-            if (value["status"]=="submitted") != (value["decision_at"] is None):raise ValueError
+            if (value['status']=='submitted') != (value['decision_at'] is None):raise ValueError
+            if value['status']=='submitted':
+                if value['decision_by'] or value['decision_reason']:raise ValueError
+            else:
+                if not value['decision_by'].strip() or value['decision_at']<value['created_at']:raise ValueError
+                if value['status'] in {'rejected','cancelled'} and not value['decision_reason'].strip():raise ValueError
+                if value['status'] in {'approved','rejected'} and value['decision_by']==value['requester_login']:raise ValueError
         except (KeyError,TypeError,ValueError,AttributeError):
             raise ERPUnavailable("Некорректная карточка заявки 1С.") from None
         return value

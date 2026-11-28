@@ -37,3 +37,13 @@ class RequestCardTests(TestCase):
             wire['decision_at']=None
             from portal.integration import ERPUnavailable
             with self.assertRaises(ERPUnavailable):client.request_detail('actor',self.identifier)
+
+    def test_inconsistent_decision_is_not_shown_as_completed(self):
+        from portal.integration import ERPUnavailable
+        wire={key:value.isoformat() if hasattr(value,'isoformat') else value for key,value in self.card.items()}
+        client=ERPClient('http://127.0.0.1:12345','fixture','fixture')
+        for changes in [{'decision_by':''},{'decision_reason':' '},
+            {'decision_at':(self.card['created_at']-timedelta(seconds=1)).isoformat()},
+            {'decision_by':self.user.username}]:
+            with patch.object(client,'request',return_value={'item':{**wire,**changes}}),self.assertRaises(ERPUnavailable):
+                client.request_detail('actor',self.identifier)
