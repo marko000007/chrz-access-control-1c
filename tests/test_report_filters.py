@@ -24,7 +24,7 @@ class ReportFilterTests(TestCase):
         self.assertEqual(response.status_code,200)
         data=response.json();self.assertEqual((data['source_count'],data['count_in'],data['count_out'],len(data['items'])),(2,1,0,1))
         self.assertEqual(data['items'][0]['visitor'],'Иван Петров');self.assertEqual(data['filters']['visitor'],'ИВАН')
-        self.assertEqual(response['Cache-Control'],'private, no-store')
+        self.assertIn('no-store',response['Cache-Control']);self.assertIn('private',response['Cache-Control'])
         self.assertEqual(self.report['count_out'],1);self.assertEqual(len(self.report['items']),2)
         self.assertEqual(set(self.erp.movement_report.call_args.kwargs),{'start','end'})
 

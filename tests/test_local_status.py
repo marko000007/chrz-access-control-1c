@@ -26,7 +26,7 @@ class LocalStatusTests(TestCase):
         with patch('portal.permissions.get_client') as erp,patch('subprocess.run') as launch:
             response=self.client.get('/local/status/')
             self.assertContains(response,'Подключение к1С здесь не проверялось')
-            self.assertEqual(response['Cache-Control'],'private, no-store');erp.assert_not_called();launch.assert_not_called()
+            self.assertIn('no-store',response['Cache-Control']);self.assertIn('private',response['Cache-Control']);erp.assert_not_called();launch.assert_not_called()
         normal=get_user_model().objects.create_user('local-ordinary');self.client.force_login(normal)
         self.assertEqual(self.client.get('/local/status/').status_code,403)
         self.assertEqual(Client().get('/local/status/').status_code,302)

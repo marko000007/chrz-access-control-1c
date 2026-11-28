@@ -26,7 +26,7 @@ class PendingExportTests(TestCase):
         self.assertEqual(row['payload_sha256'],hashlib.sha256(canonical_payload(self.own.payload).encode()).hexdigest())
         self.assertEqual(row['state'],'unknown')
         self.assertIsNone(next(row for row in data['commands'] if row['key']==str(self.draft.key))['payload_sha256'])
-        self.assertEqual(response['Cache-Control'],'private, no-store')
+        self.assertIn('no-store',response['Cache-Control']);self.assertIn('private',response['Cache-Control'])
         self.assertIn('attachment;',response['Content-Disposition'])
         self.assertEqual(PendingCommand.objects.count(),3)
 

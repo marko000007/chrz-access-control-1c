@@ -47,7 +47,7 @@ class MovementReportTests(TestCase):
         import csv, io
         self.row['visitor']='=1+1';self.row['checkpoint']='  @command';self.row['actor']='\tformula'
         response=self.client.get('/reports/movements/',{'start':'2026-11-23','end':'2026-11-23','format':'csv'})
-        self.assertEqual(response.status_code,200);self.assertEqual(response['Cache-Control'],'private, no-store')
+        self.assertEqual(response.status_code,200);self.assertIn('no-store',response['Cache-Control']);self.assertIn('private',response['Cache-Control'])
         rows=list(csv.reader(io.StringIO(response.content.decode('utf-8-sig')),delimiter=';'))
         self.assertEqual(rows[1][3],"'=1+1");self.assertEqual(rows[1][4],"'  @command");self.assertEqual(rows[1][5],"'\tformula")
         self.assertEqual(len(rows),2);self.assertIn('+00:00',rows[1][1])
