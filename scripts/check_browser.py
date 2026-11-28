@@ -41,6 +41,10 @@ def check(url, accounts_path, output, allow_gui=False):
             visitor=administrator.locator('article').filter(has=administrator.get_by_role('heading',name='Браузерный вымышленный посетитель',exact=True))
             visitor_id=visitor.locator('.record-id').inner_text().strip()
             assert re.fullmatch(r'[a-f0-9-]{36}',visitor_id);checks.append('browser_native_visitor_created_by_admin')
+            administrator.locator('#id_q').fill(visitor_id)
+            administrator.get_by_role('button',name='Найти посетителя',exact=True).click()
+            assert administrator.locator('article').count()==1
+            checks.append('browser_visitor_id_search');shot(administrator,'visitors-search-desktop.png')
             requester=signed_in('demo.requester')
             requester.goto(url+'/requests/new/')
             requester.locator('#id_visitor_id').select_option(visitor_id)
@@ -76,13 +80,18 @@ def check(url, accounts_path, output, allow_gui=False):
             guard.locator('#id_reason').fill('Вымышленный отзыв браузерной проверки')
             confirm(guard);guard.wait_for_url('**/passes/')
             guard.goto(url+'/reports/presence/')
-            assert 'Внутри: 1' in guard.locator('main').inner_text() and 'Отозванных: 1' in guard.locator('main').inner_text()
+            assert 'В выборке: 1' in guard.locator('main').inner_text() and 'Отозванных: 1' in guard.locator('main').inner_text()
             assert 'Браузерный вымышленный посетитель' in guard.locator('tbody').inner_text()
+            guard.locator('#id_state').select_option('revoked')
+            guard.locator('#id_visitor').fill('Браузерный')
+            guard.get_by_role('button',name='Показать выборку',exact=True).click()
+            assert guard.locator('tbody tr').count()==1
+            checks.append('browser_presence_filters')
             shot(guard,'presence-desktop.png')
             with guard.expect_download() as result:guard.get_by_role('link',name='Скачать снимок CSV',exact=True).click()
             presence_csv=output/'presence-browser.csv';result.value.save_as(presence_csv)
             presence=list(csv.DictReader(io.StringIO(presence_csv.read_text(encoding='utf-8-sig')),delimiter=';'))
-            assert len(presence)==2 and presence[0]['Всего внутри']=='1' and presence[1]['Статус пропуска']=='Отозван'
+            assert len(presence)==2 and presence[0]['Всего в выборке']=='1' and presence[1]['Статус пропуска']=='Отозван'
             checks.append('browser_revoked_inside_presence_and_csv')
             guard.set_viewport_size({'width':390,'height':844})
             assert guard.evaluate('document.documentElement.scrollWidth<=document.documentElement.clientWidth+1')
@@ -91,7 +100,7 @@ def check(url, accounts_path, output, allow_gui=False):
             confirm(guard);guard.wait_for_url('**/passes/')
             assert 'Отозван' in guard.locator('tbody').inner_text() and 'Снаружи' in guard.locator('tbody').inner_text()
             checks.append('browser_revocation_and_exit');shot(guard,'passes-desktop.png')
-            guard.goto(url+'/reports/presence/');assert 'Внутри: 0' in guard.locator('main').inner_text()
+            guard.goto(url+'/reports/presence/');assert 'В выборке: 0' in guard.locator('main').inner_text()
             assert requester.goto(url+'/reports/presence/').status==403
             checks.append('browser_presence_exit_and_role_403')
             guard.goto(url+'/events/')

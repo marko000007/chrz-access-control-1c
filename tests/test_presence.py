@@ -47,7 +47,7 @@ class PresenceViewTests(TestCase):
 
     def test_private_csv_preserves_snapshot_and_empty_summary(self):
         response=self.client.get('/reports/presence/',{'format':'csv'})
-        self.assertEqual(response['Cache-Control'],'private, no-store')
+        self.assertIn('no-store',response['Cache-Control']);self.assertIn('private',response['Cache-Control'])
         rows=list(csv.reader(io.StringIO(response.content.decode('utf-8-sig')),delimiter=';'))
         self.assertEqual((rows[1][0],rows[1][7:10]),('Итоги',['1','1','1']))
         self.assertEqual(rows[2][2],"'=Visitor <img>")
@@ -61,4 +61,16 @@ class PresenceViewTests(TestCase):
         self.erp.presence_report.reset_mock()
         self.erp.actor.return_value['role']='requester'
         self.assertEqual(self.client.get('/reports/presence/').status_code,403)
+        self.erp.presence_report.assert_not_called()
+
+    def test_filters_preserve_complete_source_count_and_csv_selection(self):
+        second={**self.row,'id':str(uuid4()),'visitor':'Other','state':'active','ends_at':self.now+timedelta(hours=1)}
+        self.erp.presence_report.return_value={'items':[self.row,second],'total':2,'expired':1,'revoked':1,'generated_at':self.now}
+        response=self.client.get('/reports/presence/',{'state':'expired','visitor':'VISITOR'})
+        self.assertEqual((response.context['report']['total'],response.context['report']['source_total']),(1,2))
+        response=self.client.get('/reports/presence/',{'state':'revoked','format':'csv'})
+        rows=list(csv.reader(io.StringIO(response.content.decode('utf-8-sig')),delimiter=';'))
+        self.assertEqual(len(rows),3);self.assertEqual(rows[1][11],'2');self.assertEqual(rows[1][-1],'revoked')
+        self.erp.presence_report.reset_mock()
+        self.assertEqual(self.client.get('/reports/presence/',{'state':'unknown'}).status_code,400)
         self.erp.presence_report.assert_not_called()
