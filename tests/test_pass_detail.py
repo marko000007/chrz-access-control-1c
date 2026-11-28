@@ -37,3 +37,13 @@ class PassCardTests(TestCase):
             self.assertEqual(client.pass_detail('actor',self.identifier)['state'],'revoked')
             wire['revoked_at']=None
             with self.assertRaises(ERPUnavailable):client.pass_detail('actor',self.identifier)
+
+    def test_revocation_must_fit_snapshot_and_have_author_and_reason(self):
+        client=ERPClient('http://127.0.0.1:12345','fixture','fixture')
+        wire={key:value.isoformat() if hasattr(value,'isoformat') else value for key,value in self.card.items()}
+        for changes in [{'revoked_by':''},{'revoke_reason':' '},
+            {'revoked_at':(self.card['issued_at']-timedelta(seconds=1)).isoformat()},
+            {'snapshot_at':(self.card['revoked_at']-timedelta(seconds=1)).isoformat()},
+            {'issued_at':(self.card['snapshot_at']+timedelta(seconds=1)).isoformat()}]:
+            with patch.object(client,'request',return_value={'item':{**wire,**changes}}),self.assertRaises(ERPUnavailable):
+                client.pass_detail('actor',self.identifier)

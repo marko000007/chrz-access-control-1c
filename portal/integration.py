@@ -282,7 +282,13 @@ class ERPClient:
                 if field=="revoked_at" and value[field] is None:continue
                 value[field]=datetime.fromisoformat(value[field])
                 if value[field].tzinfo is None:raise ValueError
-            if (value["state"]=="active") != (value["revoked_at"] is None):raise ValueError
+            if (value['state']=='active') != (value['revoked_at'] is None):raise ValueError
+            if value['issued_at']>value['snapshot_at']:raise ValueError
+            if value['state']=='active':
+                if value['revoked_by'] or value['revoke_reason']:raise ValueError
+            else:
+                if not value['revoked_by'].strip() or not value['revoke_reason'].strip():raise ValueError
+                if not value['issued_at']<=value['revoked_at']<=value['snapshot_at']:raise ValueError
         except (KeyError,TypeError,ValueError,AttributeError):
             raise ERPUnavailable("Некорректная карточка пропуска 1С.") from None
         return value
