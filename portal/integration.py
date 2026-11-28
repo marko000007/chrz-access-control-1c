@@ -1,6 +1,7 @@
 """Bounded HTTP client; domain records remain in 1C."""
 import base64
 import json
+import re
 from datetime import datetime, time, timedelta, timezone
 from uuid import UUID
 from http.client import HTTPException
@@ -65,8 +66,15 @@ class ERPClient:
         self.opener=build_opener(NoRedirect())
 
     def request(self, method, path, actor, payload=None, idempotency_key=None):
-        if method not in {"GET","POST"} or not path.startswith("/") or path.startswith("//") or ".." in path or urlsplit(path).query or urlsplit(path).fragment:
-            raise ValueError("Недопустимый маршрут интеграции.")
+        allowed={'GET':{'/health','/actors/me','/references','/requests','/passes','/events','/reports/presence'},
+            'POST':{'/visitors','/requests','/requests/approve','/requests/reject','/requests/cancel','/passes','/passes/revoke','/movements'}}
+        if not isinstance(method,str) or method not in allowed or not isinstance(path,str):
+            raise ValueError('Недопустимый маршрут интеграции.')
+        dynamic=method=='GET' and (re.fullmatch(r'/(?:requests|passes)/[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}',path)
+            or re.fullmatch(r'/reports/movements/[0-9]{8}/[0-9]{8}',path))
+        if path not in allowed[method] and not dynamic:raise ValueError('Недопустимый маршрут интеграции.')
+        if (method=='GET' and payload is not None) or (method=='POST' and not isinstance(payload,dict)):
+            raise ValueError('Недопустимое тело запроса.')
         if not isinstance(actor,str) or not actor or len(actor)>150 or any(ord(c)<32 for c in actor):
             raise ValueError("Некорректный автор запроса.")
         actor64=base64.b64encode(actor.encode("utf-8")).decode("ascii")
